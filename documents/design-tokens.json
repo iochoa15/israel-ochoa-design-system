@@ -1,0 +1,417 @@
+{
+  "brand": {
+    "color": {
+      "white-and-black": {
+        "white": { "$value": "#FFFFFF", "$type": "color", "$description": "Pure white foundation.", "$extensions": { "generated": true } },
+        "black": { "$value": "#000000", "$type": "color", "$description": "Pure black foundation.", "$extensions": { "generated": true } }
+      },
+      "red-coral": {
+        "100": { "$value": "#FFF1EE", "$type": "color", "$description": "Light tint.", "$extensions": { "generated": true } },
+        "200": { "$value": "#FFD8D1", "$type": "color", "$description": "Light tint.", "$extensions": { "generated": true } },
+        "300": { "$value": "#FFB5A9", "$type": "color", "$description": "Soft tint.", "$extensions": { "generated": true } },
+        "400": { "$value": "#FF8E7E", "$type": "color", "$description": "Mid tint.", "$extensions": { "generated": true } },
+        "500": { "$value": "#F66955", "$type": "color", "$description": "Default light action.", "$extensions": { "generated": true } },
+        "600": { "$value": "#E54633", "$type": "color", "$description": "Immutable source red-coral.", "$extensions": { "generated": false } },
+        "700": { "$value": "#C53A2A", "$type": "color", "$description": "Hover shade.", "$extensions": { "generated": true } },
+        "800": { "$value": "#A23022", "$type": "color", "$description": "Pressed-depth shade.", "$extensions": { "generated": true } },
+        "900": { "$value": "#86271C", "$type": "color", "$description": "Deep shade.", "$extensions": { "generated": true } },
+        "1000": { "$value": "#6A1F16", "$type": "color", "$description": "Dark accent shade.", "$extensions": { "generated": true } },
+        "1100": { "$value": "#4E1710", "$type": "color", "$description": "Very dark shade.", "$extensions": { "generated": true } },
+        "1200": { "$value": "#34100B", "$type": "color", "$description": "Deepest shade.", "$extensions": { "generated": true } }
+      },
+      "teal": {
+        "100": { "$value": "#F2FAFD", "$type": "color", "$description": "Lightest teal tint.", "$extensions": { "generated": true } },
+        "200": { "$value": "#E2F3F8", "$type": "color", "$description": "Very light teal.", "$extensions": { "generated": true } },
+        "300": { "$value": "#CBE8F1", "$type": "color", "$description": "Light teal.", "$extensions": { "generated": true } },
+        "400": { "$value": "#AEDBE8", "$type": "color", "$description": "Soft teal.", "$extensions": { "generated": true } },
+        "500": { "$value": "#8CC8DB", "$type": "color", "$description": "Immutable source teal.", "$extensions": { "generated": false } },
+        "600": { "$value": "#74B2C6", "$type": "color", "$description": "Mid shade.", "$extensions": { "generated": true } },
+        "700": { "$value": "#5C9BB0", "$type": "color", "$description": "Darker teal.", "$extensions": { "generated": true } },
+        "800": { "$value": "#478394", "$type": "color", "$description": "Dark teal.", "$extensions": { "generated": true } },
+        "900": { "$value": "#396A78", "$type": "color", "$description": "Deeper teal.", "$extensions": { "generated": true } },
+        "1000": { "$value": "#2C525E", "$type": "color", "$description": "Very dark teal.", "$extensions": { "generated": true } },
+        "1100": { "$value": "#1F3A43", "$type": "color", "$description": "Near-navy teal.", "$extensions": { "generated": true } },
+        "1200": { "$value": "#14252B", "$type": "color", "$description": "Deepest teal.", "$extensions": { "generated": true } }
+      },
+      "blue-lavender": {
+        "100": { "$value": "#F3F5FE", "$type": "color", "$description": "Lightest tint.", "$extensions": { "generated": true } },
+        "200": { "$value": "#E5E9FA", "$type": "color", "$description": "Pale lavender-blue.", "$extensions": { "generated": true } },
+        "300": { "$value": "#CDD2EB", "$type": "color", "$description": "Immutable source light lavender.", "$extensions": { "generated": false } },
+        "400": { "$value": "#BDC4E0", "$type": "color", "$description": "Muted transition.", "$extensions": { "generated": true } },
+        "500": { "$value": "#A6ACC6", "$type": "color", "$description": "Immutable source muted lavender.", "$extensions": { "generated": false } },
+        "600": { "$value": "#8791C2", "$type": "color", "$description": "Balanced mid.", "$extensions": { "generated": true } },
+        "700": { "$value": "#5D8DF7", "$type": "color", "$description": "Immutable source periwinkle blue.", "$extensions": { "generated": false } },
+        "800": { "$value": "#4D76D3", "$type": "color", "$description": "Darker blue.", "$extensions": { "generated": true } },
+        "900": { "$value": "#3F62AF", "$type": "color", "$description": "Deep blue.", "$extensions": { "generated": true } },
+        "1000": { "$value": "#324E8C", "$type": "color", "$description": "Very deep blue.", "$extensions": { "generated": true } },
+        "1100": { "$value": "#263B6A", "$type": "color", "$description": "Dark accent blue.", "$extensions": { "generated": true } },
+        "1200": { "$value": "#1B2A4A", "$type": "color", "$description": "Deepest blue-lavender.", "$extensions": { "generated": true } }
+      },
+      "neutral-light": {
+        "100": { "$value": "#FFFFFF", "$type": "color", "$description": "Light neutral.", "$extensions": { "generated": true } },
+        "200": { "$value": "#FDFDFD", "$type": "color", "$description": "Immutable source near-white.", "$extensions": { "generated": false } },
+        "300": { "$value": "#FAFAF4", "$type": "color", "$description": "Cream tint.", "$extensions": { "generated": true } },
+        "400": { "$value": "#F6F5E9", "$type": "color", "$description": "Immutable source warm cream.", "$extensions": { "generated": false } },
+        "500": { "$value": "#EEEDEB", "$type": "color", "$description": "Immutable source light gray.", "$extensions": { "generated": false } },
+        "600": { "$value": "#DDD9D5", "$type": "color", "$description": "Warm divider tone.", "$extensions": { "generated": true } },
+        "700": { "$value": "#C7C2BC", "$type": "color", "$description": "Warm mid neutral.", "$extensions": { "generated": true } },
+        "800": { "$value": "#AFA8A1", "$type": "color", "$description": "Deeper warm neutral.", "$extensions": { "generated": true } },
+        "900": { "$value": "#948D86", "$type": "color", "$description": "Dark warm neutral.", "$extensions": { "generated": true } },
+        "1000": { "$value": "#7A736D", "$type": "color", "$description": "Very dark warm neutral.", "$extensions": { "generated": true } },
+        "1100": { "$value": "#605A55", "$type": "color", "$description": "Near-dark neutral.", "$extensions": { "generated": true } },
+        "1200": { "$value": "#494440", "$type": "color", "$description": "Deep warm neutral.", "$extensions": { "generated": true } }
+      },
+      "neutral-dark": {
+        "100": { "$value": "#F8F7F5", "$type": "color", "$description": "High-contrast light text for dark mode.", "$extensions": { "generated": true } },
+        "200": { "$value": "#E5E1DC", "$type": "color", "$description": "Light warm neutral.", "$extensions": { "generated": true } },
+        "300": { "$value": "#CFC8C0", "$type": "color", "$description": "Soft warm neutral.", "$extensions": { "generated": true } },
+        "400": { "$value": "#AFA79E", "$type": "color", "$description": "Muted warm neutral.", "$extensions": { "generated": true } },
+        "500": { "$value": "#8B837A", "$type": "color", "$description": "Mid warm neutral.", "$extensions": { "generated": true } },
+        "600": { "$value": "#66605A", "$type": "color", "$description": "Dark warm neutral.", "$extensions": { "generated": true } },
+        "700": { "$value": "#4A4540", "$type": "color", "$description": "Deeper warm neutral.", "$extensions": { "generated": true } },
+        "800": { "$value": "#333333", "$type": "color", "$description": "Immutable source dark gray.", "$extensions": { "generated": false } },
+        "900": { "$value": "#2B2B2B", "$type": "color", "$description": "Near-black transition.", "$extensions": { "generated": true } },
+        "1000": { "$value": "#242424", "$type": "color", "$description": "Immutable source near-black.", "$extensions": { "generated": false } },
+        "1100": { "$value": "#1A1A1A", "$type": "color", "$description": "Very dark warm neutral.", "$extensions": { "generated": true } },
+        "1200": { "$value": "#111111", "$type": "color", "$description": "Deepest warm neutral.", "$extensions": { "generated": true } }
+      },
+      "success-green": {
+        "100": { "$value": "#F2F8F0", "$type": "color", "$description": "Light success tint.", "$extensions": { "generated": true } },
+        "200": { "$value": "#DFECDD", "$type": "color", "$description": "Soft success tint.", "$extensions": { "generated": true } },
+        "300": { "$value": "#C7DCC1", "$type": "color", "$description": "Muted success tone.", "$extensions": { "generated": true } },
+        "400": { "$value": "#ABC7A0", "$type": "color", "$description": "Warm green tint.", "$extensions": { "generated": true } },
+        "500": { "$value": "#8FB280", "$type": "color", "$description": "Default success.", "$extensions": { "generated": true } },
+        "600": { "$value": "#779C69", "$type": "color", "$description": "Darker success.", "$extensions": { "generated": true } },
+        "700": { "$value": "#608354", "$type": "color", "$description": "Hover success.", "$extensions": { "generated": true } },
+        "800": { "$value": "#4D6A43", "$type": "color", "$description": "Deep success.", "$extensions": { "generated": true } },
+        "900": { "$value": "#3D5335", "$type": "color", "$description": "Dark success.", "$extensions": { "generated": true } },
+        "1000": { "$value": "#2E3E28", "$type": "color", "$description": "Very dark success.", "$extensions": { "generated": true } },
+        "1100": { "$value": "#202B1B", "$type": "color", "$description": "Near-black success.", "$extensions": { "generated": true } },
+        "1200": { "$value": "#131A11", "$type": "color", "$description": "Deepest success.", "$extensions": { "generated": true } }
+      },
+      "warning-amber": {
+        "100": { "$value": "#FFF8ED", "$type": "color", "$description": "Light warning tint.", "$extensions": { "generated": true } },
+        "200": { "$value": "#FDEFD7", "$type": "color", "$description": "Soft warning tint.", "$extensions": { "generated": true } },
+        "300": { "$value": "#FBE1B5", "$type": "color", "$description": "Light amber.", "$extensions": { "generated": true } },
+        "400": { "$value": "#F4CE8A", "$type": "color", "$description": "Warm amber.", "$extensions": { "generated": true } },
+        "500": { "$value": "#E9B963", "$type": "color", "$description": "Default amber.", "$extensions": { "generated": true } },
+        "600": { "$value": "#D29D3F", "$type": "color", "$description": "Darker amber.", "$extensions": { "generated": true } },
+        "700": { "$value": "#B98431", "$type": "color", "$description": "Hover amber.", "$extensions": { "generated": true } },
+        "800": { "$value": "#956A29", "$type": "color", "$description": "Deep amber.", "$extensions": { "generated": true } },
+        "900": { "$value": "#765323", "$type": "color", "$description": "Dark amber.", "$extensions": { "generated": true } },
+        "1000": { "$value": "#5B3E1C", "$type": "color", "$description": "Very dark amber.", "$extensions": { "generated": true } },
+        "1100": { "$value": "#412B15", "$type": "color", "$description": "Near-black amber.", "$extensions": { "generated": true } },
+        "1200": { "$value": "#2A1B0E", "$type": "color", "$description": "Deepest amber.", "$extensions": { "generated": true } }
+      }
+    },
+    "number": {
+      "scale": {
+        "25": { "$value": 1, "$type": "number", "$description": "4pt system quarter step." },
+        "50": { "$value": 2, "$type": "number", "$description": "4pt system half step." },
+        "100": { "$value": 4, "$type": "number", "$description": "4pt system base step." },
+        "200": { "$value": 8, "$type": "number", "$description": "Spacing step." },
+        "300": { "$value": 12, "$type": "number", "$description": "Spacing step." },
+        "400": { "$value": 16, "$type": "number", "$description": "Spacing step." },
+        "500": { "$value": 20, "$type": "number", "$description": "Spacing step." },
+        "600": { "$value": 24, "$type": "number", "$description": "Spacing step." },
+        "700": { "$value": 28, "$type": "number", "$description": "Spacing step." },
+        "800": { "$value": 32, "$type": "number", "$description": "Spacing step." },
+        "900": { "$value": 40, "$type": "number", "$description": "Spacing step." },
+        "1000": { "$value": 48, "$type": "number", "$description": "Spacing step." },
+        "1100": { "$value": 64, "$type": "number", "$description": "Spacing step." },
+        "1200": { "$value": 80, "$type": "number", "$description": "Spacing step." }
+      }
+    },
+    "typography": {
+      "font-family": {
+        "display": { "$value": "Wixmadefor Display Variable", "$type": "fontFamilies", "$description": "Display and heading family." },
+        "body": { "$value": "Wixmadefor Text Variable", "$type": "fontFamilies", "$description": "Body and UI family." },
+        "accent": { "$value": "Newsreader Variable", "$type": "fontFamilies", "$description": "Editorial accent family." }
+      },
+      "font-weight": {
+        "light": { "$value": "light", "$type": "fontWeights", "$description": "Light weight label." },
+        "regular": { "$value": "regular", "$type": "fontWeights", "$description": "Regular weight label." },
+        "medium": { "$value": "medium", "$type": "fontWeights", "$description": "Medium weight label." },
+        "semi-bold": { "$value": "semi-bold", "$type": "fontWeights", "$description": "Semi-bold weight label." },
+        "bold": { "$value": "bold", "$type": "fontWeights", "$description": "Bold weight label." }
+      },
+      "font-style": {
+        "normal": { "$value": "normal", "$type": "fontStyles", "$description": "Normal style." },
+        "italic": { "$value": "italic", "$type": "fontStyles", "$description": "Italic style." }
+      }
+    }
+  },
+  "alias": {
+    "color": {
+      "primary": { "$value": "{brand.color.red-coral.600}", "$type": "color", "$description": "Primary semantic default." },
+      "primary-hover": { "$value": "{brand.color.red-coral.700}", "$type": "color", "$description": "Primary semantic hover." },
+      "secondary": { "$value": "{brand.color.teal.500}", "$type": "color", "$description": "Secondary semantic default." },
+      "secondary-hover": { "$value": "{brand.color.teal.700}", "$type": "color", "$description": "Secondary semantic hover." },
+      "tertiary": { "$value": "{brand.color.blue-lavender.600}", "$type": "color", "$description": "Tertiary semantic default." },
+      "information": { "$value": "{brand.color.blue-lavender.700}", "$type": "color", "$description": "Information semantic default." },
+      "success": { "$value": "{brand.color.success-green.600}", "$type": "color", "$description": "Success semantic default." },
+      "warning": { "$value": "{brand.color.warning-amber.600}", "$type": "color", "$description": "Warning semantic default." },
+      "error": { "$value": "{brand.color.red-coral.600}", "$type": "color", "$description": "Error semantic default." },
+      "neutral-light": { "$value": "{brand.color.neutral-light.400}", "$type": "color", "$description": "Neutral light semantic." },
+      "neutral-dark": { "$value": "{brand.color.neutral-dark.900}", "$type": "color", "$description": "Neutral dark semantic." },
+      "foundation-white": { "$value": "{brand.color.white-and-black.white}", "$type": "color", "$description": "Foundation white." },
+      "foundation-black": { "$value": "{brand.color.white-and-black.black}", "$type": "color", "$description": "Foundation black." }
+    },
+    "border-width": {
+      "none": { "$value": 0, "$type": "borderWidth", "$description": "No border." },
+      "small": { "$value": "{brand.number.scale.25}", "$type": "borderWidth", "$description": "Small border width." },
+      "medium": { "$value": "{brand.number.scale.50}", "$type": "borderWidth", "$description": "Medium border width." },
+      "large": { "$value": "{brand.number.scale.100}", "$type": "borderWidth", "$description": "Large border width." }
+    },
+    "border-radius": {
+      "none": { "$value": 0, "$type": "borderRadius", "$description": "No radius." },
+      "small": { "$value": "{brand.number.scale.100}", "$type": "borderRadius", "$description": "Small radius." },
+      "medium": { "$value": "{brand.number.scale.200}", "$type": "borderRadius", "$description": "Medium radius." },
+      "large": { "$value": "{brand.number.scale.400}", "$type": "borderRadius", "$description": "Large radius." },
+      "xl": { "$value": "{brand.number.scale.600}", "$type": "borderRadius", "$description": "XL radius." },
+      "round": { "$value": 9999, "$type": "borderRadius", "$description": "Round shape radius." }
+    },
+    "typography": {
+      "font-family": {
+        "display": { "$value": "{brand.typography.font-family.display}", "$type": "fontFamilies", "$description": "Display family alias." },
+        "body": { "$value": "{brand.typography.font-family.body}", "$type": "fontFamilies", "$description": "Body family alias." },
+        "accent": { "$value": "{brand.typography.font-family.accent}", "$type": "fontFamilies", "$description": "Accent family alias." }
+      }
+    }
+  },
+  "mapped": {
+    "light": {
+      "surface": {
+        "page": { "$value": "{brand.color.neutral-light.200}", "$type": "color", "$description": "Page background." },
+        "default": { "$value": "{brand.color.neutral-light.400}", "$type": "color", "$description": "Card/container surface." },
+        "elevated": { "$value": "{brand.color.neutral-light.100}", "$type": "color", "$description": "Raised surface." },
+        "action": { "$value": "{alias.color.primary}", "$type": "color", "$description": "Primary action background." },
+        "action-hover": { "$value": "{alias.color.primary-hover}", "$type": "color", "$description": "Primary action hover." },
+        "action-hover-light": { "$value": "{brand.color.red-coral.200}", "$type": "color", "$description": "Subtle hover tint." },
+        "secondary": { "$value": "{alias.color.secondary}", "$type": "color", "$description": "Secondary action background." },
+        "secondary-hover": { "$value": "{alias.color.secondary-hover}", "$type": "color", "$description": "Secondary action hover." },
+        "disabled": { "$value": "{brand.color.neutral-light.600}", "$type": "color", "$description": "Disabled surfaces." },
+        "success": { "$value": "{brand.color.success-green.200}", "$type": "color", "$description": "Success surface tint." },
+        "warning": { "$value": "{brand.color.warning-amber.200}", "$type": "color", "$description": "Warning surface tint." },
+        "information": { "$value": "{brand.color.blue-lavender.200}", "$type": "color", "$description": "Info surface tint." },
+        "error": { "$value": "{brand.color.red-coral.200}", "$type": "color", "$description": "Error surface tint." },
+        "glass": {
+          "$value": {
+            "background": "rgba(253, 253, 253, 0.58)",
+            "border": "1px solid rgba(255, 255, 255, 0.5)",
+            "backdropFilter": "blur(20px)"
+          },
+          "$type": "composition",
+          "$description": "Glass surface composite token."
+        },
+        "gradient-primary": {
+          "$value": "linear-gradient(135deg, #E54633 0%, #F66955 48%, #8CC8DB 100%)",
+          "$type": "other",
+          "$description": "Primary gradient token."
+        },
+        "gradient-accent": {
+          "$value": "linear-gradient(145deg, #5D8DF7 0%, #A6ACC6 54%, #CDD2EB 100%)",
+          "$type": "other",
+          "$description": "Accent gradient token."
+        }
+      },
+      "text": {
+        "heading": { "$value": "{brand.color.neutral-dark.1000}", "$type": "color", "$description": "Heading text." },
+        "hero": { "$value": "{brand.color.neutral-dark.900}", "$type": "color", "$description": "Hero text." },
+        "body": { "$value": "{brand.color.neutral-dark.800}", "$type": "color", "$description": "Body text." },
+        "caption": { "$value": "{brand.color.neutral-dark.700}", "$type": "color", "$description": "Caption text." },
+        "placeholder": { "$value": "{brand.color.neutral-dark.500}", "$type": "color", "$description": "Placeholder text." },
+        "action": { "$value": "{alias.color.primary}", "$type": "color", "$description": "Interactive text." },
+        "action-hover": { "$value": "{alias.color.primary-hover}", "$type": "color", "$description": "Interactive text hover." },
+        "disabled": { "$value": "{brand.color.neutral-dark.400}", "$type": "color", "$description": "Disabled text." },
+        "on-action": { "$value": "{brand.color.white-and-black.white}", "$type": "color", "$description": "Text on primary action." },
+        "on-secondary": { "$value": "{brand.color.neutral-dark.1200}", "$type": "color", "$description": "Text on secondary surface." },
+        "on-surface-success": { "$value": "{brand.color.success-green.900}", "$type": "color", "$description": "Text on success surface." },
+        "on-surface-warning": { "$value": "{brand.color.warning-amber.1000}", "$type": "color", "$description": "Text on warning surface." },
+        "on-surface-information": { "$value": "{brand.color.blue-lavender.1000}", "$type": "color", "$description": "Text on information surface." },
+        "on-surface-error": { "$value": "{brand.color.red-coral.1000}", "$type": "color", "$description": "Text on error surface." },
+        "success": { "$value": "{alias.color.success}", "$type": "color", "$description": "Standalone success text." },
+        "warning": { "$value": "{alias.color.warning}", "$type": "color", "$description": "Standalone warning text." },
+        "information": { "$value": "{alias.color.information}", "$type": "color", "$description": "Standalone info text." },
+        "error": { "$value": "{alias.color.error}", "$type": "color", "$description": "Standalone error text." }
+      },
+      "icon": {
+        "default": { "$value": "{mapped.light.text.body}", "$type": "color", "$description": "Default icon." },
+        "action": { "$value": "{mapped.light.text.action}", "$type": "color", "$description": "Action icon." },
+        "action-hover": { "$value": "{mapped.light.text.action-hover}", "$type": "color", "$description": "Action hover icon." },
+        "disabled": { "$value": "{mapped.light.text.disabled}", "$type": "color", "$description": "Disabled icon." },
+        "on-action": { "$value": "{mapped.light.text.on-action}", "$type": "color", "$description": "Icon on action." },
+        "on-secondary": { "$value": "{mapped.light.text.on-secondary}", "$type": "color", "$description": "Icon on secondary." },
+        "success": { "$value": "{mapped.light.text.success}", "$type": "color", "$description": "Success icon." },
+        "warning": { "$value": "{mapped.light.text.warning}", "$type": "color", "$description": "Warning icon." },
+        "information": { "$value": "{mapped.light.text.information}", "$type": "color", "$description": "Information icon." },
+        "error": { "$value": "{mapped.light.text.error}", "$type": "color", "$description": "Error icon." }
+      },
+      "border": {
+        "default": { "$value": "{brand.color.neutral-light.700}", "$type": "color", "$description": "Default border." },
+        "action": { "$value": "{alias.color.primary}", "$type": "color", "$description": "Action border." },
+        "action-hover": { "$value": "{alias.color.primary-hover}", "$type": "color", "$description": "Action hover border." },
+        "focus": { "$value": "{alias.color.primary}", "$type": "color", "$description": "Focus border/ring." },
+        "disabled": { "$value": "{brand.color.neutral-light.800}", "$type": "color", "$description": "Disabled border." },
+        "subtle": { "$value": "{brand.color.neutral-light.600}", "$type": "color", "$description": "Subtle separator border." },
+        "success": { "$value": "{alias.color.success}", "$type": "color", "$description": "Success border." },
+        "warning": { "$value": "{alias.color.warning}", "$type": "color", "$description": "Warning border." },
+        "information": { "$value": "{alias.color.information}", "$type": "color", "$description": "Information border." },
+        "error": { "$value": "{alias.color.error}", "$type": "color", "$description": "Error border." }
+      }
+    },
+    "dark": {
+      "surface": {
+        "page": { "$value": "{brand.color.neutral-dark.1100}", "$type": "color", "$description": "Page background dark mode." },
+        "default": { "$value": "{brand.color.neutral-dark.1000}", "$type": "color", "$description": "Card/container dark mode." },
+        "elevated": { "$value": "{brand.color.neutral-dark.900}", "$type": "color", "$description": "Raised dark surface." },
+        "action": { "$value": "{alias.color.primary}", "$type": "color", "$description": "Primary action dark mode." },
+        "action-hover": { "$value": "{brand.color.red-coral.500}", "$type": "color", "$description": "Primary hover dark mode." },
+        "action-hover-light": { "$value": "{brand.color.red-coral.900}", "$type": "color", "$description": "Subtle dark hover tint." },
+        "secondary": { "$value": "{brand.color.teal.700}", "$type": "color", "$description": "Secondary dark mode." },
+        "secondary-hover": { "$value": "{brand.color.teal.600}", "$type": "color", "$description": "Secondary hover dark mode." },
+        "disabled": { "$value": "{brand.color.neutral-dark.700}", "$type": "color", "$description": "Disabled dark surface." },
+        "success": { "$value": "{brand.color.success-green.900}", "$type": "color", "$description": "Success dark surface." },
+        "warning": { "$value": "{brand.color.warning-amber.900}", "$type": "color", "$description": "Warning dark surface." },
+        "information": { "$value": "{brand.color.blue-lavender.1000}", "$type": "color", "$description": "Information dark surface." },
+        "error": { "$value": "{brand.color.red-coral.900}", "$type": "color", "$description": "Error dark surface." },
+        "glass-fixed": {
+          "$value": {
+            "background": "rgba(17, 17, 17, 0.5)",
+            "border": "1px solid rgba(255, 255, 255, 0.16)",
+            "backdropFilter": "blur(20px)"
+          },
+          "$type": "composition",
+          "$description": "Glass surface dark composite."
+        },
+        "gradient-primary-fixed": { "$value": "{mapped.light.surface.gradient-primary}", "$type": "other", "$description": "Gradient fixed across modes." },
+        "gradient-accent-fixed": { "$value": "{mapped.light.surface.gradient-accent}", "$type": "other", "$description": "Gradient fixed across modes." }
+      },
+      "text": {
+        "heading": { "$value": "{brand.color.neutral-dark.100}", "$type": "color", "$description": "Heading text dark mode." },
+        "hero": { "$value": "{brand.color.neutral-dark.100}", "$type": "color", "$description": "Hero text dark mode." },
+        "body": { "$value": "{brand.color.neutral-dark.200}", "$type": "color", "$description": "Body text dark mode." },
+        "caption": { "$value": "{brand.color.neutral-dark.300}", "$type": "color", "$description": "Caption text dark mode." },
+        "placeholder": { "$value": "{brand.color.neutral-dark.400}", "$type": "color", "$description": "Placeholder dark mode." },
+        "action": { "$value": "{brand.color.red-coral.400}", "$type": "color", "$description": "Action text dark mode." },
+        "action-hover": { "$value": "{brand.color.red-coral.300}", "$type": "color", "$description": "Action hover dark mode." },
+        "disabled": { "$value": "{brand.color.neutral-dark.500}", "$type": "color", "$description": "Disabled text dark mode." },
+        "on-action": { "$value": "{brand.color.white-and-black.white}", "$type": "color", "$description": "Text on action dark mode." },
+        "on-secondary": { "$value": "{brand.color.neutral-dark.1200}", "$type": "color", "$description": "Text on secondary dark mode." },
+        "on-surface-success": { "$value": "{brand.color.success-green.100}", "$type": "color", "$description": "Text on success dark surface." },
+        "on-surface-warning": { "$value": "{brand.color.warning-amber.100}", "$type": "color", "$description": "Text on warning dark surface." },
+        "on-surface-information": { "$value": "{brand.color.blue-lavender.100}", "$type": "color", "$description": "Text on info dark surface." },
+        "on-surface-error": { "$value": "{brand.color.red-coral.100}", "$type": "color", "$description": "Text on error dark surface." },
+        "success": { "$value": "{brand.color.success-green.300}", "$type": "color", "$description": "Standalone success text dark mode." },
+        "warning": { "$value": "{brand.color.warning-amber.300}", "$type": "color", "$description": "Standalone warning text dark mode." },
+        "information": { "$value": "{brand.color.blue-lavender.300}", "$type": "color", "$description": "Standalone info text dark mode." },
+        "error": { "$value": "{brand.color.red-coral.300}", "$type": "color", "$description": "Standalone error text dark mode." }
+      },
+      "icon": {
+        "default": { "$value": "{mapped.dark.text.body}", "$type": "color", "$description": "Default icon dark mode." },
+        "action": { "$value": "{mapped.dark.text.action}", "$type": "color", "$description": "Action icon dark mode." },
+        "action-hover": { "$value": "{mapped.dark.text.action-hover}", "$type": "color", "$description": "Action hover icon dark mode." },
+        "disabled": { "$value": "{mapped.dark.text.disabled}", "$type": "color", "$description": "Disabled icon dark mode." },
+        "on-action": { "$value": "{mapped.dark.text.on-action}", "$type": "color", "$description": "Icon on action dark mode." },
+        "on-secondary": { "$value": "{mapped.dark.text.on-secondary}", "$type": "color", "$description": "Icon on secondary dark mode." },
+        "success": { "$value": "{mapped.dark.text.success}", "$type": "color", "$description": "Success icon dark mode." },
+        "warning": { "$value": "{mapped.dark.text.warning}", "$type": "color", "$description": "Warning icon dark mode." },
+        "information": { "$value": "{mapped.dark.text.information}", "$type": "color", "$description": "Information icon dark mode." },
+        "error": { "$value": "{mapped.dark.text.error}", "$type": "color", "$description": "Error icon dark mode." }
+      },
+      "border": {
+        "default": { "$value": "{brand.color.neutral-dark.700}", "$type": "color", "$description": "Default border dark mode." },
+        "action": { "$value": "{brand.color.red-coral.500}", "$type": "color", "$description": "Action border dark mode." },
+        "action-hover": { "$value": "{brand.color.red-coral.400}", "$type": "color", "$description": "Action hover border dark mode." },
+        "focus": { "$value": "{brand.color.red-coral.300}", "$type": "color", "$description": "Focus border dark mode." },
+        "disabled": { "$value": "{brand.color.neutral-dark.600}", "$type": "color", "$description": "Disabled border dark mode." },
+        "subtle": { "$value": "{brand.color.neutral-dark.800}", "$type": "color", "$description": "Subtle border dark mode." },
+        "success": { "$value": "{brand.color.success-green.400}", "$type": "color", "$description": "Success border dark mode." },
+        "warning": { "$value": "{brand.color.warning-amber.400}", "$type": "color", "$description": "Warning border dark mode." },
+        "information": { "$value": "{brand.color.blue-lavender.400}", "$type": "color", "$description": "Information border dark mode." },
+        "error": { "$value": "{brand.color.red-coral.400}", "$type": "color", "$description": "Error border dark mode." }
+      }
+    }
+  },
+  "responsive": {
+    "desktop": {
+      "display": {
+        "hero": { "$value": { "fontFamily": "{alias.typography.font-family.display}", "fontSize": 72, "lineHeight": 84 }, "$type": "typography", "$description": "Desktop hero size." }
+      },
+      "headings": {
+        "h1": { "$value": { "fontFamily": "{alias.typography.font-family.display}", "fontSize": 60, "lineHeight": 72 }, "$type": "typography", "$description": "Desktop h1." },
+        "h2": { "$value": { "fontFamily": "{alias.typography.font-family.display}", "fontSize": 48, "lineHeight": 56 }, "$type": "typography", "$description": "Desktop h2." },
+        "h3": { "$value": { "fontFamily": "{alias.typography.font-family.display}", "fontSize": 40, "lineHeight": 48 }, "$type": "typography", "$description": "Desktop h3." },
+        "h4": { "$value": { "fontFamily": "{alias.typography.font-family.display}", "fontSize": 32, "lineHeight": 40 }, "$type": "typography", "$description": "Desktop h4." },
+        "h5": { "$value": { "fontFamily": "{alias.typography.font-family.display}", "fontSize": 24, "lineHeight": 28 }, "$type": "typography", "$description": "Desktop h5." },
+        "h6": { "$value": { "fontFamily": "{alias.typography.font-family.display}", "fontSize": 20, "lineHeight": 24 }, "$type": "typography", "$description": "Desktop h6." }
+      },
+      "body": {
+        "large": { "$value": { "fontFamily": "{alias.typography.font-family.body}", "fontSize": 20, "lineHeight": 28 }, "$type": "typography", "$description": "Body large." },
+        "medium": { "$value": { "fontFamily": "{alias.typography.font-family.body}", "fontSize": 16, "lineHeight": 24 }, "$type": "typography", "$description": "Body medium." },
+        "small": { "$value": { "fontFamily": "{alias.typography.font-family.body}", "fontSize": 14, "lineHeight": 20 }, "$type": "typography", "$description": "Body small." },
+        "x-small": { "$value": { "fontFamily": "{alias.typography.font-family.body}", "fontSize": 12, "lineHeight": 16 }, "$type": "typography", "$description": "Body x-small." }
+      },
+      "caption": {
+        "default": { "$value": { "fontFamily": "{alias.typography.font-family.body}", "fontSize": 12, "lineHeight": 16 }, "$type": "typography", "$description": "Caption default." }
+      }
+    },
+    "mobile": {
+      "display": {
+        "hero": { "$value": { "fontFamily": "{alias.typography.font-family.display}", "fontSize": 56, "lineHeight": 68 }, "$type": "typography", "$description": "Mobile hero size." }
+      },
+      "headings": {
+        "h1": { "$value": { "fontFamily": "{alias.typography.font-family.display}", "fontSize": 48, "lineHeight": 56 }, "$type": "typography", "$description": "Mobile h1." },
+        "h2": { "$value": { "fontFamily": "{alias.typography.font-family.display}", "fontSize": 40, "lineHeight": 48 }, "$type": "typography", "$description": "Mobile h2." },
+        "h3": { "$value": { "fontFamily": "{alias.typography.font-family.display}", "fontSize": 32, "lineHeight": 40 }, "$type": "typography", "$description": "Mobile h3." },
+        "h4": { "$value": { "fontFamily": "{alias.typography.font-family.display}", "fontSize": 28, "lineHeight": 36 }, "$type": "typography", "$description": "Mobile h4." },
+        "h5": { "$value": { "fontFamily": "{alias.typography.font-family.display}", "fontSize": 24, "lineHeight": 28 }, "$type": "typography", "$description": "Mobile h5." },
+        "h6": { "$value": { "fontFamily": "{alias.typography.font-family.display}", "fontSize": 20, "lineHeight": 24 }, "$type": "typography", "$description": "Mobile h6." }
+      },
+      "body": {
+        "large": { "$value": { "fontFamily": "{alias.typography.font-family.body}", "fontSize": 20, "lineHeight": 28 }, "$type": "typography", "$description": "Body large unchanged." },
+        "medium": { "$value": { "fontFamily": "{alias.typography.font-family.body}", "fontSize": 16, "lineHeight": 24 }, "$type": "typography", "$description": "Body medium unchanged." },
+        "small": { "$value": { "fontFamily": "{alias.typography.font-family.body}", "fontSize": 14, "lineHeight": 20 }, "$type": "typography", "$description": "Body small unchanged." },
+        "x-small": { "$value": { "fontFamily": "{alias.typography.font-family.body}", "fontSize": 12, "lineHeight": 16 }, "$type": "typography", "$description": "Body x-small unchanged." }
+      },
+      "caption": {
+        "default": { "$value": { "fontFamily": "{alias.typography.font-family.body}", "fontSize": 12, "lineHeight": 16 }, "$type": "typography", "$description": "Caption unchanged." }
+      }
+    },
+    "spacing": {
+      "none": { "$value": 0, "$type": "spacing", "$description": "No spacing." },
+      "2xs": { "$value": "{brand.number.scale.25}", "$type": "spacing", "$description": "2xs spacing." },
+      "xs": { "$value": "{brand.number.scale.50}", "$type": "spacing", "$description": "xs spacing." },
+      "sm": { "$value": "{brand.number.scale.100}", "$type": "spacing", "$description": "sm spacing." },
+      "md": { "$value": "{brand.number.scale.200}", "$type": "spacing", "$description": "md spacing." },
+      "lg": { "$value": "{brand.number.scale.400}", "$type": "spacing", "$description": "lg spacing." },
+      "xl": { "$value": "{brand.number.scale.600}", "$type": "spacing", "$description": "xl spacing." },
+      "2xl": { "$value": "{brand.number.scale.800}", "$type": "spacing", "$description": "2xl spacing." },
+      "3xl": { "$value": "{brand.number.scale.900}", "$type": "spacing", "$description": "3xl spacing." },
+      "4xl": { "$value": "{brand.number.scale.1000}", "$type": "spacing", "$description": "4xl spacing." },
+      "5xl": { "$value": "{brand.number.scale.1100}", "$type": "spacing", "$description": "5xl spacing." }
+    }
+  },
+  "meta": {
+    "audit": {
+      "input_anchors_confirmed": [
+        "#E54633",
+        "#8CC8DB",
+        "#FCFCD4",
+        "#FDFDFD",
+        "#F6F5E9",
+        "#EEEDEB",
+        "#242424",
+        "#333333",
+        "#5D8DF7",
+        "#A6ACC6",
+        "#CDD2EB"
+      ],
+      "generated_color_count": 75,
+      "reference_chain_validation": "pass",
+      "wcag_failures": [
+        "mapped.dark.text.on-surface-warning on mapped.dark.surface.warning may not consistently reach AA for small text in all contexts; verify with implementation opacity and actual rendered background."
+      ]
+    }
+  }
+}

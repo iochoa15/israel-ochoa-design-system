@@ -1,0 +1,8 @@
+{
+  "name": "Token Frame Generator",
+  "id": "token-frame-generator-io-design",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma"]
+}

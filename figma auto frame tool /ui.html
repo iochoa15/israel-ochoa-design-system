@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Inter, -apple-system, sans-serif;
+      font-size: 13px;
+      background: #1e1e1e;
+      color: #e0e0e0;
+      padding: 16px;
+      min-height: 100%;
+    }
+
+    .header { margin-bottom: 20px; }
+    .header h1 { font-size: 15px; font-weight: 600; color: #ffffff; margin-bottom: 4px; }
+    .header p  { font-size: 11px; color: #888; line-height: 1.4; }
+
+    .section { margin-bottom: 16px; }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background 0.15s, opacity 0.15s;
+      margin-bottom: 6px;
+      text-align: left;
+    }
+
+    .btn:last-child { margin-bottom: 0; }
+
+    .btn-secondary {
+      background: #2c2c2c;
+      color: #e0e0e0;
+      border: 1px solid #3a3a3a;
+    }
+    .btn-secondary:hover { background: #353535; }
+
+    .btn-primary {
+      background: #18a0fb;
+      color: #fff;
+    }
+    .btn-primary:hover { background: #0d8de0; }
+
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .icon { font-size: 14px; }
+
+    .divider { height: 1px; background: #2a2a2a; margin: 16px 0; }
+
+    .status {
+      padding: 8px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      line-height: 1.4;
+      display: none;
+    }
+    .status.visible  { display: block; }
+    .status.loading  { background: #1a2a3a; color: #6cb8f5; }
+    .status.success  { background: #1a2e1a; color: #6dcf6d; }
+    .status.error    { background: #2e1a1a; color: #f56d6d; }
+
+    .spinner {
+      display: inline-block;
+      width: 10px; height: 10px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-top-color: #6cb8f5;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .note { font-size: 10px; color: #555; line-height: 1.5; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Token Frame Generator</h1>
+    <p>Creates documentation frames from your Figma variables.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Generate Frames</div>
+    <button class="btn btn-secondary" id="btn-colors">
+      <span class="icon">🎨</span> Color Palette
+    </button>
+    <button class="btn btn-secondary" id="btn-typography">
+      <span class="icon">✍️</span> Typography
+    </button>
+    <button class="btn btn-secondary" id="btn-spacing">
+      <span class="icon">📏</span> Spacing
+    </button>
+    <button class="btn btn-secondary" id="btn-border">
+      <span class="icon">⬜</span> Border Radius
+    </button>
+    <button class="btn btn-secondary" id="btn-shadows">
+      <span class="icon">🌑</span> Shadows
+    </button>
+    <button class="btn btn-secondary" id="btn-buttons">
+      <span class="icon">🔘</span> Buttons
+    </button>
+    <button class="btn btn-secondary" id="btn-surfaces">
+      <span class="icon">🪟</span> Surfaces & Glass
+    </button>
+  </div>
+
+  <div class="divider"></div>
+
+  <button class="btn btn-primary" id="btn-all">
+    <span class="icon">✨</span> Generate All Frames
+  </button>
+
+  <div class="status" id="status"></div>
+
+  <p class="note">
+    Reads variables already imported into this Figma file. Run again anytime to refresh the frames.
+  </p>
+
+  <script>
+    const buttons = ['btn-colors', 'btn-typography', 'btn-spacing', 'btn-border', 'btn-shadows', 'btn-buttons', 'btn-surfaces', 'btn-all'].map(id => document.getElementById(id));
+    const status  = document.getElementById('status');
+
+    function setLoading(msg) {
+      status.className = 'status visible loading';
+      status.innerHTML = `<span class="spinner"></span>${msg}`;
+      buttons.forEach(b => b.disabled = true);
+    }
+    function setDone(msg) {
+      status.className = 'status visible success';
+      status.textContent = msg;
+      buttons.forEach(b => b.disabled = false);
+    }
+    function setError(msg) {
+      status.className = 'status visible error';
+      status.textContent = msg;
+      buttons.forEach(b => b.disabled = false);
+    }
+
+    document.getElementById('btn-colors').onclick = () => {
+      setLoading('Generating color palette...');
+      parent.postMessage({ pluginMessage: { type: 'generate-colors' } }, '*');
+    };
+
+    document.getElementById('btn-typography').onclick = () => {
+      setLoading('Generating typography frame...');
+      parent.postMessage({ pluginMessage: { type: 'generate-typography' } }, '*');
+    };
+
+    document.getElementById('btn-spacing').onclick = () => {
+      setLoading('Generating spacing...');
+      parent.postMessage({ pluginMessage: { type: 'generate-spacing' } }, '*');
+    };
+
+    document.getElementById('btn-border').onclick = () => {
+      setLoading('Generating border radius...');
+      parent.postMessage({ pluginMessage: { type: 'generate-border' } }, '*');
+    };
+
+    document.getElementById('btn-shadows').onclick = () => {
+      setLoading('Generating shadows...');
+      parent.postMessage({ pluginMessage: { type: 'generate-shadows' } }, '*');
+    };
+
+    document.getElementById('btn-buttons').onclick = () => {
+      setLoading('Generating buttons...');
+      parent.postMessage({ pluginMessage: { type: 'generate-buttons' } }, '*');
+    };
+
+    document.getElementById('btn-surfaces').onclick = () => {
+      setLoading('Generating surfaces & glass...');
+      parent.postMessage({ pluginMessage: { type: 'generate-surfaces' } }, '*');
+    };
+
+    document.getElementById('btn-all').onclick = () => {
+      setLoading('Generating all frames...');
+      parent.postMessage({ pluginMessage: { type: 'generate-all' } }, '*');
+    };
+
+    window.onmessage = (event) => {
+      const msg = event.data.pluginMessage;
+      if (!msg) return;
+      if (msg.type === 'done')  setDone(msg.text  || 'Done!');
+      if (msg.type === 'error') setError(msg.text || 'Something went wrong.');
+    };
+  </script>
+</body>
+</html>
