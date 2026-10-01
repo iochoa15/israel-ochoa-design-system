@@ -1,5 +1,11 @@
 # Israel Ochoa Design System — Agent Instructions
 
+## Communication style (always apply)
+
+Israel is a **beginner / non-expert** with code and dev tooling. Explain everything **concisely and in plain language** — avoid jargon, or define it immediately in everyday terms. Lead with the practical takeaway ("what this means for you / what to do"), use simple analogies over technical precision, and keep depth optional. Do the technical work correctly under the hood; just keep the *explanation* beginner-friendly.
+
+---
+
 This project has two files that must stay in sync whenever tokens change:
 1. `design-tokens-fixed.json` — source of truth for Figma variables (imported via Token Studio)
 2. `figma auto frame tool /code.js` — Figma plugin that generates documentation frames

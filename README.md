@@ -27,6 +27,7 @@ israel-ochoa-design-system/
 │   └── screenshots/                  # Reference frames from Figma canvas
 │
 ├── framer/
+│   ├── code-components/              # Backup of the Framer code components & overrides (see its README)
 │   ├── design-tokens.css             # CSS custom properties
 │   ├── design-tokens.ts              # TypeScript token map
 │   └── tailwind-tokens.js            # Tailwind config extension
@@ -133,6 +134,19 @@ Token files in `framer/` are ready to drop into a Framer project:
 - **`design-tokens.css`** — paste into a global CSS override or code component
 - **`design-tokens.ts`** — import and use as typed token constants
 - **`tailwind-tokens.js`** — extend your Tailwind config with `extend: require('./tailwind-tokens')`
+
+---
+
+## September 2026 update
+
+**Framer site**
+- `/homepage-3`: the typewriter moved into the main card; the card rises into view, then the top stats and the nav animate in together and stay on screen. Sections hold in place and the page keeps your spot when the window is resized.
+- `/homepage-4`: a faster copy of homepage-3. Scrolling was choppy because of heavy glass blur, so blur now appears only where it's visible, and only Stage 1 and Stage 3 snap.
+- Each design decision is kept as its own page version so they can be compared side by side.
+
+**Figma (IO-Website-2026, Page 2)**
+- v1: research report from ~60 Mobbin website sections, plus three homepage directions.
+- v2: a report built from the "Getting Hired at Anthropic" knowledge base, Home v2 ("The Trust Designer"), next steps, and an About page with Keep / Replace / Delete review notes.
 
 ---
 
