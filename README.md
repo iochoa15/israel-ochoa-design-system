@@ -148,6 +148,20 @@ Token files in `framer/` are ready to drop into a Framer project:
 - v1: research report from ~60 Mobbin website sections, plus three homepage directions.
 - v2: a report built from the "Getting Hired at Anthropic" knowledge base, Home v2 ("The Trust Designer"), next steps, and an About page with Keep / Replace / Delete review notes.
 
+## October 2026 update
+
+All of this lives in Figma (IO-Website-2026, page "Home & About · Design Set"). Full details, node IDs and next steps are in [`documents/figma-explorations-oct-2026.md`](documents/figma-explorations-oct-2026.md).
+
+- **Six variations** of Home + About, based on 9 portfolio sites Israel likes.
+- **Curated v2 · Modern:** his picks rebuilt with the sans font leading and a more technical look, plus a proposed v2 design system.
+- **Curated v3 · Subtle:** six quieter sets using five interactions he picked:
+  - Littlebird's expanding room
+  - Flim's frosted nav and slow reveals
+  - Fourmula's stacking steps
+  - Klarna's hover-to-open cards
+  - V7's live interfaces in place of videos
+- **Curated v4 · Middle ground (current direction):** v2's exact copy and clay objects, a design system halfway between v2 and v3, and only the components he liked: Flim nav bar, live Lab bento, room + dark deck for the work, letter chips with hover photo, hover-to-open Kind words. New `v4-middle` Figma styles are waiting for approval before they go into the tokens JSON and Framer.
+
 ---
 
 ## Button Variants
