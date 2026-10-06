@@ -1,6 +1,6 @@
 # Figma explorations · October 2026 (where we left off)
 
-Last updated: 2026-10-05. Read this first when you pick the work back up.
+Last updated: 2026-10-05 (late). Read this first when you pick the work back up.
 
 **Figma file:** IO-Website-2026 (`71RYIBnkaFohQHGeU3MXdN`), in Israel's personal account (iochoa15@gmail.com).
 **Page:** "Home & About · Design Set" (`496:154`).
@@ -8,7 +8,45 @@ The Figma MCP must be signed in with the personal Gmail account. The work accoun
 
 ---
 
-## Current direction: Curated v4 · Middle ground
+## Latest: Curated v5 · Human and v6 · Elegant (Oct 5)
+
+Built from Israel's edited V4. He had:
+- put his original Main Nav pill back
+- removed the career section, the tab index and some labels
+- edited the Lab copy
+
+**His feedback:**
+- No DM Mono anywhere.
+- Keep the original Main Nav shape and use only the glass surface.
+- Wix Madefor stays the main font.
+- Bring back the blue-lavender tones.
+- Goal: a balance of tech, personality, fun, human, elegance, AI product and wow (mostly new animations).
+
+| Section | Node | What it is |
+|---|---|---|
+| **v5 · Human** | `572:532` | About 50% less tech. New `v5-human` styles (Wix labels, warm canvas #F4F2EE, night blue #1C2B52 instead of black, lavender sections, softer corners, light closing section) |
+| v5 nav | `572:533` | COMPONENT "Main Nav · Glass": the original Main Nav pill with the Flim glass surface |
+| v5 pages | `572:558` Home · `572:781` About · `573:550` DS doc | |
+| **v6 · Elegant** | `575:550` | v5 + claudetype.com elegance (listed below) |
+| v6 pages | `575:552` Home · `576:574` About · `577:596` elegance-layer doc | |
+
+**v6 · Elegant adds:**
+- Hero: the clay objects sit in an arch triptych.
+- A soft lavender and rose gradient pause.
+- 40px rounded sheets.
+- A segmented pill: Read the case study · Play · Live prototype.
+- The Lab becomes a gallery of shapes holding the live UIs.
+- A giant Newsreader "Israel Ochoa" wordmark footer.
+- About: arch-shaped Kind words and Beyond work cards.
+
+**Open:**
+- Which of v5 or v6 goes to Framer (as a new page)?
+- Approve the `v5-human` styles for the tokens file.
+- Copy and projects will still change.
+
+---
+
+## Previous: Curated v4 · Middle ground
 
 Section `554:486` · [open in Figma](https://www.figma.com/design/71RYIBnkaFohQHGeU3MXdN/IO-Website-2026?node-id=554-486)
 
