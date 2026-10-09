@@ -1,0 +1,82 @@
+[
+ {
+  "file": "Stack 0A - I.glb",
+  "meshes": 3,
+  "tris": 5276,
+  "materials": [
+   "Material_tripo_part_1",
+   "Material_tripo_part_2",
+   "Material_tripo_part_3"
+  ],
+  "images": [
+   [
+    "bone-shaped+3d+model_tripo_part_1_basecolor.jpg",
+    [
+     2048,
+     2048
+    ]
+   ],
+   [
+    "bone-shaped+3d+model_tripo_part_1_normal.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "bone-shaped+3d+model_tripo_part_1_rm.png",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "bone-shaped+3d+model_tripo_part_2_basecolor.jpg",
+    [
+     2048,
+     2048
+    ]
+   ],
+   [
+    "bone-shaped+3d+model_tripo_part_2_normal.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "bone-shaped+3d+model_tripo_part_2_rm.png",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "bone-shaped+3d+model_tripo_part_3_basecolor.jpg",
+    [
+     2048,
+     2048
+    ]
+   ],
+   [
+    "bone-shaped+3d+model_tripo_part_3_normal.jpg",
+    [
+     1024,
+     1024
+    ]
+   ],
+   [
+    "bone-shaped+3d+model_tripo_part_3_rm.png",
+    [
+     1024,
+     1024
+    ]
+   ]
+  ],
+  "size_xyz": [
+   0.238,
+   0.193,
+   0.461
+  ]
+ }
+]

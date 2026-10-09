@@ -1,0 +1,15 @@
+[
+  {
+    "name": "pizza",
+    "triangles_in": 41076,
+    "triangles_out": 7999,
+    "normal_map_baked": true,
+    "size": {
+      "width": 0.886,
+      "height": 1.0,
+      "depth": 1.438
+    },
+    "mb_in": 0.47,
+    "mb_out": 0.35
+  }
+]

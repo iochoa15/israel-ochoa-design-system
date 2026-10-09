@@ -1,0 +1,314 @@
+{
+ "Stack 1B - Concha": {
+  "parts": 1,
+  "triangles": 120010,
+  "colors": [
+   "#ddb0b6",
+   "#9f9267"
+  ],
+  "size": {
+   "width": 1.0,
+   "height": 0.89,
+   "depth": 1.014
+  },
+  "mb": 1.01
+ },
+ "Stack 0A - I": {
+  "parts": 1,
+  "triangles": 110000,
+  "colors": [
+   "#d2f0e3"
+  ],
+  "size": {
+   "width": 0.513,
+   "height": 1.0,
+   "depth": 0.432
+  },
+  "mb": 0.83
+ },
+ "Stack 0B - O": {
+  "parts": 1,
+  "triangles": 110000,
+  "colors": [
+   "#4189e7"
+  ],
+  "size": {
+   "width": 0.985,
+   "height": 1.0,
+   "depth": 0.524
+  },
+  "mb": 0.86
+ },
+ "Stack 0C - D": {
+  "parts": 1,
+  "triangles": 109993,
+  "colors": [
+   "#d45c4d"
+  ],
+  "size": {
+   "width": 0.765,
+   "height": 1.0,
+   "depth": 0.478
+  },
+  "mb": 0.96
+ },
+ "Stack 1A - Beer": {
+  "parts": 3,
+  "triangles": 116369,
+  "colors": [
+   "#8a5530",
+   "#b40002",
+   "#fef06e",
+   "#95e3fe"
+  ],
+  "size": {
+   "width": 0.362,
+   "height": 1.0,
+   "depth": 0.361
+  },
+  "mb": 1.01
+ },
+ "Stack 1C - Taco": {
+  "parts": 12,
+  "triangles": 119297,
+  "colors": [
+   "#c3a780",
+   "#649761",
+   "#e96e61",
+   "#866549",
+   "#b7b4a4"
+  ],
+  "size": {
+   "width": 0.615,
+   "height": 1.0,
+   "depth": 0.915
+  },
+  "mb": 1.14
+ },
+ "Stack 2A - A train": {
+  "parts": 1,
+  "triangles": 112376,
+  "colors": [
+   "#004b8e",
+   "#cfccce"
+  ],
+  "size": {
+   "width": 1.0,
+   "height": 0.993,
+   "depth": 0.475
+  },
+  "mb": 0.88
+ },
+ "Stack 2A - Statue of Liberty": {
+  "parts": 9,
+  "triangles": 121584,
+  "colors": [
+   "#7fb89d",
+   "#e4ffd1",
+   "#4eacd7",
+   "#627e7d",
+   "#d7d885"
+  ],
+  "size": {
+   "width": 0.504,
+   "height": 1.0,
+   "depth": 0.387
+  },
+  "mb": 1.11
+ },
+ "Stack 2c - Pizza": {
+  "parts": 1,
+  "triangles": 118733,
+  "colors": [
+   "#e39457",
+   "#c7544a",
+   "#f2aa3a",
+   "#54a173"
+  ],
+  "size": {
+   "width": 0.583,
+   "height": 1.0,
+   "depth": 0.543
+  },
+  "mb": 1.03
+ },
+ "Stack 3A - Evangelion": {
+  "parts": 1,
+  "triangles": 126593,
+  "colors": [
+   "#a39fd8",
+   "#8cc895",
+   "#dcc064",
+   "#da7163",
+   "#3c3a44"
+  ],
+  "size": {
+   "width": 0.657,
+   "height": 1.0,
+   "depth": 0.717
+  },
+  "mb": 1.13
+ },
+ "Stack 3B - Dragon Ball": {
+  "parts": 1,
+  "triangles": 112470,
+  "colors": [
+   "#fea15e",
+   "#d7754c"
+  ],
+  "size": {
+   "width": 0.992,
+   "height": 1.0,
+   "depth": 0.995
+  },
+  "mb": 0.87
+ },
+ "Stack 3C - Sailor Moon": {
+  "parts": 1,
+  "triangles": 115488,
+  "colors": [
+   "#a5aea8",
+   "#f1daa7",
+   "#ea9bb8",
+   "#d6a500",
+   "#e9586e",
+   "#4a6ad0"
+  ],
+  "size": {
+   "width": 0.73,
+   "height": 1.0,
+   "depth": 0.377
+  },
+  "mb": 0.95
+ },
+ "Stack 4A - Dumbbell": {
+  "parts": 1,
+  "triangles": 111514,
+  "colors": [
+   "#50aa9f",
+   "#b3b8c5"
+  ],
+  "size": {
+   "width": 0.438,
+   "height": 1.0,
+   "depth": 0.624
+  },
+  "mb": 0.86
+ },
+ "Stack 4B - Kettlebell": {
+  "parts": 1,
+  "triangles": 112192,
+  "colors": [
+   "#8b99d9",
+   "#694840"
+  ],
+  "size": {
+   "width": 0.741,
+   "height": 1.0,
+   "depth": 0.726
+  },
+  "mb": 0.87
+ },
+ "Stack 4C - Glove": {
+  "parts": 1,
+  "triangles": 114522,
+  "colors": [
+   "#fd3e49",
+   "#eaa54c",
+   "#98c8de"
+  ],
+  "size": {
+   "width": 0.755,
+   "height": 1.0,
+   "depth": 0.68
+  },
+  "mb": 0.94
+ },
+ "Stack 5A - OLoGuadalupe": {
+  "parts": 1,
+  "triangles": 129740,
+  "colors": [
+   "#ef6c18",
+   "#009494",
+   "#ca3044",
+   "#d2814c",
+   "#e7e5e3",
+   "#fcc253",
+   "#624942"
+  ],
+  "size": {
+   "width": 0.608,
+   "height": 1.0,
+   "depth": 0.524
+  },
+  "mb": 1.14
+ },
+ "Stack 5B - Candy Skul": {
+  "parts": 1,
+  "triangles": 124686,
+  "colors": [
+   "#f2e9e3",
+   "#feba43",
+   "#c693b3",
+   "#fe897a",
+   "#298ebd",
+   "#b9cede"
+  ],
+  "size": {
+   "width": 0.885,
+   "height": 1.0,
+   "depth": 0.923
+  },
+  "mb": 1.06
+ },
+ "Stack 5C - Rainbow": {
+  "parts": 1,
+  "triangles": 126626,
+  "colors": [
+   "#dd4235",
+   "#de9109",
+   "#f9ca00",
+   "#63a056",
+   "#0060a8",
+   "#993f5f"
+  ],
+  "size": {
+   "width": 0.56,
+   "height": 1.0,
+   "depth": 0.535
+  },
+  "mb": 1.1
+ },
+ "Stack 6A - Pencil": {
+  "parts": 1,
+  "triangles": 116934,
+  "colors": [
+   "#fcf8cd",
+   "#80817e",
+   "#fd5e43",
+   "#6a8fe4",
+   "#9fc6f2"
+  ],
+  "size": {
+   "width": 0.379,
+   "height": 1.0,
+   "depth": 0.439
+  },
+  "mb": 0.92
+ },
+ "Stack 6C - Lego": {
+  "parts": 3,
+  "triangles": 109997,
+  "colors": [
+   "#5695e8",
+   "#68ac6a",
+   "#bb584f"
+  ],
+  "size": {
+   "width": 1.0,
+   "height": 0.786,
+   "depth": 0.675
+  },
+  "mb": 0.9
+ }
+}

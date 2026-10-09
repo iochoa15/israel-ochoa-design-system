@@ -2,8 +2,8 @@ import { useEffect, useRef, useState, startTransition, type CSSProperties } from
 import { addPropertyControls, ControlType, useIsStaticRenderer } from "framer"
 import {
     motion,
-    useInView,
     useMotionValue,
+    useScroll,
     useSpring,
     useTransform,
     type MotionValue,
@@ -23,7 +23,8 @@ interface ClayItem {
 interface FloatingClayProps {
     items: ClayItem[]
     mouseStrength: number
-    repelRadius: number
+    tiltStrength: number
+    stagger: number
     style?: CSSProperties
 }
 
@@ -35,88 +36,135 @@ const DEFAULTS: ClayItem[] = [
     { image: { src: IMG("eLdwIZmJqyF0i8rQnKn0TGWDEHI"), alt: "Clay taco" }, x: 3, y: 80, size: 96, depth: 0.45, rotate: 8 },
 ]
 
+// On phones and tablets the text spans most of the width, so objects settle in the top and bottom bands.
+const PHONE_POS = [
+    { x: 4, y: 4 },
+    { x: 80, y: 5 },
+    { x: 76, y: 84 },
+    { x: 6, y: 86 },
+    { x: 44, y: 90 },
+    { x: 60, y: 3 },
+]
+const TABLET_POS = [
+    { x: 6, y: 8 },
+    { x: 86, y: 10 },
+    { x: 80, y: 78 },
+    { x: 10, y: 80 },
+    { x: 48, y: 88 },
+    { x: 58, y: 6 },
+]
+
+const clamp01 = (v: number) => Math.min(1, Math.max(0, v))
+// Hero timeline (see Reveal.tsx): avatar + name tag 0–0.41, first object 0.28–0.62, the rest from 0.42.
+const LEAD_AT = 0.28
+const REST_AT = 0.42
+const MAX_RATE = 1 / 2.4 // the whole entrance never runs faster than ~2.4s, even when the intro snaps to the hero
+const HERO_KEY = "__ioHeroPlayhead"
+const HERO_EVENT = "io-hero-playhead"
+const easeOut = (t: number) => 1 - Math.pow(1 - t, 3)
+
 function Clay(props: {
     item: ClayItem
     index: number
+    count: number
+    progress: MotionValue<number>
     mx: MotionValue<number>
     my: MotionValue<number>
-    pointer: MotionValue<{ x: number; y: number }>
+    box: { w: number; h: number }
     mouseStrength: number
-    repelRadius: number
-    visible: boolean
+    tiltStrength: number
+    stagger: number
+    touch: boolean
     isStatic: boolean
     scale: number
 }) {
-    const { item, index, mx, my, pointer, mouseStrength, repelRadius, visible, isStatic, scale } = props
-    const ref = useRef<HTMLDivElement>(null)
+    const { item, index, count, progress, mx, my, box, mouseStrength, tiltStrength, stagger, touch, isStatic, scale } = props
+    const size = item.size * scale
 
-    // Parallax: nearer objects (bigger depth) move more, each on its own lazy spring.
+    // Where it rests, and where it starts: bunched up near the middle of the hero (passionfroot.me style).
+    const restX = (item.x / 100) * box.w + size / 2
+    const restY = (item.y / 100) * box.h + size / 2
+    const fromX = (box.w / 2 - restX) * 0.82
+    const fromY = (box.h / 2 - restY) * 0.82
+    const spin = index % 2 ? 12 : -12
+
+    // Each object runs its own slice of the hero timeline: the first one (concha) right after the avatar and
+    // name tag, the others together with the headline, one after another.
+    const start = index === 0 ? LEAD_AT : REST_AT + (index - 1) * stagger
+    const span = index === 0 ? 0.34 : Math.min(0.4, Math.max(0.2, 1 - (REST_AT + Math.max(0, count - 2) * stagger)))
+    const local = useTransform(progress, (p) => clamp01((p - start) / span))
+    const eased = useTransform(local, easeOut)
+    const enterX = useTransform(eased, (e) => fromX * (1 - e))
+    const enterY = useTransform(eased, (e) => fromY * (1 - e) + 12 * (1 - e))
+    const enterScale = useTransform(eased, (e) => 0.55 + 0.45 * e)
+    const enterRotate = useTransform(eased, (e) => item.rotate + spin * (1 - e))
+    const opacity = useTransform(local, [0, 0.45], [0, 1])
+    const filter = useTransform(eased, (e) => `blur(${(1 - e) * 6}px)`)
+
+    // Mouse parallax: nearer objects (bigger depth) drift more, each on its own lazy spring.
     const spring = { stiffness: 40 + index * 6, damping: 14, mass: 1 + item.depth * 0.4 }
     const px = useSpring(useTransform(mx, (v) => v * 36 * item.depth * mouseStrength), spring)
     const py = useSpring(useTransform(my, (v) => v * 26 * item.depth * mouseStrength), spring)
+    const x = useTransform([enterX, px] as MotionValue<number>[], ([a, b]: number[]) => a + b)
+    const y = useTransform([enterY, py] as MotionValue<number>[], ([a, b]: number[]) => a + b)
 
-    // Repel: the cursor gently pushes nearby objects away.
-    const rx = useMotionValue(0)
-    const ry = useMotionValue(0)
-    const srx = useSpring(rx, { stiffness: 120, damping: 12 })
-    const sry = useSpring(ry, { stiffness: 120, damping: 12 })
-    useEffect(() => {
-        if (isStatic) return
-        return pointer.on("change", (p) => {
-            const el = ref.current
-            if (!el) return
-            const r = el.getBoundingClientRect()
-            const dx = r.left + r.width / 2 - p.x
-            const dy = r.top + r.height / 2 - p.y
-            const d = Math.hypot(dx, dy)
-            if (d < repelRadius && d > 0.01) {
-                const f = (1 - d / repelRadius) * 46
-                rx.set((dx / d) * f)
-                ry.set((dy / d) * f)
-            } else {
-                rx.set(0)
-                ry.set(0)
-            }
-        })
-    }, [pointer, repelRadius, isStatic])
+    // Hover tilt: the object leans toward the cursor in 3D (a real 3D model can replace the image later).
+    const tx = useMotionValue(0)
+    const ty = useMotionValue(0)
+    const rotY = useSpring(useTransform(tx, (v) => v * tiltStrength), { stiffness: 180, damping: 16 })
+    const rotX = useSpring(useTransform(ty, (v) => -v * tiltStrength), { stiffness: 180, damping: 16 })
 
-    const x = useTransform([px, srx] as MotionValue<number>[], ([a, b]: number[]) => a + b)
-    const y = useTransform([py, sry] as MotionValue<number>[], ([a, b]: number[]) => a + b)
+    function onMove(e: React.PointerEvent<HTMLDivElement>) {
+        if (touch) return
+        const r = e.currentTarget.getBoundingClientRect()
+        tx.set((e.clientX - r.left) / r.width - 0.5)
+        ty.set((e.clientY - r.top) / r.height - 0.5)
+    }
+    function onLeave() {
+        tx.set(0)
+        ty.set(0)
+    }
 
     const floatDur = 4.2 + (index % 3) * 0.9 + item.depth
+    const fallback = DEFAULTS[index % DEFAULTS.length].image!
 
     return (
         <motion.div
-            ref={ref}
             style={{
                 position: "absolute",
                 left: `${item.x}%`,
                 top: `${item.y}%`,
-                width: item.size * scale,
+                width: size,
                 x: isStatic ? 0 : x,
                 y: isStatic ? 0 : y,
+                scale: isStatic ? 1 : enterScale,
+                rotate: isStatic ? item.rotate : enterRotate,
+                opacity: isStatic ? 1 : opacity,
+                filter: isStatic ? "none" : filter,
                 zIndex: Math.round(item.depth * 10),
                 pointerEvents: "auto",
+                willChange: "transform, opacity, filter",
             }}
         >
             <motion.div
-                initial={isStatic ? false : { opacity: 0, scale: 0.2, rotate: item.rotate - 40 }}
-                animate={visible || isStatic ? { opacity: 1, scale: 1, rotate: item.rotate } : undefined}
-                transition={{ type: "spring", stiffness: 220, damping: 13, mass: 0.8, delay: 0.25 + index * 0.12 }}
+                animate={isStatic ? undefined : { y: [0, -14, 0, 8, 0], rotate: [0, 3, 0, -3, 0] }}
+                transition={{ duration: floatDur, repeat: Infinity, ease: "easeInOut", delay: index * 0.4 }}
+                style={{ perspective: 600 }}
             >
                 <motion.div
-                    animate={isStatic ? undefined : { y: [0, -14, 0, 8, 0], rotate: [0, 3, 0, -3, 0] }}
-                    transition={{ duration: floatDur, repeat: Infinity, ease: "easeInOut", delay: index * 0.4 }}
+                    onPointerMove={onMove}
+                    onPointerLeave={onLeave}
+                    style={{ rotateX: rotX, rotateY: rotY, transformStyle: "preserve-3d" }}
                 >
                     <motion.img
-                        src={item.image?.src || DEFAULTS[index % DEFAULTS.length].image!.src}
-                        alt={item.image?.alt || DEFAULTS[index % DEFAULTS.length].image!.alt || ""}
+                        src={item.image?.src || fallback.src}
+                        alt={item.image?.alt || fallback.alt || ""}
                         draggable={false}
                         drag={!isStatic}
                         dragSnapToOrigin
                         dragElastic={0.6}
                         dragTransition={{ bounceStiffness: 260, bounceDamping: 14 }}
-                        whileHover={{ scale: 1.1, rotate: item.rotate > 0 ? -6 : 6 }}
+                        whileHover={touch ? undefined : { scale: 1.1 }}
                         whileDrag={{ scale: 1.18, cursor: "grabbing" }}
                         transition={{ type: "spring", stiffness: 300, damping: 16 }}
                         style={{ width: "100%", height: "auto", display: "block", cursor: "grab", userSelect: "none", touchAction: "none" }}
@@ -128,7 +176,9 @@ function Clay(props: {
 }
 
 /**
- * Floating clay objects: they pop in, drift, follow the mouse at different depths, dodge the cursor and can be flung.
+ * Floating clay objects. They start bunched in the middle of the section, then drift out to their spots,
+ * one after another, as the section scrolls into view (and back in when you scroll up). Arriving straight
+ * on the section plays the same move on its own. They follow the mouse, tilt toward the cursor and can be flung.
  * Place it absolutely over a section (fill the section).
  *
  * @framerIntrinsicWidth 1200
@@ -138,15 +188,54 @@ function Clay(props: {
  * @framerSupportedLayoutHeight fixed
  */
 export default function FloatingClay(props: FloatingClayProps) {
-    const { items = DEFAULTS, mouseStrength = 1, repelRadius = 220 } = props
+    const { items = DEFAULTS, mouseStrength = 1, tiltStrength = 26, stagger = 0.07 } = props
     const isStatic = useIsStaticRenderer()
     const rootRef = useRef<HTMLDivElement>(null)
-    const visible = useInView(rootRef, { once: true, amount: 0.2 })
     const mx = useMotionValue(0)
     const my = useMotionValue(0)
-    const pointer = useMotionValue({ x: -9999, y: -9999 })
-    const [vw, setVw] = useState(1200)
+    const [box, setBox] = useState({ w: 1200, h: 800 })
     const [touch, setTouch] = useState(false)
+
+    // Progress runs 0 → 1 while the section rises from the bottom of the screen to near the top.
+    const { scrollYProgress } = useScroll({ target: rootRef, offset: ["start 0.95", "start 0.1"] })
+    // The playhead follows the scroll, capped at MAX_RATE, so a fast scroll or a jump still plays the whole
+    // entrance in order. It is shared with the avatar, name tag, headline and 3D clay via window.
+    const progress = useMotionValue(isStatic ? 1 : 0)
+    const smooth = useSpring(progress, { stiffness: 110, damping: 24, mass: 0.6 })
+
+    useEffect(() => {
+        if (isStatic || typeof window === "undefined") return
+        const w = window as any
+        w[HERO_KEY] = smooth
+        window.dispatchEvent(new CustomEvent(HERO_EVENT))
+        let raf = 0
+        let last = 0
+        const tick = (now: number) => {
+            raf = 0
+            const dt = last ? Math.min(0.05, (now - last) / 1000) : 1 / 60
+            last = now
+            const target = scrollYProgress.get()
+            const cur = progress.get()
+            const diff = target - cur
+            if (Math.abs(diff) < 0.0005) {
+                progress.set(target)
+                last = 0
+                return
+            }
+            progress.set(cur + Math.sign(diff) * Math.min(Math.abs(diff), MAX_RATE * dt))
+            raf = window.requestAnimationFrame(tick)
+        }
+        const kick = () => {
+            if (!raf) raf = window.requestAnimationFrame(tick)
+        }
+        kick()
+        const unsub = scrollYProgress.on("change", kick)
+        return () => {
+            unsub()
+            if (raf) window.cancelAnimationFrame(raf)
+            if (w[HERO_KEY] === smooth) delete w[HERO_KEY]
+        }
+    }, [isStatic])
 
     useEffect(() => {
         if (typeof window === "undefined") return
@@ -154,15 +243,15 @@ export default function FloatingClay(props: FloatingClayProps) {
         const el = rootRef.current
         if (!el || typeof ResizeObserver === "undefined") return
         const ro = new ResizeObserver((entries) => {
-            const w = entries[0]?.contentRect.width
-            if (w) startTransition(() => setVw(w))
+            const r = entries[0]?.contentRect
+            if (r && r.width && r.height) startTransition(() => setBox({ w: r.width, h: r.height }))
         })
         ro.observe(el)
         return () => ro.disconnect()
     }, [])
 
     useEffect(() => {
-        // Touch screens have no cursor: keep the pop-in, float and drag, skip mouse-follow and dodge.
+        // Touch screens have no cursor: keep the drift-out, float and drag, skip mouse-follow and tilt.
         if (isStatic || touch || typeof window === "undefined") return
         let frame = 0
         let last = { x: 0, y: 0 }
@@ -173,7 +262,6 @@ export default function FloatingClay(props: FloatingClayProps) {
                 frame = 0
                 mx.set((last.x / window.innerWidth) * 2 - 1)
                 my.set((last.y / window.innerHeight) * 2 - 1)
-                pointer.set(last)
             })
         }
         window.addEventListener("pointermove", onMove, { passive: true })
@@ -183,27 +271,10 @@ export default function FloatingClay(props: FloatingClayProps) {
         }
     }, [isStatic, touch])
 
-    // On phones and tablets the text spans most of the width, so objects move to the top and bottom bands.
-    const PHONE_POS = [
-        { x: 4, y: 4 },
-        { x: 80, y: 5 },
-        { x: 76, y: 84 },
-        { x: 6, y: 86 },
-        { x: 44, y: 90 },
-        { x: 60, y: 3 },
-    ]
-    const TABLET_POS = [
-        { x: 6, y: 8 },
-        { x: 86, y: 10 },
-        { x: 80, y: 78 },
-        { x: 10, y: 80 },
-        { x: 48, y: 88 },
-        { x: 58, y: 6 },
-    ]
-    const bands = vw < 640 ? PHONE_POS : vw < 1000 ? TABLET_POS : null
+    const bands = box.w < 640 ? PHONE_POS : box.w < 1000 ? TABLET_POS : null
     const baseList = items && items.length ? items : DEFAULTS
     const list = bands ? baseList.map((it, i) => ({ ...it, ...bands[i % bands.length] })) : baseList
-    const scale = Math.max(0.5, Math.min(1, vw / 1200))
+    const scale = Math.max(0.5, Math.min(1, box.w / 1200))
 
     return (
         <div ref={rootRef} style={{ ...props.style, position: "relative", width: "100%", height: "100%", pointerEvents: "none" }}>
@@ -212,12 +283,15 @@ export default function FloatingClay(props: FloatingClayProps) {
                     key={i}
                     item={item}
                     index={i}
+                    count={list.length}
+                    progress={isStatic ? progress : smooth}
                     mx={mx}
                     my={my}
-                    pointer={pointer}
+                    box={box}
                     mouseStrength={mouseStrength}
-                    repelRadius={repelRadius}
-                    visible={visible}
+                    tiltStrength={tiltStrength}
+                    stagger={stagger}
+                    touch={touch}
                     isStatic={isStatic}
                     scale={scale}
                 />
@@ -244,5 +318,6 @@ addPropertyControls(FloatingClay, {
         defaultValue: DEFAULTS,
     },
     mouseStrength: { type: ControlType.Number, title: "Mouse follow", defaultValue: 1, min: 0, max: 2, step: 0.05 },
-    repelRadius: { type: ControlType.Number, title: "Dodge radius", defaultValue: 220, min: 0, max: 400, unit: "px" },
+    tiltStrength: { type: ControlType.Number, title: "Hover tilt", defaultValue: 26, min: 0, max: 45, unit: "°" },
+    stagger: { type: ControlType.Number, title: "Stagger", defaultValue: 0.07, min: 0, max: 0.15, step: 0.01 },
 })

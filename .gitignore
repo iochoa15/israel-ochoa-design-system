@@ -8,3 +8,16 @@
 
 # Editor
 .cursor/
+
+# 3D: raw Tripo exports are big, keep them out of git
+3d/source/
+*.blend1
+# 3D: Israel's source stills + Tripo files (360MB) and the big working files of models-v2
+3d/illustrations and models/
+3d/models-v2/work/
+3d/models-v2/05_compare/*.blend
+3d/models-v2/06_solid_clay/work/
+3d/models-v2/06_solid_clay/compare/*.blend
+3d/models-v2/07_tripo_clean/blend/
+3d/models-v2/07_tripo_clean/compare/*.blend
+__pycache__/
