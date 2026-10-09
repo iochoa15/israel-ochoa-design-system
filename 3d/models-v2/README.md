@@ -80,3 +80,10 @@ Files:
 - `07_tripo_clean/compare/all_versions.blend`: every version side by side, one collection per version (hide a column with one click).
 
 Re-run: `Blender -b --factory-startup --python scripts/clean/clean_tripo.py -- "../illustrations and models/GBL Models" 07_tripo_clean work/alignment.json "../illustrations and models/Still Illustration" [name]`, then `scripts/clean/compare_sheet.py` and `scripts/clean/compare_scene.py`.
+
+## Local cleanup (Oct 9 2026)
+
+To save space, this Mac only keeps the editables: `07_tripo_clean/blend/*.blend` (all 22, Cube and Doll made with `scripts/clean/make_editable.py`), the scripts, `work/alignment.json` + `proportions.json`, and the comparison sheet.
+- Older stages (01 to 06, 07 GLBs and previews) are still on GitHub, hidden locally with git sparse checkout. Bring them back: `git sparse-checkout disable`.
+- Files that were never on GitHub (working files, comparison .blend files, .blend1 backups) went to the Mac Trash in `io-c models-v2 cleanup 2026-10-09`. They're gone for good once the Trash is emptied; scripts can rebuild them from the Tripo files.
+- 410 iCloud " 2" copies (identical duplicates) went to the same Trash folder.

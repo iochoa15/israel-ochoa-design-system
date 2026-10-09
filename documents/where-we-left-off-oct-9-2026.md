@@ -14,9 +14,11 @@ All versions live in `3d/models-v2/` (details and re-run commands in its `README
 | **`07_tripo_clean`** | **his Tripo models, only cleaned** (seams stitched, small gaps closed, turned like the still, same matte finish, paint untouched) | **"looking way better": the base to use** |
 
 - Comparison: `3d/models-v2/07_tripo_clean/compare/all_22__5_versions.png` (still, Tripo original, 03, 06, 07, 07 at 3/4).
-- All versions in Blender: `07_tripo_clean/compare/all_versions.blend` (local only, ~670 MB, not on GitHub).
+- All versions in Blender: `all_versions.blend` was moved to the Trash on Oct 9 (rebuild with `scripts/clean/compare_scene.py`).
 - One Blender file per object for hand editing: `07_tripo_clean/blend/<name>.blend` (local only, not on GitHub). Each has a front camera and the still as a hidden see-through reference.
-- Cube and Doll had no Tripo file: they use the Blender-built versions in `04_from_scratch`.
+- Cube and Doll had no Tripo file: their editables were made from the Blender-built versions (`04_from_scratch`).
+- Local cleanup (Oct 9): this Mac keeps only the 22 editables + scripts (399 MB, was 2.8 GB). Old stages are on GitHub, hidden locally (`git sparse-checkout disable` brings them back). See `3d/models-v2/README.md`.
+- Live Blender connector INSTALLED (Oct 9): official add-on in Blender (auto-starts), Blender bundle in Claude Desktop. Israel does the hand revisions from the Claude Desktop chat.
 
 ## 2. Next steps (in order)
 
