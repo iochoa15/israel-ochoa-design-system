@@ -1,0 +1,342 @@
+{
+ "Stack 0A - I": {
+  "parts": 3,
+  "triangles_in": 5276,
+  "triangles_out": 5276,
+  "size": {
+   "width": 0.514,
+   "height": 1.0,
+   "depth": 0.437
+  },
+  "mb_glb": 0.41,
+  "open_edges_before": 2062,
+  "open_edges_after_stitch": 194,
+  "open_edges_left": 194,
+  "needles_removed": 0,
+  "dust_faces_removed": 0,
+  "holes_filled": 0
+ },
+ "Stack 0B - O": {
+  "parts": 1,
+  "triangles_in": 9967,
+  "triangles_out": 9965,
+  "size": {
+   "width": 0.985,
+   "height": 1.0,
+   "depth": 0.526
+  },
+  "mb_glb": 1.04,
+  "open_edges_before": 4929,
+  "open_edges_after_stitch": 27,
+  "open_edges_left": 27,
+  "needles_removed": 2,
+  "dust_faces_removed": 0,
+  "holes_filled": 0
+ },
+ "Stack 0C - D": {
+  "parts": 1,
+  "triangles_in": 10120,
+  "triangles_out": 10122,
+  "size": {
+   "width": 0.764,
+   "height": 1.0,
+   "depth": 0.478
+  },
+  "mb_glb": 1.23,
+  "open_edges_before": 2418,
+  "open_edges_after_stitch": 31,
+  "open_edges_left": 27,
+  "needles_removed": 0,
+  "dust_faces_removed": 0,
+  "holes_filled": 1
+ },
+ "Stack 1A - Beer": {
+  "parts": 3,
+  "triangles_in": 14981,
+  "triangles_out": 14981,
+  "size": {
+   "width": 0.403,
+   "height": 1.0,
+   "depth": 0.401
+  },
+  "mb_glb": 0.89,
+  "open_edges_before": 4857,
+  "open_edges_after_stitch": 227,
+  "open_edges_left": 227,
+  "needles_removed": 0,
+  "dust_faces_removed": 0,
+  "holes_filled": 0
+ },
+ "Stack 1B - Concha": {
+  "parts": 1,
+  "triangles_in": 20688,
+  "triangles_out": 20688,
+  "size": {
+   "width": 1.0,
+   "height": 0.89,
+   "depth": 1.014
+  },
+  "mb_glb": 2.08,
+  "open_edges_before": 16730,
+  "open_edges_after_stitch": 11,
+  "open_edges_left": 11,
+  "needles_removed": 0,
+  "dust_faces_removed": 0,
+  "holes_filled": 0
+ },
+ "Stack 1C - Taco": {
+  "parts": 12,
+  "triangles_in": 18466,
+  "triangles_out": 18477,
+  "size": {
+   "width": 0.558,
+   "height": 1.0,
+   "depth": 0.83
+  },
+  "mb_glb": 1.87,
+  "open_edges_before": 13741,
+  "open_edges_after_stitch": 1058,
+  "open_edges_left": 1040,
+  "needles_removed": 3,
+  "dust_faces_removed": 0,
+  "holes_filled": 2
+ },
+ "Stack 2A - A train": {
+  "parts": 1,
+  "triangles_in": 18570,
+  "triangles_out": 18570,
+  "size": {
+   "width": 1.0,
+   "height": 0.992,
+   "depth": 0.476
+  },
+  "mb_glb": 1.92,
+  "open_edges_before": 10366,
+  "open_edges_after_stitch": 6,
+  "open_edges_left": 6,
+  "needles_removed": 0,
+  "dust_faces_removed": 0,
+  "holes_filled": 0
+ },
+ "Stack 2A - Statue of Liberty": {
+  "parts": 9,
+  "triangles_in": 18037,
+  "triangles_out": 18039,
+  "size": {
+   "width": 0.504,
+   "height": 1.0,
+   "depth": 0.388
+  },
+  "mb_glb": 1.68,
+  "open_edges_before": 13003,
+  "open_edges_after_stitch": 840,
+  "open_edges_left": 834,
+  "needles_removed": 0,
+  "dust_faces_removed": 0,
+  "holes_filled": 2
+ },
+ "Stack 2c - Pizza": {
+  "parts": 1,
+  "triangles_in": 1048112,
+  "triangles_out": 1048108,
+  "size": {
+   "width": 0.583,
+   "height": 1.0,
+   "depth": 0.543
+  },
+  "mb_glb": 13.13,
+  "open_edges_before": 77096,
+  "open_edges_after_stitch": 0,
+  "open_edges_left": 0,
+  "needles_removed": 0,
+  "dust_faces_removed": 0,
+  "holes_filled": 0
+ },
+ "Stack 3A - Evangelion": {
+  "parts": 1,
+  "triangles_in": 1041362,
+  "triangles_out": 1041358,
+  "size": {
+   "width": 0.657,
+   "height": 1.0,
+   "depth": 0.721
+  },
+  "mb_glb": 7.68,
+  "open_edges_before": 32806,
+  "open_edges_after_stitch": 0,
+  "open_edges_left": 0,
+  "needles_removed": 0,
+  "dust_faces_removed": 0,
+  "holes_filled": 0
+ },
+ "Stack 3B - Dragon Ball": {
+  "parts": 1,
+  "triangles_in": 17862,
+  "triangles_out": 17863,
+  "size": {
+   "width": 0.992,
+   "height": 1.0,
+   "depth": 0.995
+  },
+  "mb_glb": 1.1,
+  "open_edges_before": 7784,
+  "open_edges_after_stitch": 36,
+  "open_edges_left": 33,
+  "needles_removed": 0,
+  "dust_faces_removed": 0,
+  "holes_filled": 1
+ },
+ "Stack 3C - Sailor Moon": {
+  "parts": 1,
+  "triangles_in": 1037186,
+  "triangles_out": 1037048,
+  "size": {
+   "width": 0.73,
+   "height": 1.0,
+   "depth": 0.377
+  },
+  "mb_glb": 7.18,
+  "open_edges_before": 31502,
+  "open_edges_after_stitch": 11,
+  "open_edges_left": 11,
+  "needles_removed": 0,
+  "dust_faces_removed": 0,
+  "holes_filled": 0
+ },
+ "Stack 4A - Dumbbell": {
+  "parts": 1,
+  "triangles_in": 18071,
+  "triangles_out": 18090,
+  "size": {
+   "width": 0.437,
+   "height": 1.0,
+   "depth": 0.623
+  },
+  "mb_glb": 1.61,
+  "open_edges_before": 5147,
+  "open_edges_after_stitch": 39,
+  "open_edges_left": 0,
+  "needles_removed": 0,
+  "dust_faces_removed": 0,
+  "holes_filled": 10
+ },
+ "Stack 4B - Kettlebell": {
+  "parts": 1,
+  "triangles_in": 14456,
+  "triangles_out": 14456,
+  "size": {
+   "width": 0.741,
+   "height": 1.0,
+   "depth": 0.726
+  },
+  "mb_glb": 1.7,
+  "open_edges_before": 4084,
+  "open_edges_after_stitch": 0,
+  "open_edges_left": 0,
+  "needles_removed": 0,
+  "dust_faces_removed": 0,
+  "holes_filled": 0
+ },
+ "Stack 4C - Glove": {
+  "parts": 1,
+  "triangles_in": 17363,
+  "triangles_out": 17367,
+  "size": {
+   "width": 0.711,
+   "height": 1.0,
+   "depth": 0.641
+  },
+  "mb_glb": 2.56,
+  "open_edges_before": 11189,
+  "open_edges_after_stitch": 28,
+  "open_edges_left": 18,
+  "needles_removed": 0,
+  "dust_faces_removed": 0,
+  "holes_filled": 3
+ },
+ "Stack 5A - OLoGuadalupe": {
+  "parts": 1,
+  "triangles_in": 10510,
+  "triangles_out": 10518,
+  "size": {
+   "width": 0.609,
+   "height": 1.0,
+   "depth": 0.525
+  },
+  "mb_glb": 1.35,
+  "open_edges_before": 8462,
+  "open_edges_after_stitch": 60,
+  "open_edges_left": 44,
+  "needles_removed": 0,
+  "dust_faces_removed": 0,
+  "holes_filled": 4
+ },
+ "Stack 5B - Candy Skul": {
+  "parts": 58,
+  "triangles_in": 38097,
+  "triangles_out": 38107,
+  "size": {
+   "width": 0.885,
+   "height": 1.0,
+   "depth": 0.923
+  },
+  "mb_glb": 1.76,
+  "open_edges_before": 24180,
+  "open_edges_after_stitch": 3282,
+  "open_edges_left": 3269,
+  "needles_removed": 1,
+  "dust_faces_removed": 0,
+  "holes_filled": 1
+ },
+ "Stack 5C - Rainbow": {
+  "parts": 1,
+  "triangles_in": 14791,
+  "triangles_out": 14799,
+  "size": {
+   "width": 0.56,
+   "height": 1.0,
+   "depth": 0.536
+  },
+  "mb_glb": 2.2,
+  "open_edges_before": 11543,
+  "open_edges_after_stitch": 31,
+  "open_edges_left": 11,
+  "needles_removed": 0,
+  "dust_faces_removed": 0,
+  "holes_filled": 6
+ },
+ "Stack 6A - Pencil": {
+  "parts": 1,
+  "triangles_in": 14170,
+  "triangles_out": 14172,
+  "size": {
+   "width": 0.407,
+   "height": 1.0,
+   "depth": 0.473
+  },
+  "mb_glb": 1.93,
+  "open_edges_before": 8124,
+  "open_edges_after_stitch": 6,
+  "open_edges_left": 0,
+  "needles_removed": 0,
+  "dust_faces_removed": 0,
+  "holes_filled": 2
+ },
+ "Stack 6C - Lego": {
+  "parts": 3,
+  "triangles_in": 17626,
+  "triangles_out": 17626,
+  "size": {
+   "width": 1.0,
+   "height": 0.787,
+   "depth": 0.676
+  },
+  "mb_glb": 0.45,
+  "open_edges_before": 8026,
+  "open_edges_after_stitch": 186,
+  "open_edges_left": 186,
+  "needles_removed": 0,
+  "dust_faces_removed": 0,
+  "holes_filled": 0
+ }
+}

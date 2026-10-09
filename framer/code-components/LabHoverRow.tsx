@@ -269,11 +269,6 @@ export default function LabHoverRow(props: LabHoverRowProps) {
                             outline: "none",
                         }}
                     >
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                            <span style={label}>{String(i + 1).padStart(2, "0")}</span>
-                            <motion.span animate={{ rotate: open ? 45 : 0 }} transition={SPRING} style={{ ...label, fontSize: 14, color: C.ink }}>+</motion.span>
-                        </div>
-
                         {/* Media: the live interface lives here, scaled down until the card opens */}
                         <div style={{ position: "relative", flex: 1, minHeight: 0, order: narrow ? 3 : 0, borderRadius: radius - 6, background: item.tint, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
                             {item.video ? (

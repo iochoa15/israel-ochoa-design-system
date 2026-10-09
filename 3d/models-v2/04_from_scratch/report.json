@@ -1,0 +1,42 @@
+{
+ "Stack 6B - Cube": {
+  "parts_in": 2,
+  "parts_out": 2,
+  "triangles_in": 34908,
+  "triangles_out": 34908,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": -38,
+   "pitch": 30,
+   "roll": -10
+  },
+  "size": {
+   "width": 0.982,
+   "height": 1.0,
+   "depth": 1.073
+  },
+  "mb_in": 0.28,
+  "mb_out": 0.28
+ },
+ "Stack 6D - Doll": {
+  "parts_in": 2,
+  "parts_out": 2,
+  "triangles_in": 92944,
+  "triangles_out": 92944,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": 0,
+   "pitch": 10,
+   "roll": 0
+  },
+  "size": {
+   "width": 0.914,
+   "height": 1.0,
+   "depth": 0.773
+  },
+  "mb_in": 0.51,
+  "mb_out": 0.62
+ }
+}

@@ -3,8 +3,27 @@ import { addPropertyControls, ControlType, useIsStaticRenderer } from "framer"
 import { motion, AnimatePresence, useScroll, useSpring, useMotionValueEvent } from "framer-motion"
 
 const IMG = (id: string) => `https://framerusercontent.com/images/${id}.png`
-const SEEN_KEY = "io-intro-seen"
 const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect
+
+// Survives moves between pages inside the site (no full reload), so a second mount means "came back".
+let mountedBefore = false
+
+// True when the visitor reached this page from another page of the same site.
+function cameFromInsideSite(): boolean {
+    if (typeof window === "undefined") return false
+    const here = window.location.pathname
+    try {
+        const nav = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined
+        if (nav && new URL(nav.name).pathname !== here) return true // landed elsewhere, then moved here in-site
+    } catch (e) {}
+    try {
+        if (document.referrer) {
+            const ref = new URL(document.referrer)
+            if (ref.origin === window.location.origin && ref.pathname !== here) return true
+        }
+    } catch (e) {}
+    return mountedBefore
+}
 
 // The IOD logo, split into its three letters (from the original SVG, viewBox 56.053 × 30.994).
 const LOGO_W = 56.053
@@ -40,7 +59,7 @@ interface IODIntroProps {
     label: string
     skipLabel: string
     stepLength: number
-    rememberSeen: boolean
+    landOnHero: boolean
     style?: CSSProperties
 }
 
@@ -55,7 +74,7 @@ const SPRING = { type: "spring", stiffness: 140, damping: 20, mass: 1 } as const
 
 /**
  * I·O·D intro: opens on the IOD logo; as you scroll, each letter morphs into a clay object, set after set.
- * Remembers (per browser session) that the visitor already saw it and then collapses to nothing.
+ * Always there on a fresh visit; coming back from another page of the site lands just below it, on the hero.
  * Set the instance height to Fit Content.
  *
  * @framerIntrinsicWidth 1200
@@ -72,27 +91,43 @@ export default function IODIntro(props: IODIntroProps) {
         textColor = "#5E5D59",
         accent = "#E54633",
         railColor = "#E1E0DC",
-        label = "Israel Ochoa · Scroll",
+        label = "Scroll",
         skipLabel = "Skip intro",
         stepLength = 90,
-        rememberSeen = true,
+        landOnHero = true,
     } = props
     const isStatic = useIsStaticRenderer()
     const rootRef = useRef<HTMLDivElement>(null)
     const [step, setStep] = useState(0)
-    const [hidden, setHidden] = useState(false)
     const [vw, setVw] = useState(1200)
 
     const list = (sets && sets.length ? sets : DEFAULT_SETS).map((s, i) => ({ ...DEFAULT_SETS[i % DEFAULT_SETS.length], ...s }))
     const steps = 1 + list.length // logo + every set
 
-    // Already seen this visit? Collapse before paint so the page starts at the hero.
+    // Everyone gets the intro on a fresh visit. Coming back from another page of the site lands on the hero
+    // (just below the intro); scrolling up still plays it.
     useIsoLayoutEffect(() => {
-        if (isStatic || !rememberSeen || typeof window === "undefined") return
-        try {
-            if (window.sessionStorage.getItem(SEEN_KEY) === "1") setHidden(true)
-        } catch (e) {}
-    }, [isStatic, rememberSeen])
+        if (isStatic || typeof window === "undefined") return
+        const jump = landOnHero && !window.location.hash && cameFromInsideSite()
+        mountedBefore = true
+        if (!jump) return
+        const toHero = () => {
+            const el = rootRef.current
+            if (!el) return
+            const top = window.scrollY + el.getBoundingClientRect().bottom
+            window.scrollTo({ top, behavior: "instant" as ScrollBehavior })
+        }
+        toHero()
+        // The router may reset the scroll right after the page mounts; re-apply only if we're still at the top.
+        const raf = window.requestAnimationFrame(toHero)
+        const t = window.setTimeout(() => {
+            if (window.scrollY < 40) toHero()
+        }, 250)
+        return () => {
+            window.cancelAnimationFrame(raf)
+            window.clearTimeout(t)
+        }
+    }, [isStatic, landOnHero])
 
     useEffect(() => {
         // Size from the component's own width (matches the breakpoint on canvas and the screen on the live site).
@@ -104,32 +139,21 @@ export default function IODIntro(props: IODIntroProps) {
         })
         ro.observe(el)
         return () => ro.disconnect()
-    }, [hidden])
+    }, [])
 
     const { scrollYProgress } = useScroll({ target: rootRef, offset: ["start start", "end end"] })
     const rail = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 })
 
-    function markSeen() {
-        if (!rememberSeen || typeof window === "undefined") return
-        try {
-            window.sessionStorage.setItem(SEEN_KEY, "1")
-        } catch (e) {}
-    }
-
     useMotionValueEvent(scrollYProgress, "change", (p) => {
         const next = Math.min(steps - 1, Math.floor(p * steps * 1.0001))
         if (next !== step) startTransition(() => setStep(next))
-        if (p > 0.97) markSeen()
     })
 
     function skip() {
-        markSeen()
         if (typeof window === "undefined" || !rootRef.current) return
         const r = rootRef.current.getBoundingClientRect()
         window.scrollTo({ top: window.scrollY + r.bottom, behavior: "smooth" })
     }
-
-    if (hidden) return <div style={{ ...props.style, height: 0, width: "100%" }} />
 
     const shownStep = isStatic ? 0 : step
     const isPhone = vw < 640
@@ -150,10 +174,10 @@ export default function IODIntro(props: IODIntroProps) {
     return (
         <div ref={rootRef} style={{ ...props.style, position: "relative", width: "100%", height: `${100 + (steps - 1) * stepLength}vh`, background }}>
             <div style={{ position: "sticky", top: 0, height: "100vh", width: "100%", overflow: "hidden" }}>
-                <span style={{ ...labelStyle, position: "absolute", left: isPhone ? 20 : 48, top: 40 }}>{label}</span>
-                <span style={{ ...labelStyle, position: "absolute", right: isPhone ? 20 : 48, top: 40 }}>
-                    {String(shownStep + 1).padStart(2, "0")} / {String(steps).padStart(2, "0")}
-                </span>
+                {/* "Scroll" sits just left of the progress rail, centered on it */}
+                {label ? (
+                    <span style={{ ...labelStyle, position: "absolute", right: isPhone ? 20 : 88, top: "50%", transform: "translateY(-50%)" }}>{label}</span>
+                ) : null}
 
                 {/* Progress rail with one dot per step */}
                 {!isPhone && (
@@ -251,12 +275,17 @@ addPropertyControls(IODIntro, {
         defaultValue: DEFAULT_SETS,
     },
     stepLength: { type: ControlType.Number, title: "Scroll per step", defaultValue: 90, min: 40, max: 200, unit: "vh" },
-    rememberSeen: { type: ControlType.Boolean, title: "Skip if seen", defaultValue: true },
+    landOnHero: {
+        type: ControlType.Boolean,
+        title: "Return to hero",
+        description: "Visitors coming back from another page land on the hero; scrolling up still shows the intro.",
+        defaultValue: true,
+    },
     background: { type: ControlType.Color, title: "Background", defaultValue: "#F3F3F1" },
     logoColor: { type: ControlType.Color, title: "Logo", defaultValue: "#111110" },
     textColor: { type: ControlType.Color, title: "Text", defaultValue: "#5E5D59" },
     accent: { type: ControlType.Color, title: "Accent", defaultValue: "#E54633" },
     railColor: { type: ControlType.Color, title: "Rail", defaultValue: "#E1E0DC" },
-    label: { type: ControlType.String, title: "Label", defaultValue: "Israel Ochoa · Scroll" },
+    label: { type: ControlType.String, title: "Label", defaultValue: "Scroll" },
     skipLabel: { type: ControlType.String, title: "Skip label", defaultValue: "Skip intro" },
 })

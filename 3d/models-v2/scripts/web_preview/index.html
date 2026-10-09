@@ -1,0 +1,43 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Clay preview</title>
+<style>html,body{margin:0;background:transparent}canvas{display:block}</style></head>
+<body>
+<script type="module">
+// Same renderer, lights and camera as framer/code-components/Clay3D.tsx, so previews match the website.
+import * as THREE from "https://esm.sh/three@0.169.0"
+import { GLTFLoader } from "https://esm.sh/three@0.169.0/examples/jsm/loaders/GLTFLoader.js"
+import { MeshoptDecoder } from "https://esm.sh/three@0.169.0/examples/jsm/libs/meshopt_decoder.module.js"
+const q = new URLSearchParams(location.search)
+const S = +(q.get("size") || 640)
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true })
+renderer.setPixelRatio(1); renderer.setSize(S, S)
+renderer.outputColorSpace = THREE.SRGBColorSpace
+renderer.toneMapping = THREE.NeutralToneMapping
+document.body.appendChild(renderer.domElement)
+const scene = new THREE.Scene()
+const camera = new THREE.PerspectiveCamera(28, 1, 0.01, 100)
+scene.add(new THREE.HemisphereLight(0xffffff, 0xd9d4cc, 1.7))
+const key = new THREE.DirectionalLight(0xffffff, 2.1); key.position.set(2.5, 3, 4); scene.add(key)
+const rim = new THREE.DirectionalLight(0xdfe6ff, 0.9); rim.position.set(-3, 1, -2.5); scene.add(rim)
+const pivot = new THREE.Group(); scene.add(pivot)
+const loader = new GLTFLoader(); loader.setMeshoptDecoder(MeshoptDecoder)
+loader.load(q.get("model"), (gltf) => {
+  const obj = gltf.scene
+  // ?flat=1: plain unlit colors (used to find which pixels belong to which clay color)
+  if (q.get("flat")) {
+    renderer.toneMapping = THREE.NoToneMapping
+    obj.traverse((o) => { if (o.isMesh) o.material = new THREE.MeshBasicMaterial({ color: o.material.color }) })
+  }
+  const box = new THREE.Box3().setFromObject(obj)
+  const size = box.getSize(new THREE.Vector3()), center = box.getCenter(new THREE.Vector3())
+  obj.position.sub(center)
+  // tighter framing than the site (which fits the bounding sphere) so details are easy to compare
+  const fit = q.get("fit") === "sphere" ? size.length() / 2 : Math.max(size.x, size.y) / 2 * 1.08
+  camera.position.z = fit / Math.sin(THREE.MathUtils.degToRad(14)) + size.z / 2
+  camera.near = camera.position.z / 100; camera.far = camera.position.z * 10; camera.updateProjectionMatrix()
+  pivot.rotation.set(THREE.MathUtils.degToRad(+(q.get("pitch") || 0)), THREE.MathUtils.degToRad(+(q.get("yaw") || 0)), 0)
+  pivot.add(obj)
+  renderer.render(scene, camera)
+  requestAnimationFrame(() => { renderer.render(scene, camera); window.__done = true })
+}, undefined, (e) => { window.__error = String(e); window.__done = true })
+</script></body></html>

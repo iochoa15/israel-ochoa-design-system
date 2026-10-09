@@ -1,0 +1,402 @@
+{
+ "Stack 0A - I": {
+  "parts_in": 3,
+  "parts_out": 3,
+  "triangles_in": 5276,
+  "triangles_out": 5276,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": 1,
+   "pitch": -2,
+   "roll": 0
+  },
+  "size": {
+   "width": 0.514,
+   "height": 1.0,
+   "depth": 0.437
+  },
+  "mb_in": 3.14,
+  "mb_out": 0.37
+ },
+ "Stack 0B - O": {
+  "parts_in": 1,
+  "parts_out": 1,
+  "triangles_in": 9967,
+  "triangles_out": 9967,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": 0,
+   "pitch": -6.5,
+   "roll": -3.5
+  },
+  "size": {
+   "width": 0.985,
+   "height": 1.0,
+   "depth": 0.526
+  },
+  "mb_in": 11.0,
+  "mb_out": 0.26
+ },
+ "Stack 0C - D": {
+  "parts_in": 1,
+  "parts_out": 1,
+  "triangles_in": 10120,
+  "triangles_out": 10120,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": 0,
+   "pitch": 29.5,
+   "roll": -3
+  },
+  "size": {
+   "width": 0.764,
+   "height": 1.0,
+   "depth": 0.478
+  },
+  "mb_in": 8.68,
+  "mb_out": 0.26
+ },
+ "Stack 1A - Beer": {
+  "parts_in": 3,
+  "parts_out": 3,
+  "triangles_in": 14981,
+  "triangles_out": 14981,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": 18.5,
+   "pitch": 0,
+   "roll": -4
+  },
+  "size": {
+   "width": 0.363,
+   "height": 1.0,
+   "depth": 0.361
+  },
+  "mb_in": 5.31,
+  "mb_out": 0.54
+ },
+ "Stack 1B - Concha": {
+  "parts_in": 1,
+  "parts_out": 1,
+  "triangles_in": 20688,
+  "triangles_out": 20688,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": -12.5,
+   "pitch": 30,
+   "roll": 0
+  },
+  "size": {
+   "width": 1.0,
+   "height": 0.89,
+   "depth": 1.014
+  },
+  "mb_in": 18.82,
+  "mb_out": 0.93
+ },
+ "Stack 1C - Taco": {
+  "parts_in": 12,
+  "parts_out": 12,
+  "triangles_in": 18466,
+  "triangles_out": 18466,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": -25,
+   "pitch": 32,
+   "roll": 0
+  },
+  "size": {
+   "width": 0.615,
+   "height": 1.0,
+   "depth": 0.915
+  },
+  "mb_in": 9.0,
+  "mb_out": 1.07
+ },
+ "Stack 2A - A train": {
+  "parts_in": 1,
+  "parts_out": 1,
+  "triangles_in": 18570,
+  "triangles_out": 18570,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": 3.5,
+   "pitch": 0,
+   "roll": 1
+  },
+  "size": {
+   "width": 1.0,
+   "height": 0.992,
+   "depth": 0.476
+  },
+  "mb_in": 3.27,
+  "mb_out": 0.65
+ },
+ "Stack 2A - Statue of Liberty": {
+  "parts_in": 9,
+  "parts_out": 9,
+  "triangles_in": 18037,
+  "triangles_out": 18037,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": 20,
+   "pitch": -5,
+   "roll": 0
+  },
+  "size": {
+   "width": 0.504,
+   "height": 1.0,
+   "depth": 0.388
+  },
+  "mb_in": 7.68,
+  "mb_out": 1.38
+ },
+ "Stack 2c - Pizza": {
+  "parts_in": 1,
+  "parts_out": 1,
+  "triangles_in": 1048112,
+  "triangles_out": 40000,
+  "decimated_and_baked": true,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": 0,
+   "pitch": 37.5,
+   "roll": 0
+  },
+  "size": {
+   "width": 0.583,
+   "height": 1.0,
+   "depth": 0.543
+  },
+  "mb_in": 47.24,
+  "mb_out": 1.02
+ },
+ "Stack 3A - Evangelion": {
+  "parts_in": 1,
+  "parts_out": 1,
+  "triangles_in": 1041362,
+  "triangles_out": 40000,
+  "decimated_and_baked": true,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": -1,
+   "pitch": 10,
+   "roll": 0
+  },
+  "size": {
+   "width": 0.657,
+   "height": 1.0,
+   "depth": 0.721
+  },
+  "mb_in": 45.92,
+  "mb_out": 0.76
+ },
+ "Stack 3B - Dragon Ball": {
+  "parts_in": 1,
+  "parts_out": 1,
+  "triangles_in": 17862,
+  "triangles_out": 17862,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": -24,
+   "pitch": 0,
+   "roll": -2.5
+  },
+  "size": {
+   "width": 0.992,
+   "height": 1.0,
+   "depth": 0.995
+  },
+  "mb_in": 14.02,
+  "mb_out": 0.49
+ },
+ "Stack 3C - Sailor Moon": {
+  "parts_in": 1,
+  "parts_out": 1,
+  "triangles_in": 1037186,
+  "triangles_out": 40000,
+  "decimated_and_baked": true,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": -8.5,
+   "pitch": 8.5,
+   "roll": 9
+  },
+  "size": {
+   "width": 0.73,
+   "height": 1.0,
+   "depth": 0.377
+  },
+  "mb_in": 41.44,
+  "mb_out": 0.65
+ },
+ "Stack 4A - Dumbbell": {
+  "parts_in": 1,
+  "parts_out": 1,
+  "triangles_in": 18071,
+  "triangles_out": 18071,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": 0,
+   "pitch": 16,
+   "roll": 0
+  },
+  "size": {
+   "width": 0.437,
+   "height": 1.0,
+   "depth": 0.623
+  },
+  "mb_in": 13.0,
+  "mb_out": 0.63
+ },
+ "Stack 4B - Kettlebell": {
+  "parts_in": 1,
+  "parts_out": 1,
+  "triangles_in": 14456,
+  "triangles_out": 14456,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": 45,
+   "pitch": 4,
+   "roll": -2.5
+  },
+  "size": {
+   "width": 0.741,
+   "height": 1.0,
+   "depth": 0.726
+  },
+  "mb_in": 13.52,
+  "mb_out": 0.5
+ },
+ "Stack 4C - Glove": {
+  "parts_in": 1,
+  "parts_out": 1,
+  "triangles_in": 17363,
+  "triangles_out": 17363,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": -5,
+   "pitch": 8.5,
+   "roll": 2.5
+  },
+  "size": {
+   "width": 0.755,
+   "height": 1.0,
+   "depth": 0.68
+  },
+  "mb_in": 21.01,
+  "mb_out": 0.82
+ },
+ "Stack 5A - OLoGuadalupe": {
+  "parts_in": 1,
+  "parts_out": 1,
+  "triangles_in": 10510,
+  "triangles_out": 10510,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": 0,
+   "pitch": 11.5,
+   "roll": -1
+  },
+  "size": {
+   "width": 0.609,
+   "height": 1.0,
+   "depth": 0.525
+  },
+  "mb_in": 13.64,
+  "mb_out": 0.51
+ },
+ "Stack 5B - Candy Skul": {
+  "parts_in": 58,
+  "parts_out": 1,
+  "triangles_in": 38097,
+  "triangles_out": 38097,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": true,
+  "turn": {
+   "yaw": -2,
+   "pitch": 0.5,
+   "roll": 0
+  },
+  "size": {
+   "width": 0.885,
+   "height": 1.0,
+   "depth": 0.923
+  },
+  "mb_in": 7.66,
+  "mb_out": 1.17
+ },
+ "Stack 5C - Rainbow": {
+  "parts_in": 1,
+  "parts_out": 1,
+  "triangles_in": 14791,
+  "triangles_out": 14791,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": -3.5,
+   "pitch": -12.5,
+   "roll": 1.5
+  },
+  "size": {
+   "width": 0.56,
+   "height": 1.0,
+   "depth": 0.536
+  },
+  "mb_in": 10.29,
+  "mb_out": 0.8
+ },
+ "Stack 6A - Pencil": {
+  "parts_in": 1,
+  "parts_out": 1,
+  "triangles_in": 14170,
+  "triangles_out": 14170,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": 30,
+   "pitch": 8.5,
+   "roll": -1
+  },
+  "size": {
+   "width": 0.379,
+   "height": 1.0,
+   "depth": 0.44
+  },
+  "mb_in": 14.67,
+  "mb_out": 0.75
+ },
+ "Stack 6C - Lego": {
+  "parts_in": 3,
+  "parts_out": 3,
+  "triangles_in": 17626,
+  "triangles_out": 17626,
+  "decimated_and_baked": false,
+  "merged_into_one_texture": false,
+  "turn": {
+   "yaw": -10,
+   "pitch": 15,
+   "roll": 5
+  },
+  "size": {
+   "width": 1.0,
+   "height": 0.787,
+   "depth": 0.676
+  },
+  "mb_in": 2.98,
+  "mb_out": 0.44
+ }
+}
