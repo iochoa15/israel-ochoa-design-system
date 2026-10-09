@@ -43,7 +43,7 @@ function useHeroTimeline(enabled: boolean): MotionValue<number> {
             return true
         }
         window.addEventListener(HERO_EVENT, attach)
-        const fallback = attach() ? 0 : window.setTimeout(() => !(window as any)[HERO_KEY] && p.set(1), 1200)
+        const fallback = attach() ? 0 : window.setTimeout(() => !(window as any)[HERO_KEY] && p.set(1), 600)
         return () => {
             unsub()
             window.removeEventListener(HERO_EVENT, attach)
@@ -70,7 +70,7 @@ export default function Clay3D(props: Clay3DProps) {
     const isStatic = useIsStaticRenderer()
     // Hero entrance: pops in at its slot of the hero timeline (0 = off, plays as soon as it has loaded).
     const hero = useHeroTimeline(!isStatic && heroAt > 0)
-    const heroLocal = useTransform(hero, (v) => (heroAt > 0 ? clamp((v - heroAt) / 0.32, 0, 1) : 1))
+    const heroLocal = useTransform(hero, (v) => (heroAt > 0 ? clamp((v - heroAt) / 0.28, 0, 1) : 1))
     const heroOpacity = useTransform(heroLocal, (e) => clamp(e / 0.45, 0, 1))
     const heroScale = useTransform(heroLocal, (e) => 0.55 + 0.45 * (1 - Math.pow(1 - e, 3)))
     const heroFilter = useTransform(heroLocal, (e) => `blur(${(1 - (1 - Math.pow(1 - e, 3))) * 6}px)`)

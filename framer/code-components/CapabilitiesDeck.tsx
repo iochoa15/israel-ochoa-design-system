@@ -124,6 +124,10 @@ export default function CapabilitiesDeck(props: CapabilitiesDeckProps) {
     // A mouse wheel moves the page in big steps; the spring turns them into one smooth glide.
     const smooth = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.5, restDelta: 0.0005 })
     const step = useTransform(smooth, (p) => (isStatic ? 0 : toStep(p, n)))
+    // The first card grows in while the section rises from the bottom of the screen to the top.
+    const { scrollYProgress: introRaw } = useScroll({ target: rootRef, offset: ["start end", "start start"] })
+    const introSmooth = useSpring(introRaw, { stiffness: 140, damping: 30, mass: 0.5, restDelta: 0.0005 })
+    const intro = useTransform(introSmooth, (v) => (isStatic ? 1 : v))
 
     const side = narrow ? 20 : 48
     const cardSize: CSSProperties = narrow
@@ -165,7 +169,7 @@ export default function CapabilitiesDeck(props: CapabilitiesDeckProps) {
     const cards = (
         <div style={{ position: "relative", ...cardSize }}>
             {items.map((it, i) => (
-                <Card key={i} index={i} step={step} rotate={i % 2 ? 2 : -2} cardColor={cardColor} mediaColor={mediaColor} video={it.video} image={it.image} />
+                <Card key={i} index={i} step={step} intro={intro} rotate={i % 2 ? 2 : -2} cardColor={cardColor} mediaColor={mediaColor} video={it.video} image={it.image} />
             ))}
         </div>
     )
@@ -266,26 +270,38 @@ function Copy(props: { index: number; step: MotionValue<number>; vertical: boole
     )
 }
 
-// One card: waits below the screen, slides up to cover the one before, then steps back as the next arrives.
+// One card: comes up from the bottom of the screen at 10% of its size and already half visible, then grows into
+// place over the one before, and steps back as the next arrives. Every card does the same (the first one while
+// the section scrolls into view, the others while the deck is pinned). Cards further ahead stay hidden.
 function Card(props: {
     index: number
     step: MotionValue<number>
+    intro: MotionValue<number>
     rotate: number
     cardColor: string
     mediaColor: string
     video?: string
     image?: { src: string; srcSet?: string; alt?: string }
 }) {
-    const { index, step, rotate, cardColor, mediaColor, video, image } = props
-    const y = useTransform(step, (t) => {
-        const enter = clamp(index - t, 0, 1)
+    const { index, step, intro, rotate, cardColor, mediaColor, video, image } = props
+    // How far away the card still is: 0 = in place, 1 = waiting at the bottom, 2 = not up yet (hidden).
+    const away = useTransform([step, intro] as MotionValue<number>[], ([t, s]: number[]) => (index === 0 ? 1 - s : clamp(index - t, 0, 2)))
+    const y = useTransform([step, away] as MotionValue<number>[], ([t, a]: number[]) => {
+        const w = Math.min(a, 1)
         const depth = clamp(t - index, 0, 2)
-        return `calc(${(enter * 105).toFixed(3)}vh - ${(depth * 16).toFixed(2)}px)`
+        // waiting: just below the bottom edge of the screen, so it visibly rises in from the bottom
+        return `calc(${(w * 62).toFixed(3)}vh - ${(depth * 16).toFixed(2)}px)`
     })
-    const scale = useTransform(step, (t) => 1 - 0.06 * clamp(t - index, 0, 2))
-    const opacity = useTransform(step, (t) => {
+    const scale = useTransform([step, away] as MotionValue<number>[], ([t, a]: number[]) => {
+        const w = Math.min(a, 1)
+        const grow = 0.1 + 0.9 * (1 - w) * (2 - (1 - w)) // 10% → 100%, easing out as it lands
+        return grow * (1 - 0.06 * clamp(t - index, 0, 2))
+    })
+    const opacity = useTransform([step, away] as MotionValue<number>[], ([t, a]: number[]) => {
         const d = clamp(t - index, 0, 2)
-        return d <= 1 ? 1 - 0.5 * d : 0.5 - 0.2 * (d - 1)
+        const back = d <= 1 ? 1 - 0.5 * d : 0.5 - 0.2 * (d - 1)
+        const coming = a <= 1 ? 0.5 + 0.5 * (1 - a) : 0.5 * (2 - a) // half visible while waiting
+        return back * coming
     })
     return (
         <motion.div
@@ -303,7 +319,7 @@ function Card(props: {
                 boxShadow: "0 16px 32px rgba(0,0,0,0.07)",
                 padding: 12,
                 boxSizing: "border-box",
-                willChange: "transform",
+                willChange: "transform, opacity",
             }}
         >
             <div style={{ position: "relative", width: "100%", height: "100%", borderRadius: 16, overflow: "hidden", background: mediaColor }}>

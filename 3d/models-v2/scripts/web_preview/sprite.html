@@ -1,0 +1,52 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Clay sprite sheet</title>
+<style>html,body{margin:0;background:transparent}</style></head>
+<body>
+<script type="module">
+// Turntable sprite sheet for one clay model, with the SAME renderer, lights and framing as
+// framer/code-components/Clay3D.tsx, so the flipbook looks like the live 3D.
+// ?model=<glb>&cols=24&cell=240&pitches=10,30,50  → window.__sheet = PNG data URL (cols × rows grid)
+// Columns: yaw 0°, 360/cols°, … (turning right). Rows: one per pitch (tilt toward the viewer).
+import * as THREE from "https://esm.sh/three@0.169.0"
+import { GLTFLoader } from "https://esm.sh/three@0.169.0/examples/jsm/loaders/GLTFLoader.js"
+import { MeshoptDecoder } from "https://esm.sh/three@0.169.0/examples/jsm/libs/meshopt_decoder.module.js"
+const q = new URLSearchParams(location.search)
+const COLS = +(q.get("cols") || 24)
+const CELL = +(q.get("cell") || 240)
+const PITCHES = (q.get("pitches") || "10,30,50").split(",").map(Number)
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true })
+renderer.setPixelRatio(1); renderer.setSize(CELL * 2, CELL * 2) // render at 2x, then scale down (smoother edges)
+renderer.outputColorSpace = THREE.SRGBColorSpace
+renderer.toneMapping = THREE.NeutralToneMapping
+renderer.setClearColor(0x000000, 0)
+const scene = new THREE.Scene()
+const camera = new THREE.PerspectiveCamera(28, 1, 0.01, 100)
+scene.add(new THREE.HemisphereLight(0xffffff, 0xd9d4cc, 1.7))
+const key = new THREE.DirectionalLight(0xffffff, 2.1); key.position.set(2.5, 3, 4); scene.add(key)
+const rim = new THREE.DirectionalLight(0xdfe6ff, 0.9); rim.position.set(-3, 1, -2.5); scene.add(rim)
+const pivot = new THREE.Group(); scene.add(pivot)
+const loader = new GLTFLoader(); loader.setMeshoptDecoder(MeshoptDecoder)
+loader.load(q.get("model"), (gltf) => {
+  const obj = gltf.scene
+  const box = new THREE.Box3().setFromObject(obj)
+  const size = box.getSize(new THREE.Vector3()), center = box.getCenter(new THREE.Vector3())
+  obj.position.sub(center)
+  const radius = size.length() / 2 || 1
+  camera.position.z = (radius / Math.sin(THREE.MathUtils.degToRad(camera.fov / 2))) * 1.02
+  camera.near = camera.position.z / 100; camera.far = camera.position.z * 10; camera.updateProjectionMatrix()
+  pivot.add(obj)
+  const sheet = document.createElement("canvas")
+  sheet.width = COLS * CELL; sheet.height = PITCHES.length * CELL
+  const ctx = sheet.getContext("2d")
+  ctx.imageSmoothingQuality = "high"
+  PITCHES.forEach((p, r) => {
+    for (let c = 0; c < COLS; c++) {
+      pivot.rotation.set(THREE.MathUtils.degToRad(p), THREE.MathUtils.degToRad((360 / COLS) * c), 0)
+      renderer.render(scene, camera)
+      ctx.drawImage(renderer.domElement, c * CELL, r * CELL, CELL, CELL)
+    }
+  })
+  window.__sheet = sheet.toDataURL("image/png")
+  window.__done = true
+}, undefined, (e) => { window.__error = String(e); window.__done = true })
+</script></body></html>

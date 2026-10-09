@@ -87,3 +87,16 @@ To save space, this Mac only keeps the editables: `07_tripo_clean/blend/*.blend`
 - Older stages (01 to 06, 07 GLBs and previews) are still on GitHub, hidden locally with git sparse checkout. Bring them back: `git sparse-checkout disable`.
 - Files that were never on GitHub (working files, comparison .blend files, .blend1 backups) went to the Mac Trash in `io-c models-v2 cleanup 2026-10-09`. They're gone for good once the Trash is emptied; scripts can rebuild them from the Tripo files.
 - 410 iCloud " 2" copies (identical duplicates) went to the same Trash folder.
+
+## 08_web (Oct 9 2026): light copies for the website
+
+`scripts/clean/web_export.py` reads the 22 editables in `07_tripo_clean/blend` (it never saves them) and writes `08_web/<name>.glb`:
+- Triangles: only Pizza, Eva and Sailor Moon (~1M each) are reduced to 150k. Everything else keeps every triangle.
+- Paint images: each image is sized to what its part needs (2048px for a whole object, smaller for small pieces; bump maps get half). The skull's 174 images were mostly 4096px for tiny pieces.
+- Result: 54 MB → 16 MB for all 22, with no visible difference in website-light renders (checked side by side, including 2x close-ups).
+Re-run after hand edits: `Blender -b --factory-startup --python scripts/clean/web_export.py -- 07_tripo_clean/blend 08_web ["Concha"]`
+
+## 09_sprites (Oct 9 2026): flipbook versions for /homepage-7
+
+Each 3D object pre-shot from 72 angles (24 turns × tilts 10°/30°/50°, 240px cells), with the website's exact 3D lights and framing (`scripts/web_preview/sprite.html`), packed into one WebP sheet (~200 KB each, 3.8 MB for 19). The hero shows the right photo for the current angle: plain images, no 3D engine, phone-friendly.
+Re-make after editing a model: serve `3d/` on :8765, then `node scripts/web_preview/make_sheets.mjs <outDir> "models-v2/08_web/<name>.glb"` and convert the PNG to WebP (q82).
