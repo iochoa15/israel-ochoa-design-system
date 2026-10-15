@@ -22,3 +22,6 @@
 3d/models-v2/07_tripo_clean/compare/*.blend
 __pycache__/
 3d/models-v2/07_tripo_clean/hero_renders/
+
+# Client logo source files: private, never public (Israel, Oct 15 2026)
+web content/
