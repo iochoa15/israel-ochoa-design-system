@@ -1,0 +1,367 @@
+{
+ "_note": "Order, name and one-line description for each logo card. card colors come from process_logos.py report. removed = taken off the site (kept here so they can come back).",
+ "logos": [
+  [
+   "desales-media",
+   "catholic-media-company",
+   "DeSales Media",
+   "Media company"
+  ],
+  [
+   "lileva",
+   "apparel-fashion",
+   "Lileva",
+   "Apparel and fashion"
+  ],
+  [
+   "tagalong",
+   "education",
+   "Tagalong",
+   "Education"
+  ],
+  [
+   "inmova",
+   "real-state",
+   "Inmova",
+   "Real estate"
+  ],
+  [
+   "play-academy",
+   "children-academy-prek",
+   "Play Academy",
+   "Children's academy, pre-K"
+  ],
+  [
+   "city-kitchen",
+   "restaurant-nyc",
+   "City Kitchen",
+   "Food market, Times Square"
+  ],
+  [
+   "dalcor",
+   "marketing-media-company",
+   "Dalcor Media",
+   "Marketing and media company"
+  ],
+  [
+   "u-design",
+   "design-conference",
+   "U. Design Monterrey",
+   "Design conference"
+  ],
+  [
+   "first-look",
+   "venture-conpany-nyc",
+   "First Look",
+   "Venture company, NYC"
+  ],
+  [
+   "azteca",
+   "mma-academy",
+   "Azteca Fight Club",
+   "MMA academy"
+  ],
+  [
+   "generations-of-faith",
+   "catholic-fundraising-appeal-brooklyn-ny",
+   "Generations of Faith",
+   "Fundraising campaign, Brooklyn"
+  ],
+  [
+   "portraits-of-faith",
+   "catholic-tv-show",
+   "Portraits of Faith",
+   "TV show"
+  ],
+  [
+   "digital-democracy",
+   "digital",
+   "Digital Democracy Bureau",
+   "Digital"
+  ],
+  [
+   "district",
+   "nyc-restaurant",
+   "District",
+   "Restaurant, New York"
+  ],
+  [
+   "amgw",
+   "marketing-agency",
+   "AMGW Agency",
+   "Marketing agency"
+  ],
+  [
+   "kunming-mandarin",
+   "mandarin-language",
+   "Kunming Mandarin",
+   "Mandarin language school"
+  ],
+  [
+   "deep-clean",
+   "cleaning",
+   "Deep Clean",
+   "Cleaning service"
+  ],
+  [
+   "fonovisa",
+   "music",
+   "Fonovisa Records",
+   "Music label"
+  ],
+  [
+   "wcd",
+   "nyc-media-conference",
+   "World Communications Day",
+   "Media conference"
+  ],
+  [
+   "perfect-genlabs",
+   "health-2",
+   "Perfect Genlabs",
+   "Health and performance"
+  ],
+  [
+   "nautilus",
+   "marketing-agency-b",
+   "Nautilus",
+   "Hotel, Miami Beach"
+  ],
+  [
+   "alem",
+   "automovil",
+   "Alem Automotriz",
+   "Automotive"
+  ],
+  [
+   "movirad",
+   "xray-medical",
+   "Movi Rad",
+   "X-ray and medical imaging"
+  ],
+  [
+   "jrc",
+   "construction",
+   "JRC",
+   "Construction"
+  ],
+  [
+   "sismedics",
+   "medical-clinic",
+   "Sismedics",
+   "Medical clinic"
+  ],
+  [
+   "hello-world",
+   "media",
+   "Hello World",
+   "Media"
+  ],
+  [
+   "to-your-health",
+   "health",
+   "To Your Health",
+   "Health"
+  ],
+  [
+   "david-orsini",
+   "holistic-health",
+   "David Orsini Fitness",
+   "Holistic health"
+  ],
+  [
+   "rikshow",
+   "music-band",
+   "Rikshow n the Ruckus",
+   "Music band"
+  ],
+  [
+   "heal",
+   "healthy-lifestyle",
+   "Heal Good Food",
+   "Healthy lifestyle"
+  ],
+  [
+   "carotiq",
+   "beauty-product",
+   "Carotiq",
+   "Beauty product"
+  ],
+  [
+   "organic-for-us",
+   "organic-food",
+   "Organic for Us",
+   "Organic food"
+  ],
+  [
+   "mass-media",
+   "marketing",
+   "Mass Media & Mktg.",
+   "Marketing"
+  ],
+  [
+   "wnyu",
+   "nyc-radio-station",
+   "WNYU 89.1 FM",
+   "Radio station, NYC"
+  ],
+  [
+   "s-and-f",
+   "marketing-consulting",
+   "S&F Consulting",
+   "Marketing consulting"
+  ],
+  [
+   "diario-de-un-inmigrante",
+   "podcast-latino-hispanic",
+   "Diario de un Inmigrante",
+   "Latino podcast"
+  ],
+  [
+   "evoluzzionee",
+   "health-lifestyle",
+   "Evoluzzionee",
+   "Lifestyle coaching"
+  ],
+  [
+   "media-management",
+   "management",
+   "Media Management & Marketing",
+   "Management"
+  ],
+  [
+   "generations-of-faith-2",
+   "catholic-fundraising-appeal-brooklyn-ny-2",
+   "Generations of Faith (alt)",
+   "Fundraising campaign, Brooklyn"
+  ]
+ ],
+ "removed": [
+  [
+   "catholics-care",
+   "catholic-diocese-of-brooklyn",
+   "Catholics Care",
+   "Diocese of Brooklyn",
+   "Removed Oct 10 2026 at Israel's request"
+  ],
+  [
+   "brooklyn-priests",
+   "catholic-diocese-of-brooklyn-2",
+   "Brooklyn Priests",
+   "Diocese of Brooklyn",
+   "Removed Oct 10 2026 at Israel's request"
+  ],
+  [
+   "san-antonio",
+   "food-pizza",
+   "San Antonio",
+   "Wood-fired pizza",
+   "Removed Oct 10 2026 at Israel's request"
+  ],
+  [
+   "avakkashi",
+   "apparel-fashion-3",
+   "Avakkashi",
+   "Apparel and fashion",
+   "Removed Oct 10 2026 at Israel's request"
+  ],
+  [
+   "meet-me-in",
+   "catholic-app-website",
+   "meet me in.",
+   "App and website",
+   "Removed Oct 10 2026 at Israel's request"
+  ],
+  [
+   "la-tremenda",
+   "mexican-food",
+   "La Tremenda",
+   "Mexican food",
+   "Removed Oct 10 2026 at Israel's request"
+  ],
+  [
+   "mount-carmel",
+   "catholic-school",
+   "The Mount Carmel",
+   "Early childhood center",
+   "Removed Oct 10 2026 at Israel's request"
+  ],
+  [
+   "annual-catholic-appeal",
+   "catholic-appeal-fundraising-brooklyn-ny",
+   "Annual Catholic Appeal 2021",
+   "Fundraising appeal, Brooklyn",
+   "Removed Oct 10 2026 at Israel's request"
+  ],
+  [
+   "think-green",
+   "environmentally-friendly-2",
+   "Think Green",
+   "Environmentally friendly",
+   "Removed Oct 10 2026 at Israel's request"
+  ],
+  [
+   "one-whole-year",
+   "apparel-fashion-2",
+   "One Whole Year",
+   "Apparel and fashion",
+   "Removed Oct 10 2026 at Israel's request"
+  ],
+  [
+   "challenge-the-storm",
+   "inspirational",
+   "Challenge the Storm",
+   "Inspirational",
+   "Removed Oct 10 2026 at Israel's request"
+  ],
+  [
+   "patito-de-goma",
+   "music-2",
+   "Patito de Goma Music",
+   "Music",
+   "Removed Oct 10 2026 at Israel's request"
+  ],
+  [
+   "redes-y-enlaces",
+   "electronics",
+   "Redes y Enlaces",
+   "Electronics",
+   "Removed Oct 10 2026 at Israel's request"
+  ],
+  [
+   "catholic-media-conference",
+   "catholic-conference",
+   "Catholic Media Conference 2015",
+   "Conference",
+   "Removed Oct 10 2026 at Israel's request"
+  ],
+  [
+   "quick-blade",
+   "packaging",
+   "Quick Blade",
+   "Packaging",
+   "Removed Oct 10 2026 at Israel's request"
+  ],
+  [
+   "st-mary",
+   "church",
+   "St. Mary Gate of Heaven",
+   "Church",
+   "Removed Oct 10 2026 at Israel's request"
+  ],
+  [
+   "seed",
+   "environmentally-friendly",
+   "Seed",
+   "Environmentally friendly",
+   "Removed Oct 10 2026 at Israel's request"
+  ],
+  [
+   "personal-brand",
+   "personal-brand",
+   "Personal brand",
+   "Personal brand",
+   "Removed Oct 10 2026 at Israel's request"
+  ]
+ ]
+}
