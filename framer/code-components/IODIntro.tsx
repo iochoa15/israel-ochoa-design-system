@@ -42,6 +42,7 @@ const LETTERS = [
 interface Img {
     src: string
     alt?: string
+    scale?: number // per-object size fix, used when "Size tweaks" is on
 }
 interface ClaySet {
     i?: Img
@@ -61,6 +62,8 @@ interface IODIntroProps {
     stepLength: number
     landOnHero: boolean
     mode: "scroll" | "slots"
+    iSize: number
+    sizeTweaks: boolean
     style?: CSSProperties
 }
 
@@ -72,11 +75,11 @@ const DEFAULT_SETS: ClaySet[] = [
     // Stack 2
     { i: { src: "https://framerusercontent.com/images/G7kUeulTgMVDgL0KdpIJzyhrL8.webp", alt: "Clay Statue of Liberty" }, o: { src: "https://framerusercontent.com/images/uv1gEP7i6lDXaHnBjwoAqSPbJk.webp", alt: "Clay A train coin" }, d: { src: "https://framerusercontent.com/images/oJWOzjsoIpt7JLejqzl4I1WbAp4.webp", alt: "Clay pizza" } },
     // Stack 3
-    { i: { src: "https://framerusercontent.com/images/SeSrl7KlX1bsHnal18ztjJKT2I.webp", alt: "Clay Evangelion" }, o: { src: "https://framerusercontent.com/images/3qXZMDiMk9rlAQv1OMEB0WXDjJc.webp", alt: "Clay Dragon Ball" }, d: { src: "https://framerusercontent.com/images/HtuqR8xeYER3wxXjwFxPw4tBFU.webp", alt: "Clay moon wand" } },
+    { i: { src: "https://framerusercontent.com/images/SeSrl7KlX1bsHnal18ztjJKT2I.webp", alt: "Clay Evangelion", scale: 1.15 }, o: { src: "https://framerusercontent.com/images/3qXZMDiMk9rlAQv1OMEB0WXDjJc.webp", alt: "Clay Dragon Ball" }, d: { src: "https://framerusercontent.com/images/HtuqR8xeYER3wxXjwFxPw4tBFU.webp", alt: "Clay moon wand" } },
     // Stack 4
     { i: { src: "https://framerusercontent.com/images/gYfvYKJ3gfPKK27NtQSYThTxU.webp", alt: "Clay dumbbell" }, o: { src: "https://framerusercontent.com/images/qeREjdnZusv1jJ0oSFtoLMPbo.webp", alt: "Clay kettlebell" }, d: { src: "https://framerusercontent.com/images/x4GWujFlQHQEfLyxTiGDEtRLZwk.webp", alt: "Clay boxing glove" } },
     // Stack 5
-    { i: { src: "https://framerusercontent.com/images/qtSEzW2E7DYzsmtfe0FBZvFKWs.webp", alt: "Clay Virgin of Guadalupe" }, o: { src: "https://framerusercontent.com/images/sxQHvbBGfY9UcjdXmi1CX2jHQ.webp", alt: "Clay candy skull" }, d: { src: "https://framerusercontent.com/images/0g742sol6L6HsgEQmligfq2U9M.webp", alt: "Clay rainbow" } },
+    { i: { src: "https://framerusercontent.com/images/qtSEzW2E7DYzsmtfe0FBZvFKWs.webp", alt: "Clay Virgin of Guadalupe", scale: 1.22 }, o: { src: "https://framerusercontent.com/images/sxQHvbBGfY9UcjdXmi1CX2jHQ.webp", alt: "Clay candy skull" }, d: { src: "https://framerusercontent.com/images/0g742sol6L6HsgEQmligfq2U9M.webp", alt: "Clay rainbow" } },
 ]
 // The box each slot's object fits into (share of the base size): I is tall and thin, O is the hero, D is the
 // half-round. Objects keep their own shape inside the box.
@@ -119,6 +122,8 @@ export default function IODIntro(props: IODIntroProps) {
         stepLength = 63,
         landOnHero = true,
         mode = "scroll",
+        iSize = 100,
+        sizeTweaks = false,
     } = props
     const slots = mode === "slots"
     const isStatic = useIsStaticRenderer()
@@ -185,6 +190,12 @@ export default function IODIntro(props: IODIntroProps) {
     const logoW = Math.min(560, vw * (isPhone ? 0.78 : 0.5))
     const s = logoW / LOGO_W
     const objBase = LOGO_H * s * OBJ_SCALE
+    // The I slot's objects read smaller than the O and D (its box is tall and thin), so "I size" scales them up
+    // (Oct 15: 110%). The black logo's I is a letter, not an object, so it never changes.
+    const box = (slot: number) => {
+        const k = slot === 0 ? iSize / 100 : 1
+        return { w: objBase * SLOT_BOX[slot].w * k, h: objBase * SLOT_BOX[slot].h * k }
+    }
 
     // Slot machine: which stack the reels show (-1 = the logo) and how many spins so far.
     const inView = useInView(rootRef, { amount: 0.4 })
@@ -314,11 +325,12 @@ export default function IODIntro(props: IODIntroProps) {
                                 letter={L}
                                 s={s}
                                 cx={((L.x0 + L.x1) / 2 - LOGO_W / 2) * s}
-                                w={objBase * SLOT_BOX[slot].w}
-                                h={objBase * SLOT_BOX[slot].h}
+                                w={box(slot).w}
+                                h={box(slot).h}
                                 list={list}
                                 spin={spin}
                                 logoColor={logoColor}
+                                sizeTweaks={sizeTweaks}
                             />
                         ))}
                     </div>
@@ -332,8 +344,8 @@ export default function IODIntro(props: IODIntroProps) {
                         const cx = atLogo ? letterCx : letterCx * OBJ_SPREAD
                         const set = atLogo ? null : list[shownStep - 1]
                         const img = set ? [set.i, set.o, set.d][slot] : null
-                        const w = objBase * SLOT_BOX[slot].w
-                        const h = objBase * SLOT_BOX[slot].h
+                        const tweak = sizeTweaks ? img?.scale || 1 : 1
+                        const { w, h } = box(slot)
                         return (
                             <motion.div key={L.key} initial={false} animate={{ x: cx }} transition={SPRING} style={{ position: "absolute", left: 0, top: 0 }}>
                                 <AnimatePresence mode="popLayout" initial={false}>
@@ -374,7 +386,7 @@ export default function IODIntro(props: IODIntroProps) {
                                                     draggable={false}
                                                     animate={isStatic ? undefined : { y: [0, -12, 0], rotate: [0, slot % 2 ? 3 : -3, 0] }}
                                                     transition={{ duration: 3.6 + slot * 0.6, repeat: Infinity, ease: "easeInOut" }}
-                                                    style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", userSelect: "none" }}
+                                                    style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", userSelect: "none", scale: tweak }}
                                                 />
                                             </motion.div>
                                     )}
@@ -409,8 +421,9 @@ function Reel(props: {
     list: ClaySet[]
     spin: { round: number; from: number; to: number }
     logoColor: string
+    sizeTweaks: boolean
 }) {
-    const { slot, letter, s, cx, w, h, list, spin, logoColor } = props
+    const { slot, letter, s, cx, w, h, list, spin, logoColor, sizeTweaks } = props
     // Tall enough that the soft top/bottom edge of the window never touches the letter or the object.
     const cell = Math.max(h, LOGO_H * s) * CELL
     const fromTop = slot !== 1
@@ -463,7 +476,7 @@ function Reel(props: {
                                 src={it.img?.src}
                                 alt={it.img?.alt || ""}
                                 draggable={false}
-                                style={{ width: w, height: h, objectFit: "contain", display: "block", userSelect: "none" }}
+                                style={{ width: w, height: h, objectFit: "contain", display: "block", userSelect: "none", scale: sizeTweaks ? it.img?.scale || 1 : 1 }}
                             />
                         )}
                     </div>
@@ -496,6 +509,22 @@ addPropertyControls(IODIntro, {
         optionTitles: ["Scroll steps", "Slot machine"],
         defaultValue: "scroll",
         displaySegmentedControl: true,
+    },
+    iSize: {
+        type: ControlType.Number,
+        title: "I size",
+        description: "Size of the objects in the I slot (left). The black logo's I never changes.",
+        defaultValue: 100,
+        min: 70,
+        max: 150,
+        step: 5,
+        unit: "%",
+    },
+    sizeTweaks: {
+        type: ControlType.Boolean,
+        title: "Size tweaks",
+        description: "Per-object size fixes: Evangelion (stack 3) +15%, Virgin of Guadalupe (stack 5) +22%.",
+        defaultValue: false,
     },
     landOnHero: {
         type: ControlType.Boolean,
