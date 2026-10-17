@@ -97,6 +97,10 @@ function useOwnRef(ref: Ref<any>) {
     return [own, setRef] as const
 }
 
+// On a page with the avatar → nav flight (/homepage-8), the hero entrance plays once per visit: scrolling back up
+// no longer resets it, so going back and forth never replays the pops (Oct 17: it read as jagged).
+const ONCE_KEY = "__ioHeroOnce"
+
 // 0 → 1 once the layer comes into view (with a delay), on a springy "pop"; back to 0 when it leaves below the
 // screen, so it plays again the next time you scroll down to it. With `gate`, it also tells the rest of the
 // hero (FloatingClay's timeline) to start: the avatar always goes first.
@@ -111,10 +115,11 @@ function usePopIn(play: boolean, el: RefObject<HTMLElement | null>, delay: numbe
                 const e = entries[0]
                 if (!e) return
                 if (e.isIntersecting) {
+                    if (p.get() === 1) return
                     anim?.stop()
                     anim = animate(p, 1, { type: "spring", ...spring, delay })
                     if (gate) setGate(true)
-                } else if (e.boundingClientRect.top > (window.innerHeight || 0) * 1.28) {
+                } else if (!(window as any)[ONCE_KEY] && e.boundingClientRect.top > (window.innerHeight || 0) * 1.28) {
                     anim?.stop()
                     p.set(0)
                     if (gate) setGate(false)
@@ -169,21 +174,23 @@ export function withClayPop(Component: ComponentType<any>): ComponentType {
 // Avatar → nav (Oct 15, after butter.video's statement icons that drop into the timeline below as you scroll).
 // Scrolling down from the hero, the avatar lifts out of the name tag, tilts as it travels down the screen,
 // shrinks, and lands in the nav where the logo icon sits. It stays there for the rest of the page; scrolling
-// back up flies it home. On this page the nav's logo icon is hidden: the avatar takes its place.
+// back up flies it home. The nav's Logo Icon IS the avatar (same image, same roundness) on every page; on this
+// page it stays hidden until the flying avatar lands on it, then the flying copy hands over to it.
 // Two overrides work together:
 //   withClayPopDock  on the hero avatar (the same pop-in as withClayPop, plus the flight)
 //   withNavLogoSlot  on MainNav's "Logo Icon" (marks the landing spot; optional, see findLogoIcons)
-// Smooth and crisp (round 2): the flying avatar is its own small layer above the page (an image in a rounded
-// box), resized every frame instead of scaled, so the edges stay sharp and the corners stay round at every size.
-// It follows a smoothed copy of the scroll, so a mouse wheel's steps never make it jump. It takes over from the
-// real avatar once the hero is at the top and the pop-in has settled (so the hand-off is invisible).
+// Round 3 (Oct 17, "jagged when I scroll back and forth"):
+//   - Before lift-off the real avatar stays in the page (it scrolls with the text, so they can never drift apart).
+//   - Only the flight's progress is smoothed. Its start point is read from the page every frame, so the avatar
+//     never lags behind the name tag; the smoothing just eases it in and out of each wheel step.
+//   - The flight is longer (80% of the screen height of scrolling, was 60%), so it reads calmer.
+//   - Once landed, the flying copy hides and the nav's own avatar shows, so it rides the nav exactly.
 const DOCK_KEY = "__ioAvatarDock"
 const DOCK_EVENT = "io-avatar-dock"
 const DOCK_LEAD = 0.04 // share of the screen height you scroll before the avatar lifts off
-const DOCK_TRAVEL = 0.6 // share of the screen height the flight takes
+const DOCK_TRAVEL = 0.8 // share of the screen height the flight takes
 const DOCK_TILT = -12 // degrees of tilt at mid-flight
-const DOCK_SIZE = 1.35 // landed size vs the logo icon's height (capped 28–46px)
-const DOCK_SMOOTH = 0.16 // s: how softly the avatar follows the scroll (a critically damped spring, so its speed never jumps)
+const DOCK_SMOOTH = 0.18 // s: how softly the flight follows the scroll (a critically damped spring, so its speed never jumps)
 // Kept on window, not in this module: the nav (a component) and the page can load separate copies of this file.
 function navSlots(): Set<HTMLElement> {
     const w = window as any
@@ -198,10 +205,10 @@ function findLogoIcons(): HTMLElement[] {
 }
 const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
 
-// The logo icon stays invisible on this page (its link still works under the landed avatar).
-function hideLogo(el: HTMLElement, hide: boolean, docked: boolean) {
+// On this page the nav avatar stays hidden (and unclickable) until the flying avatar has landed on it.
+function hideLogo(el: HTMLElement, hide: boolean) {
     el.style.opacity = hide ? "0" : ""
-    el.style.pointerEvents = hide && !docked ? "none" : ""
+    el.style.pointerEvents = hide ? "none" : ""
 }
 
 function publishDock(p: number) {
@@ -215,24 +222,26 @@ function useAvatarDock(el: RefObject<HTMLElement | null>) {
     useEffect(() => {
         const node = el.current
         if (isStatic || !node || typeof window === "undefined") return
+        const w = window as any
+        w[ONCE_KEY] = true
         const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
-        const hidden = new Set<HTMLElement>()
+        const logos = new Set<HTMLElement>()
         let fly: HTMLDivElement | null = null
-        let flying = false
-        let sY = window.scrollY
+        let p = 0
         let vel = 0
         let last = performance.now()
         let raf = 0
         let warned = false
+        let state = ""
 
         const slot = () => {
             for (const s of findLogoIcons()) {
-                if (!hidden.has(s)) hidden.add(s)
+                logos.add(s)
                 const r = s.getBoundingClientRect()
                 if (r.width > 0 && r.height > 0) {
-                    const w = s.offsetWidth || r.width
-                    const h = s.offsetHeight || r.height
-                    return { el: s, left: r.left + r.width / 2 - w / 2, cy: r.top + r.height / 2, h }
+                    const sw = s.offsetWidth || r.width
+                    const sh = s.offsetHeight || r.height
+                    return { el: s, cx: r.left + r.width / 2, cy: r.top + r.height / 2, size: Math.min(sw, sh) }
                 }
             }
             if (!warned) console.warn("[io-avatar-dock] no visible nav Logo Icon found, the avatar stays in the hero")
@@ -254,6 +263,7 @@ function useAvatarDock(el: RefObject<HTMLElement | null>) {
                 overflow: "hidden",
                 display: "none",
                 transformOrigin: "50% 50%",
+                willChange: "transform",
                 backgroundColor: cs.backgroundColor,
                 backgroundImage: cs.backgroundImage,
                 backgroundSize: cs.backgroundSize,
@@ -284,70 +294,66 @@ function useAvatarDock(el: RefObject<HTMLElement | null>) {
         let ratio = radiusRatio()
         // The pop-in has settled when withClayPop's scale/translate are back to rest.
         const settled = () => Math.abs(parseFloat(node.style.getPropertyValue("scale") || "1") - 1) < 0.01 && parseFloat((node.style.getPropertyValue("translate") || "0px 0px").split(" ")[1] || "0") < 1
+        // Only touch the DOM when the state changes (home / flying / docked).
+        const show = (next: string) => {
+            if (next === state) return
+            state = next
+            if (fly) fly.style.display = next === "flying" ? "block" : "none"
+            node.style.visibility = next === "home" ? "" : "hidden"
+            for (const lg of logos) hideLogo(lg, next !== "docked")
+        }
 
         const tick = () => {
             raf = requestAnimationFrame(tick)
             const now = performance.now()
             const dt = Math.min(0.064, (now - last) / 1000)
             last = now
-            const raw = window.scrollY
-            if (reduced) sY = raw
-            else {
-                // Smooth damp toward the real scroll: eases in and out of every wheel step.
-                const omega = 2 / DOCK_SMOOTH
-                const x = omega * dt
-                const k = 1 / (1 + x + 0.48 * x * x + 0.235 * x * x * x)
-                const change = sY - raw
-                const temp = (vel + omega * change) * dt
-                vel = (vel - omega * temp) * k
-                sY = raw + (change + temp) * k
-            }
-            if (Math.abs(raw - sY) < 0.25 && Math.abs(vel) < 4) {
-                sY = raw
-                vel = 0
-            }
-
             const vh = window.innerHeight || 1
             const r = node.getBoundingClientRect()
             const hero = node.closest("#hero") as HTMLElement | null
-            const heroTop = hero ? hero.getBoundingClientRect().top + raw : r.top + raw - vh * 0.18
+            const heroTop = hero ? hero.getBoundingClientRect().top + window.scrollY : r.top + window.scrollY - vh * 0.18
             const target = slot()
-            for (const lg of hidden) hideLogo(lg, true, false)
+            if (!state) show("home")
+            for (const lg of logos) if (state !== "docked") hideLogo(lg, true)
 
-            // Hand-off: the flying copy takes over once the hero reaches the top and the pop-in is done; it hands
-            // back when you scroll up into the intro.
-            if (!flying && target && sY >= heroTop - 2 && settled()) flying = true
-            if (flying && (!target || sY < heroTop - vh * 0.25)) flying = false
-            if (!flying) {
-                if (fly) fly.style.display = "none"
-                node.style.visibility = ""
-                publishDock(0)
-                return
+            // Where the flight should be for this scroll position (0 = in the name tag, 1 = in the nav).
+            const goal = target && settled() ? clamp01((window.scrollY - heroTop - vh * DOCK_LEAD) / (vh * DOCK_TRAVEL)) : 0
+            if (reduced) p = goal > 0.5 ? 1 : 0
+            else {
+                // Smooth damp toward the goal: eases in and out of every wheel step, never jumps.
+                const omega = 2 / DOCK_SMOOTH
+                const x = omega * dt
+                const k = 1 / (1 + x + 0.48 * x * x + 0.235 * x * x * x)
+                const change = p - goal
+                const temp = (vel + omega * change) * dt
+                vel = (vel - omega * temp) * k
+                p = goal + (change + temp) * k
+                if (Math.abs(p - goal) < 0.0005 && Math.abs(vel) < 0.01) {
+                    p = goal
+                    vel = 0
+                }
             }
+            p = clamp01(p)
+            publishDock(p)
+            if (p <= 0 || !target) return show("home")
+            if (p >= 1) return show("docked")
+
             if (!fly) fly = makeFly()
-            let p = clamp01((sY - heroTop - vh * DOCK_LEAD) / (vh * DOCK_TRAVEL))
-            if (reduced) p = p > 0.5 ? 1 : 0
             const e = easeInOut(p)
+            // Start point read live from the page, so the avatar leaves exactly from where the name tag is now.
             const w0 = node.offsetWidth || r.width
-            const h0 = node.offsetHeight || r.height
-            // Home, in screen space, from the smoothed scroll (so it glides instead of stepping).
             const homeCx = r.left + r.width / 2
-            const homeCy = r.top + r.height / 2 + (raw - sY)
-            const land = Math.max(28, Math.min(46, target!.h * DOCK_SIZE))
-            const w = w0 + (land - w0) * e
-            const h = h0 + (land - h0) * e
-            const cx = homeCx + (target!.left + land / 2 - homeCx) * e
-            const cy = homeCy + (target!.cy - homeCy) * e
+            const homeCy = r.top + r.height / 2
+            const size = w0 + (target.size - w0) * e
+            const cx = homeCx + (target.cx - homeCx) * e
+            const cy = homeCy + (target.cy - homeCy) * e
             const tilt = reduced ? 0 : DOCK_TILT * Math.sin(Math.PI * p)
             const st = fly.style
-            st.display = "block"
-            st.width = `${w}px`
-            st.height = `${h}px`
-            st.borderRadius = `${ratio * w}px`
-            st.transform = `translate3d(${cx - w / 2}px, ${cy - h / 2}px, 0) rotate(${tilt}deg)`
-            node.style.visibility = "hidden"
-            for (const lg of hidden) hideLogo(lg, true, p > 0.999)
-            publishDock(p)
+            st.width = `${size}px`
+            st.height = `${size}px`
+            st.borderRadius = `${ratio * size}px`
+            st.transform = `translate3d(${cx - size / 2}px, ${cy - size / 2}px, 0) rotate(${tilt}deg)`
+            show("flying")
         }
         const onResize = () => {
             ratio = radiusRatio()
@@ -359,8 +365,9 @@ function useAvatarDock(el: RefObject<HTMLElement | null>) {
             window.removeEventListener("resize", onResize)
             fly?.remove()
             node.style.visibility = ""
-            for (const lg of hidden) hideLogo(lg, false, false)
+            for (const lg of logos) hideLogo(lg, false)
             publishDock(0)
+            delete w[ONCE_KEY]
         }
     }, [isStatic])
 }

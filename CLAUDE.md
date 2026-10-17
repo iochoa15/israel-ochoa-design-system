@@ -1,3 +1,5 @@
+Read @AGENTS.md first and follow it. It points to Israel's global kit (00_START-HERE.md), which you must run at the start of every session.
+
 # Israel Ochoa Design System — Agent Instructions
 
 ## Communication style (always apply)
