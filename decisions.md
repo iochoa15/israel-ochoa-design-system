@@ -50,3 +50,19 @@ Newest at the bottom. Entries before Oct 17 2026 were backfilled from session no
 - **Gave up:** the hero entrance no longer replays when you scroll back up (homepages 5–7 still replay)
 - **Who decided:** suggested by agent, from Israel's feedback
 - **Revisit if:** Israel still sees jagged motion in the hero after publishing
+
+### 2026-10-17 · Two no-intro hero options: objects toward you (hp9) vs away to the center (hp10)
+- **Options:** keep the intro sequence · hero with depth objects coming toward you (microsoft.ai) · hero with objects shrinking toward the center (contralabs.com)
+- **Chose:** build both as /homepage-9 and /homepage-10 to compare; /homepage-8 stays as it is
+- **Why:** testers said the intro is too much; hiring managers should see who Israel is right away, and the clay keeps his personality
+- **Gave up:** the I·O·D intro on these two versions (hidden, not deleted) and the live 3D/flipbook clay in the hero (flat stills are lighter)
+- **Who decided:** Israel picked the references and the three copy stages; the agent picked the timing, lanes and the "soften behind the copy" rule
+- **Revisit if:** one of them wins his next round of user testing
+
+### 2026-10-17 · Homepage 11: timed copy steps under a fixed name tag
+- **Options:** copy tied 1:1 to the scroll (hp9) · scroll picks the step, each change plays on its own timing (hp11)
+- **Chose:** timed steps. Order: "I design/" → the header forms → the header goes → the paragraph → the avatar flies to the nav
+- **Why:** Israel: on hp9 the copy went by too quickly and looked off mid-change. Timed steps never stop half faded, and the header and paragraph never overlap (each waits for the other to clear)
+- **Gave up:** copy that tracks the scroll exactly; /homepage-10's "away to the center" look (archived)
+- **Who decided:** Israel set the order and what stays on screen; the agent picked the timing (cues at 10%, 38%, 42%, 85%, flight at 92% of the hero's scroll, after a first try at 7/30/34/60/70% read too fast)
+- **Revisit if:** the steps feel too slow or too fast once he scrolls it on his phone

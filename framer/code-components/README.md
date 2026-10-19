@@ -16,5 +16,7 @@ Framer is the source of truth — edit there, then re-export here.
 | `TestimonialCarouselLite.tsx` | Same, blur only while moving | /homepage-4 |
 | `GsapDemo.tsx` | GSAP test component | /gsap-test |
 | `EqualHeightCards.tsx`, `Examples.tsx` | Older helpers / examples | — |
+| `HeroDepth.tsx` | Pinned depth hero: clay stills travel through depth (toward you, or away to the center) while the copy changes; overrides `withDepthStage1–3` (hp9), `withRecedeStage1–3` (hp10), and `withStepHeader` / `withStepLine2` / `withStepParagraph` / `withStepScrollHint` (hp11: the name tag stays put, the header forms, then the paragraph, each change timed; the scroll hint leaves as line 2 comes in). "Start hidden" keeps the objects hidden until the first scroll (hp11) | /homepage-9, /homepage-11, /archive/homepage-10 |
+| `ScrollHint.tsx` | The intro's "Scroll" hint on its own: red blinking label + a small arrow moving down, fades in after the hero's entrance | /homepage-11 |
 
 Animations run in Framer Preview and on the published site, not on the canvas.
