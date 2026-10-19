@@ -24,7 +24,7 @@
 
 ## Project-specific rules
 - **Version every decision.** New ideas go on a new page or a new copy (homepage-N → homepage-N+1). Never overwrite a kept version.
-- **Working pages (Oct 17 2026):** /homepage-8 (the working homepage), /homepage-9 (kept: no-intro depth hero), /homepage-11 (hp9 + the copy sequence Israel asked for), /about, /logo-gallery-3. Everything else lives under /archive/ in Framer (kept, not deleted).
+- **Working pages (Oct 19 2026):** / (the official homepage: the page built as /homepage-11, set as Home by Israel), /about, /logo-gallery-3. Everything else, including the original home (/archive/home-original) and /homepage-8 and /homepage-9 (kept versions), lives under /archive/ in Framer (kept, not deleted). The nav points only at these pages. The Framer plan has no redirects.
 - **Token changes** follow the workflow in `CLAUDE.md` (Python for the JSON, keep the Figma plugin in sync).
 - **Client logo source files are private.** `web content/` is gitignored and must never be committed (the repo is public).
 - **Israel publishes the Framer site himself.** Agents never publish.

@@ -66,3 +66,11 @@ Newest at the bottom. Entries before Oct 17 2026 were backfilled from session no
 - **Gave up:** copy that tracks the scroll exactly; /homepage-10's "away to the center" look (archived)
 - **Who decided:** Israel set the order and what stays on screen; the agent picked the timing (cues at 10%, 38%, 42%, 85%, flight at 92% of the hero's scroll, after a first try at 7/30/34/60/70% read too fast)
 - **Revisit if:** the steps feel too slow or too fast once he scrolls it on his phone
+
+### 2026-10-19 · Homepage 11 becomes the homepage
+- **Options:** /homepage-8 (intro + avatar flight) · /homepage-9 (depth hero, copy tied to the scroll) · /homepage-11 (depth hero, timed copy steps)
+- **Chose:** /homepage-11, now at "/". The original home, /homepage-8 and /homepage-9 go to /archive/; the nav points only at /, /about and /logo-gallery-3
+- **Why:** Israel: "homepage 11 is the official main homepage." It opens on the name tag and one line, and the rest plays as you scroll, which suits hiring managers who give it seconds
+- **Gave up:** the I·O·D intro on the homepage; a redirect from the old /homepage-11 address (the Framer plan has no redirects)
+- **Who decided:** Israel
+- **Revisit if:** user testing shows people miss the intro, or the plan gains redirects

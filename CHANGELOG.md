@@ -69,3 +69,15 @@ What changed and when. The agent appends one entry after each meaningful change.
 - **Why:** Israel: the hint has to be gone before the nav appears. Cause: a code component doesn't hand its element to an override, so the fade code had nothing to move.
 - **Files:** Framer /homepage-11 (override moved to "Scroll hint row"), comments in framer/code-components/HeroDepth.tsx and ScrollHint.tsx (uploaded)
 - **Made by:** agent
+
+### 2026-10-19
+- **Changed:** Moved /homepage-8 and /homepage-9 under /archive/ in Framer. The main nav now points only at pages we have: the avatar goes to /homepage-11, Recent Work to /homepage-11#work, Logo Gallery to /logo-gallery-3, About to /about, Get in touch to /homepage-11#contact (was archived homepage 5). "The Oldies" (no page yet) is hidden on desktop too, as it already was on phone. The phone nav's Work and Logos links are now set explicitly.
+- **Why:** Israel: archive 8 and 9, nav links should only reflect the pages we have.
+- **Files:** Framer pages, Framer MainNav component, AGENTS.md
+- **Made by:** agent
+
+### 2026-10-19
+- **Changed:** Homepage 11 is now the official homepage at "/" (Israel set it as Home in Framer). The original home moved to /archive/home-original. Nav: the avatar goes to /, Recent Work to /#work, Get in touch to /#contact. No redirect from the old /homepage-11 address: the Framer plan doesn't include redirects.
+- **Why:** Israel: "homepage 11 is the official main homepage."
+- **Files:** Framer pages, Framer MainNav component, AGENTS.md
+- **Made by:** agent
