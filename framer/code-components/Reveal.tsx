@@ -149,8 +149,9 @@ export function withClayPop(Component: ComponentType<any>): ComponentType {
         const [own, setRef] = useOwnRef(ref)
         // Bold, bouncy pop from below (overshoots, like clay landing). Opens the gate for the rest of the hero.
         const p = usePopIn(play, own, 0, { stiffness: 190, damping: 12 }, true)
-        const opacity = useTransform(p, (v) => clamp01(v / 0.3))
-        const filter = useTransform(p, (v) => `blur(${(1 - clamp01(v)) * 10}px)`)
+        // The fade lives in the filter, not in opacity: the layer's hover effect animates opacity, and on mouse
+        // leave it went back to the opacity at load (0), so the avatar vanished after the first hover (Oct 19).
+        const filter = useTransform(p, (v) => (v >= 1 ? "none" : `opacity(${clamp01(v / 0.3)}) blur(${(1 - clamp01(v)) * 10}px)`))
 
         // Writes only to this layer's own element.
         useIsoLayoutEffect(() => {
@@ -167,7 +168,7 @@ export function withClayPop(Component: ComponentType<any>): ComponentType {
         }, [play])
 
         if (!play) return <Component ref={setRef} {...props} />
-        return <Component ref={setRef} {...props} style={{ ...props.style, opacity, filter }} />
+        return <Component ref={setRef} {...props} style={{ ...props.style, filter }} />
     })
 }
 
@@ -191,6 +192,7 @@ const DOCK_LEAD = 0.04 // share of the screen height you scroll before the avata
 const DOCK_TRAVEL = 0.8 // share of the screen height the flight takes
 const DOCK_TILT = -12 // degrees of tilt at mid-flight
 const DOCK_SMOOTH = 0.18 // s: how softly the flight follows the scroll (a critically damped spring, so its speed never jumps)
+const DOCK_LATE_AT = 0.92 // withClayPopDockLate (homepage 11): lifts off at 92% of the hero's pinned scroll, after the copy, and lands as the next section comes in
 // Kept on window, not in this module: the nav (a component) and the page can load separate copies of this file.
 function navSlots(): Set<HTMLElement> {
     const w = window as any
@@ -217,7 +219,8 @@ function publishDock(p: number) {
     window.dispatchEvent(new CustomEvent(DOCK_EVENT, { detail: p }))
 }
 
-function useAvatarDock(el: RefObject<HTMLElement | null>) {
+// startAt: lift off at this share of a pinned hero's scroll (null = right as you start scrolling).
+function useAvatarDock(el: RefObject<HTMLElement | null>, startAt: number | null = null) {
     const isStatic = useIsStaticRenderer()
     useEffect(() => {
         const node = el.current
@@ -316,8 +319,16 @@ function useAvatarDock(el: RefObject<HTMLElement | null>) {
             if (!state) show("home")
             for (const lg of logos) if (state !== "docked") hideLogo(lg, true)
 
+            // A nav avatar that can't be measured for a moment (the nav re-rendering) freezes the flight where it is,
+            // instead of sending the avatar home and hiding the nav one.
+            if (!target) {
+                if (state !== "docked") show("home")
+                return
+            }
+
             // Where the flight should be for this scroll position (0 = in the name tag, 1 = in the nav).
-            const goal = target && settled() ? clamp01((window.scrollY - heroTop - vh * DOCK_LEAD) / (vh * DOCK_TRAVEL)) : 0
+            const lead = startAt !== null && hero ? Math.max(0, hero.offsetHeight - vh) * startAt : vh * DOCK_LEAD
+            const goal = settled() ? clamp01((window.scrollY - heroTop - lead) / (vh * DOCK_TRAVEL)) : 0
             if (reduced) p = goal > 0.5 ? 1 : 0
             else {
                 // Smooth damp toward the goal: eases in and out of every wheel step, never jumps.
@@ -335,7 +346,7 @@ function useAvatarDock(el: RefObject<HTMLElement | null>) {
             }
             p = clamp01(p)
             publishDock(p)
-            if (p <= 0 || !target) return show("home")
+            if (p <= 0) return show("home")
             if (p >= 1) return show("docked")
 
             if (!fly) fly = makeFly()
@@ -382,6 +393,67 @@ export function withClayPopDock(Component: ComponentType<any>): ComponentType {
         const [own, setRef] = useOwnRef(ref)
         useAvatarDock(own)
         return <Popped ref={setRef} {...props} />
+    })
+}
+
+/**
+ * Hero avatar on /homepage-11: the same pop-in and flight, but it lifts off late, once the copy in the pinned hero
+ * has played (92% of the hero's scroll), and lands as the next section comes in.
+ */
+export function withClayPopDockLate(Component: ComponentType<any>): ComponentType {
+    const Popped = withClayPop(Component)
+    return forwardRef(function ClayPopDockLate(props: any, ref: Ref<any>) {
+        const [own, setRef] = useOwnRef(ref)
+        useAvatarDock(own, DOCK_LATE_AT)
+        return <Popped ref={setRef} {...props} />
+    })
+}
+
+/**
+ * The MainNav instance on /homepage-11 (Oct 19): hidden on landing, so the visitor sees only the hero and the scroll
+ * hint. It rises in the moment the avatar lifts off for the nav (after the paragraph), and hides again if you scroll
+ * back up before it. On a page without the avatar flight it shows after a moment, so the nav is never lost.
+ */
+export function withNavAfterDock(Component: ComponentType<any>): ComponentType {
+    return forwardRef(function NavAfterDock(props: any, ref: Ref<any>) {
+        const isStatic = useIsStaticRenderer()
+        const [own, setRef] = useOwnRef(ref)
+        useIsoLayoutEffect(() => {
+            const el = own.current
+            if (isStatic || !el) return
+            const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+            let shown: boolean | null = null
+            const set = (show: boolean) => {
+                if (show === shown) return
+                const first = shown === null
+                shown = show
+                const st = el.style
+                st.transition = reduced || first ? "none" : show ? "opacity 0.45s ease-out, translate 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s" : "opacity 0.3s ease-in, translate 0.3s ease-in, visibility 0s 0.3s"
+                st.opacity = show ? "1" : "0"
+                st.setProperty("translate", show || reduced ? "0px 0px" : "0px 24px")
+                st.visibility = show ? "visible" : "hidden"
+                st.pointerEvents = show ? "" : "none"
+            }
+            const read = () => {
+                const p = (window as any)[DOCK_KEY]
+                if (typeof p === "number") set(p > 0)
+            }
+            const onDock = () => read()
+            set(false)
+            read()
+            window.addEventListener(DOCK_EVENT, onDock)
+            const fallback = window.setTimeout(() => {
+                if (typeof (window as any)[DOCK_KEY] !== "number") set(true)
+            }, 2500)
+            return () => {
+                window.removeEventListener(DOCK_EVENT, onDock)
+                window.clearTimeout(fallback)
+                for (const k of ["transition", "opacity", "translate", "visibility", "pointer-events"]) el.style.removeProperty(k)
+            }
+        }, [isStatic])
+        // The server sends it hidden too, so a refresh never flashes it.
+        const style = isStatic ? props.style : { ...props.style, opacity: 0, visibility: "hidden" }
+        return <Component ref={setRef} {...props} style={style} />
     })
 }
 
