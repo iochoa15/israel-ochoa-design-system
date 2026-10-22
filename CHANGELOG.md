@@ -81,3 +81,9 @@ What changed and when. The agent appends one entry after each meaningful change.
 - **Why:** Israel: "homepage 11 is the official main homepage."
 - **Files:** Framer pages, Framer MainNav component, AGENTS.md
 - **Made by:** agent
+
+### 2026-10-22
+- **Changed:** Split the work into three lanes (Orca worktrees): Framer (`main`), design system + Figma (`design-system`), and copy in Israel's voice (`Copywriting`). AGENTS.md now lists each lane's job and the handoff spot for finished copy, `documents/copy/`.
+- **Why:** Israel wants the most structure possible: each kind of work in its own lane, with clear handoffs.
+- **Files:** AGENTS.md, CHANGELOG.md
+- **Made by:** agent

@@ -22,6 +22,20 @@
   - Framer project: framer.com/projects/Israel-Ochoa-Design--T4MU9KJsOdFqQAfuyRnq
   - Figma explorations: file 71RYIBnkaFohQHGeU3MXdN
 
+## Lanes (Orca worktrees, since Oct 22 2026)
+Three copies of this repo, each with its own branch and job. Check `git branch --show-current` to know which lane you are in, and stay in its job.
+
+| Lane | Branch | Folder | Job |
+|---|---|---|---|
+| Framer | `main` | the original folder on the Desktop | Talking to Framer and building approved designs on the site |
+| Design system | `design-system` | `~/orca/workspaces/israel-ochoa-design-system/ruffe` | Tokens, the Figma plugin, and designing the website pages in Figma (account iochoa15@gmail.com, file "IO website 2026"); guides Israel toward a good design |
+| Copy | `Copywriting` | `~/orca/workspaces/israel-ochoa-design-system/mizuchi` | Website content and copy in Israel's voice (kit `04_my-voice/`: `my-voice.md` + `humanizer`, facts from `03_about-me.md`) |
+
+- **Handoffs:** the copy lane saves finished copy in `documents/copy/` (one file per page). The design-system lane reads it from there to design pages; the Framer lane builds what's approved. Lanes can read each other's folders on disk; nothing is shared through git until a branch is merged into `main`.
+- **Case studies:** Israel's other project folders feed the design-system lane, which turns them into case study pages (the handoff gets written down with the first case study).
+- **Merging:** merge a lane into `main` and push only when Israel asks. On conflicts in the shared logs (`CHANGELOG.md`, `decisions.md`, this file), keep both sides' entries.
+- The lanes leave out `3d/` (saved on GitHub; `git sparse-checkout add 3d` brings it back). The plugin folder's name ends with a space (`figma auto frame tool `).
+
 ## Project-specific rules
 - **Version every decision.** New ideas go on a new page or a new copy (homepage-N → homepage-N+1). Never overwrite a kept version.
 - **Working pages (Oct 19 2026):** / (the official homepage: the page built as /homepage-11, set as Home by Israel), /about, /logo-gallery-3. Everything else, including the original home (/archive/home-original) and /homepage-8 and /homepage-9 (kept versions), lives under /archive/ in Framer (kept, not deleted). The nav points only at these pages. The Framer plan has no redirects.
