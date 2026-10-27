@@ -10,6 +10,9 @@ interface HeroHeadlineProps {
     serif: string
     lineBreak: boolean
     fontSize: number
+    font: string
+    weight: number
+    serifItalic: boolean
     typeSpeed: number
     deleteSpeed: number
     holdTime: number
@@ -121,6 +124,9 @@ export default function HeroHeadline(props: HeroHeadlineProps) {
         serif = "a real person.",
         lineBreak = true,
         fontSize = 76,
+        font = "Wix Madefor Display",
+        weight = 600,
+        serifItalic = true,
         typeSpeed = 80,
         deleteSpeed = 40,
         holdTime = 2200,
@@ -206,8 +212,8 @@ export default function HeroHeadline(props: HeroHeadlineProps) {
                 position: "relative",
                 width: "100%",
                 margin: 0,
-                fontFamily: '"Wix Madefor Display", sans-serif',
-                fontWeight: 600,
+                fontFamily: `"${font}", sans-serif`,
+                fontWeight: weight,
                 fontSize,
                 lineHeight: 0.96,
                 letterSpacing: "-0.03em",
@@ -236,7 +242,12 @@ export default function HeroHeadline(props: HeroHeadlineProps) {
                 ) : (
                     middle
                 )}
-                <em style={{ fontFamily: '"Newsreader", serif', fontStyle: "italic", fontWeight: 300, letterSpacing: "-0.02em", whiteSpace: "nowrap" }}>{serif}</em>
+                {/* Homepage 12 (Oct 27) turns the italic accent off: the end then reads in the headline's own font. */}
+                {serifItalic ? (
+                    <em style={{ fontFamily: '"Newsreader", serif', fontStyle: "italic", fontWeight: 300, letterSpacing: "-0.02em", whiteSpace: "nowrap" }}>{serif}</em>
+                ) : (
+                    <span style={{ whiteSpace: "nowrap" }}>{serif}</span>
+                )}
             </span>
         </motion.h1>
     )
@@ -263,6 +274,9 @@ addPropertyControls(HeroHeadline, {
     serif: { type: ControlType.String, title: "Serif end", defaultValue: "a real person." },
     lineBreak: { type: ControlType.Boolean, title: "Break before AI", defaultValue: true },
     fontSize: { type: ControlType.Number, title: "Size", defaultValue: 76, min: 24, max: 140, unit: "px" },
+    font: { type: ControlType.String, title: "Font", description: "A font already used on the page, e.g. Clash Display", defaultValue: "Wix Madefor Display" },
+    weight: { type: ControlType.Number, title: "Weight", defaultValue: 600, min: 100, max: 900, step: 100 },
+    serifItalic: { type: ControlType.Boolean, title: "Italic end", defaultValue: true },
     typeSpeed: { type: ControlType.Number, title: "Type (ms)", defaultValue: 80, min: 20, max: 300 },
     deleteSpeed: { type: ControlType.Number, title: "Delete (ms)", defaultValue: 40, min: 10, max: 300 },
     holdTime: { type: ControlType.Number, title: "Pause (ms)", defaultValue: 2200, min: 400, max: 6000, step: 100 },

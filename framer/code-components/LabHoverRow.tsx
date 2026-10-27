@@ -20,6 +20,9 @@ interface LabHoverRowProps {
     height: number
     gap: number
     radius: number
+    titleFont: string
+    titleWeight: number
+    tagBelow: boolean
     style?: CSSProperties
 }
 
@@ -210,7 +213,11 @@ const SPRING = { type: "spring", stiffness: 170, damping: 26, mass: 0.9 } as con
  * @framerSupportedLayoutHeight any
  */
 export default function LabHoverRow(props: LabHoverRowProps) {
-    const { items = DEFAULT_ITEMS, openRatio = 2.6, height = 560, gap = 12, radius = 20 } = props
+    const { items = DEFAULT_ITEMS, openRatio = 2.6, height = 560, gap = 12, radius = 20, titleFont = "Wix Madefor Display", titleWeight = 600, tagBelow = false } = props
+    // Homepage 12 (Oct 27): the tag moves under the title, on a light block.
+    const tagStyle: CSSProperties = tagBelow
+        ? { ...label, order: 1, alignSelf: "flex-start", maxWidth: "100%", boxSizing: "border-box", padding: "4px 8px", borderRadius: 4, background: C.canvas }
+        : label
     const isStatic = useIsStaticRenderer()
     const [active, setActive] = useState<number | null>(null)
     const rootRef = useRef<HTMLDivElement>(null)
@@ -249,7 +256,7 @@ export default function LabHoverRow(props: LabHoverRowProps) {
                         tabIndex={0}
                         aria-expanded={open}
                         initial={false}
-                        animate={{ flexGrow: narrow ? 0 : shown === null ? 1 : open ? openRatio : 1, height: narrow ? (open ? 460 : 112) : height }}
+                        animate={{ flexGrow: narrow ? 0 : shown === null ? 1 : open ? openRatio : 1, height: narrow ? (open ? 460 : tagBelow ? 118 : 112) : height }}
                         transition={SPRING}
                         style={{
                             flexBasis: narrow ? "auto" : 0,
@@ -270,7 +277,8 @@ export default function LabHoverRow(props: LabHoverRowProps) {
                         }}
                     >
                         {/* Media: the live interface lives here, scaled down until the card opens */}
-                        <div style={{ position: "relative", flex: 1, minHeight: 0, order: narrow ? 3 : 0, borderRadius: radius - 6, background: item.tint, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        {/* With the tag under the title, a closed phone card has no room left for a sliver of media: hide it. */}
+                        <div style={{ position: "relative", flex: 1, minHeight: 0, order: narrow ? 3 : 0, borderRadius: radius - 6, background: item.tint, overflow: "hidden", display: narrow && !open && tagBelow ? "none" : "flex", alignItems: "center", justifyContent: "center" }}>
                             {item.video ? (
                                 <video src={item.video} muted loop playsInline autoPlay={open} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                             ) : (
@@ -287,15 +295,15 @@ export default function LabHoverRow(props: LabHoverRowProps) {
                         </div>
 
                         <div style={{ display: "flex", flexDirection: "column", gap: 6, minHeight: narrow ? 0 : 92, order: narrow ? 2 : 0 }}>
-                            <span style={{ ...label, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{item.tag}</span>
-                            <span style={{ fontFamily: '"Wix Madefor Display", sans-serif', fontWeight: 600, fontSize: open ? 24 : 18, lineHeight: 1.15, letterSpacing: "-0.01em", color: C.ink, transition: "font-size 0.4s cubic-bezier(0.22,1,0.36,1)" }}>
+                            <span style={{ ...tagStyle, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{item.tag}</span>
+                            <span style={{ fontFamily: `"${titleFont}", sans-serif`, fontWeight: titleWeight, fontSize: open ? 24 : 18, lineHeight: 1.15, letterSpacing: "-0.01em", color: C.ink, transition: "font-size 0.4s cubic-bezier(0.22,1,0.36,1)" }}>
                                 {open ? item.title : item.name}
                             </span>
                             <motion.span
                                 initial={false}
                                 animate={{ opacity: open ? 1 : 0, y: open ? 0 : 8 }}
                                 transition={{ duration: 0.35, delay: open ? 0.12 : 0, ease: [0.22, 1, 0.36, 1] }}
-                                style={{ ...body, color: C.muted, fontWeight: 400 }}
+                                style={{ ...body, color: C.muted, fontWeight: 400, order: tagBelow ? 2 : undefined }}
                             >
                                 {item.sub}
                             </motion.span>
@@ -330,4 +338,7 @@ addPropertyControls(LabHoverRow, {
     height: { type: ControlType.Number, title: "Height", defaultValue: 560, min: 360, max: 800, unit: "px" },
     gap: { type: ControlType.Number, title: "Gap", defaultValue: 12, min: 0, max: 40, unit: "px" },
     radius: { type: ControlType.Number, title: "Radius", defaultValue: 20, min: 0, max: 40, unit: "px" },
+    titleFont: { type: ControlType.String, title: "Title font", description: "A font already used on the page, e.g. Clash Display", defaultValue: "Wix Madefor Display" },
+    titleWeight: { type: ControlType.Number, title: "Title weight", defaultValue: 600, min: 100, max: 900, step: 100 },
+    tagBelow: { type: ControlType.Boolean, title: "Tag under title", defaultValue: false },
 })

@@ -38,7 +38,7 @@ Three copies of this repo, each with its own branch and job. Check `git branch -
 
 ## Project-specific rules
 - **Version every decision.** New ideas go on a new page or a new copy (homepage-N → homepage-N+1). Never overwrite a kept version.
-- **Working pages (Oct 19 2026):** / (the official homepage: the page built as /homepage-11, set as Home by Israel), /about, /logo-gallery-3. Everything else, including the original home (/archive/home-original) and /homepage-8 and /homepage-9 (kept versions), lives under /archive/ in Framer (kept, not deleted). The nav points only at these pages. The Framer plan has no redirects.
+- **Working pages (Oct 19 2026):** / (the official homepage: the page built as /homepage-11, set as Home by Israel), /about, /logo-gallery-3, plus /homepage-12 (Oct 27: new version under review; Clash Display, #DADDED background, eyebrow chips). Everything else, including the original home (/archive/home-original) and /homepage-8 and /homepage-9 (kept versions), lives under /archive/ in Framer (kept, not deleted). The nav points only at these pages. The Framer plan has no redirects.
 - **Token changes** follow the workflow in `CLAUDE.md` (Python for the JSON, keep the Figma plugin in sync).
 - **Client logo source files are private.** `web content/` is gitignored and must never be committed (the repo is public).
 - **Israel publishes the Framer site himself.** Agents never publish.

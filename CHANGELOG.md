@@ -87,3 +87,10 @@ What changed and when. The agent appends one entry after each meaningful change.
 - **Why:** Israel wants the most structure possible: each kind of work in its own lane, with clear handoffs.
 - **Files:** AGENTS.md, CHANGELOG.md
 - **Made by:** agent
+
+### 2026-10-27
+- **Changed:** New page /homepage-12 in Framer, a copy of the homepage (homepage 11, at /). On it: page background #DADDED; the "Live prototype" labels are hidden; every eyebrow (the case-card categories, "The problem / What I did / The outcome", the Lab tags) sits under the text it belongs to, on a light block; headlines in Clash Display Regular with no italic accent words (new text styles Text Styles/V5/Display L, H2, H3); the case-card text went from 14px to 17px (V4/Body). Tablet case cards went from 600px to 760px tall so the bigger text and button fit. The contact block is a new copy of the component, "Closing · contact room (V5, Clash Display)"; the original is hidden on this page.
+- **Code (bug-safe, the live homepage looks the same):** HeroHeadline.tsx gained Font, Weight and Italic end controls; LabHoverRow.tsx gained Title font, Title weight and Tag under title. Their defaults keep the old look.
+- **Why:** Israel asked for a new version with this background, Clash Display, no italic accents, eyebrow chips under the text and bigger card text.
+- **Files:** Framer page /homepage-12, Framer text styles V5, Framer component copy, framer/code-components/HeroHeadline.tsx, framer/code-components/LabHoverRow.tsx
+- **Made by:** agent
