@@ -128,3 +128,10 @@ What changed and when. The agent appends one entry after each meaningful change.
 - **Why:** Israel: "change all of the fonts, all of the fonts, everywhere. Everything that is a live text, change it to Halyard Display." Nohemi for details comes later, one step at a time.
 - **Files:** Framer page /homepage-15 (Font kit settings only), Adobe Fonts web project IOD
 - **Made by:** agent
+
+### 2026-10-28
+- **Changed (homepage 15, round 4):** Headers 2px smaller and SemiBold (600) instead of Bold (700), on desktop / tablet / phone: "I design/" 54/42/25, line 2 54/42/25, Selected work and What I build 54/42/30, contact heading 54/40/26 (V8 component copy), case-card titles 26/24/20 (new style Text Styles/V8/H3 card title (Halyard semibold), so homepage 14 keeps V7), Lab titles 22px open (closed 3/4 of that).
+- **Code:** LabHoverRow.tsx gained a "Title size" control (default 24, so other pages look the same).
+- **Why:** Israel: "make the headers one or two points smaller and less bold."
+- **Files:** Framer page /homepage-15, Framer component copy V8, framer/code-components/LabHoverRow.tsx
+- **Made by:** agent

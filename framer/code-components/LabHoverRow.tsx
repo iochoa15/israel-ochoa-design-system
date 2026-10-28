@@ -22,6 +22,7 @@ interface LabHoverRowProps {
     radius: number
     titleFont: string
     titleWeight: number
+    titleSize: number
     tagBelow: boolean
     tagLower: boolean
     style?: CSSProperties
@@ -214,7 +215,7 @@ const SPRING = { type: "spring", stiffness: 170, damping: 26, mass: 0.9 } as con
  * @framerSupportedLayoutHeight any
  */
 export default function LabHoverRow(props: LabHoverRowProps) {
-    const { items = DEFAULT_ITEMS, openRatio = 2.6, height = 560, gap = 12, radius = 20, titleFont = "Wix Madefor Display", titleWeight = 600, tagBelow = false, tagLower = false } = props
+    const { items = DEFAULT_ITEMS, openRatio = 2.6, height = 560, gap = 12, radius = 20, titleFont = "Wix Madefor Display", titleWeight = 600, titleSize = 24, tagBelow = false, tagLower = false } = props
     // Homepage 12 (Oct 27): the tag moves under the title, on a light block.
     // Homepage 13 (Oct 28): the tag reads in lowercase.
     const tagCase: CSSProperties = tagLower ? { textTransform: "lowercase", letterSpacing: "0.01em", fontSize: 12 } : {}
@@ -299,7 +300,7 @@ export default function LabHoverRow(props: LabHoverRowProps) {
 
                         <div style={{ display: "flex", flexDirection: "column", gap: 6, minHeight: narrow ? 0 : 92, order: narrow ? 2 : 0 }}>
                             <span style={{ ...tagStyle, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{item.tag}</span>
-                            <span style={{ fontFamily: `"${titleFont}", sans-serif`, fontWeight: titleWeight, fontSize: open ? 24 : 18, lineHeight: 1.15, letterSpacing: "-0.01em", color: C.ink, transition: "font-size 0.4s cubic-bezier(0.22,1,0.36,1)" }}>
+                            <span style={{ fontFamily: `"${titleFont}", sans-serif`, fontWeight: titleWeight, fontSize: open ? titleSize : Math.round(titleSize * 0.75), lineHeight: 1.15, letterSpacing: "-0.01em", color: C.ink, transition: "font-size 0.4s cubic-bezier(0.22,1,0.36,1)" }}>
                                 {open ? item.title : item.name}
                             </span>
                             <motion.span
@@ -343,6 +344,7 @@ addPropertyControls(LabHoverRow, {
     radius: { type: ControlType.Number, title: "Radius", defaultValue: 20, min: 0, max: 40, unit: "px" },
     titleFont: { type: ControlType.String, title: "Title font", description: "A font already used on the page, e.g. Clash Display", defaultValue: "Wix Madefor Display" },
     titleWeight: { type: ControlType.Number, title: "Title weight", defaultValue: 600, min: 100, max: 900, step: 100 },
+    titleSize: { type: ControlType.Number, title: "Title size", description: "Open card; closed cards use 3/4 of it", defaultValue: 24, min: 14, max: 40, unit: "px" },
     tagBelow: { type: ControlType.Boolean, title: "Tag under title", defaultValue: false },
     tagLower: { type: ControlType.Boolean, title: "Lowercase tag", defaultValue: false },
 })
