@@ -108,3 +108,10 @@ What changed and when. The agent appends one entry after each meaningful change.
 - **Why:** Israel: "it's looking better with this font. Just make the headers bold", plus the line break, name/role, buttons and nav.
 - **Files:** Framer page /homepage-14, Framer text style V7/H2, Framer component copy, framer/code-components/FontKit.tsx, documents/where-we-left-off-oct-28-2026.md, AGENTS.md
 - **Made by:** agent
+
+### 2026-10-28
+- **Changed (in progress):** New page /homepage-15 in Framer, a copy of /homepage-14 after Israel's copy edits. The dark Selected work room and the contact block are now bright (#F8F9FC), the case cards a lavender grey (#ECEEF6), all their text dark; every button uses the red Primary style of the nav's "Get in touch". Contact block: another component copy, "Closing · contact room (V8, light)". Fonts are wired for Halyard Display everywhere (from the Adobe kit, once Israel adds it; Degular shows until then) with Nohemi kept wherever a text is set in it (details: role, eyebrows), waiting for Israel to upload Nohemi to Framer.
+- **Code:** FontKit.tsx gained Main fonts, Secondary fonts and Keep font controls (empty by default, so homepages 13 and 14 look the same).
+- **Why:** Israel asked for Halyard Display as the one font, Nohemi for details, brighter boxes and red buttons.
+- **Files:** Framer page /homepage-15, Framer component copy, framer/code-components/FontKit.tsx
+- **Made by:** agent

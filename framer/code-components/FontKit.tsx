@@ -10,6 +10,8 @@ import { addPropertyControls, ControlType } from "framer"
 // Homepage 14 (Oct 28) adds three opt-in controls: "Text weights" lets each text keep its own weight (bold
 // headers) instead of one Degular weight for all; "Degular layers" puts more layers in Degular by their layer
 // name (the published page labels each layer with data-framer-name); "Extra CSS" for small tweaks like nav size.
+// Homepage 15 (Oct 28) adds "Main fonts" and "Secondary fonts" (full font stacks, e.g. Halyard Display from the
+// same Adobe kit) and "Keep font": text set in that font in Framer (Nohemi, for details) is left alone.
 
 interface FontKitProps {
     kit: string
@@ -19,10 +21,23 @@ interface FontKitProps {
     textWeights: boolean
     degularLayers: string
     extraCss: string
+    mainStack: string
+    secondaryStack: string
+    keepFont: string
     style?: CSSProperties
 }
 
 const DEGULAR = `"degular-variable", sans-serif`
+
+// Adds :not([style*="Nohemi"]) to each selector so text set in the kept font keeps it.
+function keep(selectors: string, keepFont: string) {
+    const font = keepFont.trim().replace(/"/g, "")
+    if (!font) return selectors
+    return selectors
+        .split(",")
+        .map((s) => `${s.trim()}:not([style*="${font}"])`)
+        .join(", ")
+}
 
 // "Name, Button ·" → [data-framer-name^="Name"] .framer-text, … (each name matches as a prefix)
 function layerSelectors(names: string) {
@@ -34,14 +49,16 @@ function layerSelectors(names: string) {
         .join("")
 }
 
-function fontCss(weight: number, opsz: number, secondary: string, textWeights: boolean, degularLayers: string) {
+function fontCss(weight: number, opsz: number, secondary: string, textWeights: boolean, degularLayers: string, mainStack: string, secondaryStack: string, keepFont: string) {
     // With text weights on, the weight axis is left to each text's own font-weight.
     const variation = textWeights ? `"ital" 0, "opsz" ${opsz}` : `"ital" 0, "wght" ${weight}, "opsz" ${opsz}`
-    const second = `"${secondary}", sans-serif`
+    const second = secondaryStack.trim() || `"${secondary}", sans-serif`
+    const main = mainStack.trim() || DEGULAR
+    const mainSelectors = `h1.framer-text, h2.framer-text, h3.framer-text, h1.framer-text *, h2.framer-text *, h3.framer-text *, .io-degular .framer-text${layerSelectors(degularLayers)}`
     return `
-.framer-text, [style*="Wix Madefor"] { --framer-font-family: ${second} !important; font-family: ${second} !important; }
-h1.framer-text, h2.framer-text, h3.framer-text, h1.framer-text *, h2.framer-text *, h3.framer-text *, .io-degular .framer-text${layerSelectors(degularLayers)} {
-    --framer-font-family: ${DEGULAR} !important; font-family: ${DEGULAR} !important;
+${keep(`.framer-text, [style*="Wix Madefor"]`, keepFont)} { --framer-font-family: ${second} !important; font-family: ${second} !important; }
+${keep(mainSelectors, keepFont)} {
+    --framer-font-family: ${main} !important; font-family: ${main} !important;
     --framer-font-style: normal !important; font-style: normal !important;
     font-variation-settings: ${variation} !important;
 }
@@ -54,13 +71,13 @@ h1.framer-text, h2.framer-text, h3.framer-text, h1.framer-text *, h2.framer-text
  * @framerIntrinsicHeight 1
  */
 export default function FontKit(props: FontKitProps) {
-    const { kit = "gwt5tgs", weight = 200, opsz = 6, secondary = "Figtree", textWeights = false, degularLayers = "", extraCss = "" } = props
+    const { kit = "gwt5tgs", weight = 200, opsz = 6, secondary = "Figtree", textWeights = false, degularLayers = "", extraCss = "", mainStack = "", secondaryStack = "", keepFont = "" } = props
     const family = encodeURIComponent(secondary).replace(/%20/g, "+")
     return (
         <div aria-hidden="true" style={{ ...props.style, width: 1, height: 1, overflow: "hidden", pointerEvents: "none" }}>
             <link rel="stylesheet" href={`https://use.typekit.net/${kit}.css`} />
-            <link rel="stylesheet" href={`https://fonts.googleapis.com/css2?family=${family}:wght@300..900&display=swap`} />
-            <style>{fontCss(weight, opsz, secondary, textWeights, degularLayers) + extraCss}</style>
+            {secondaryStack.trim() ? null : <link rel="stylesheet" href={`https://fonts.googleapis.com/css2?family=${family}:wght@300..900&display=swap`} />}
+            <style>{fontCss(weight, opsz, secondary, textWeights, degularLayers, mainStack, secondaryStack, keepFont) + extraCss}</style>
         </div>
     )
 }
@@ -80,4 +97,7 @@ addPropertyControls(FontKit, {
     textWeights: { type: ControlType.Boolean, title: "Text weights", description: "On: each text keeps its own weight (Degular weight is ignored)", defaultValue: false },
     degularLayers: { type: ControlType.String, title: "Degular layers", description: "Layer names (or how they start), comma-separated", defaultValue: "" },
     extraCss: { type: ControlType.String, title: "Extra CSS", displayTextArea: true, defaultValue: "" },
+    mainStack: { type: ControlType.String, title: "Main fonts", description: 'Empty = Degular. E.g. "halyard-display", sans-serif', defaultValue: "" },
+    secondaryStack: { type: ControlType.String, title: "Secondary fonts", description: "Empty = the Secondary font above, from Google Fonts", defaultValue: "" },
+    keepFont: { type: ControlType.String, title: "Keep font", description: "Text set in this font in Framer keeps it, e.g. Nohemi", defaultValue: "" },
 })
