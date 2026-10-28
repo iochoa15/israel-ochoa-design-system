@@ -29,13 +29,17 @@ interface FontKitProps {
 
 const DEGULAR = `"degular-variable", sans-serif`
 
-// Adds :not([style*="Nohemi"]) to each selector so text set in the kept font keeps it.
+// Adds :not([style*="Nohemi"]) to each selector so text set in a kept font keeps it ("Nohemi, Figtree" keeps both).
 function keep(selectors: string, keepFont: string) {
-    const font = keepFont.trim().replace(/"/g, "")
-    if (!font) return selectors
+    const fonts = keepFont
+        .split(",")
+        .map((f) => f.trim().replace(/"/g, ""))
+        .filter(Boolean)
+    if (!fonts.length) return selectors
+    const not = fonts.map((f) => `:not([style*="${f}"])`).join("")
     return selectors
         .split(",")
-        .map((s) => `${s.trim()}:not([style*="${font}"])`)
+        .map((s) => `${s.trim()}${not}`)
         .join(", ")
 }
 
@@ -99,5 +103,5 @@ addPropertyControls(FontKit, {
     extraCss: { type: ControlType.String, title: "Extra CSS", displayTextArea: true, defaultValue: "" },
     mainStack: { type: ControlType.String, title: "Main fonts", description: 'Empty = Degular. E.g. "halyard-display", sans-serif', defaultValue: "" },
     secondaryStack: { type: ControlType.String, title: "Secondary fonts", description: "Empty = the Secondary font above, from Google Fonts", defaultValue: "" },
-    keepFont: { type: ControlType.String, title: "Keep font", description: "Text set in this font in Framer keeps it, e.g. Nohemi", defaultValue: "" },
+    keepFont: { type: ControlType.String, title: "Keep font", description: "Text set in these fonts in Framer keeps them, e.g. Nohemi, Figtree", defaultValue: "" },
 })

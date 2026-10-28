@@ -115,3 +115,10 @@ What changed and when. The agent appends one entry after each meaningful change.
 - **Why:** Israel asked for Halyard Display as the one font, Nohemi for details, brighter boxes and red buttons.
 - **Files:** Framer page /homepage-15, Framer component copy, framer/code-components/FontKit.tsx
 - **Made by:** agent
+
+### 2026-10-28
+- **Changed (homepage 15, round 2):** Selected work room and contact block #ECEEF6 (close to the card color), case cards a bit darker (#E2E5EF). Drop shadows cut to 10% of what they were. Each case card now has one paragraph (problem + what Israel did, real outcomes kept, placeholders dropped) instead of three with "the problem / what I did / the outcome" eyebrows; those eyebrows are hidden and the card content sits under the title. Role under the name is red (the button red token). Footer credits stay in Figtree, as before. Halyard Display still not in the Adobe kit and Nohemi not uploaded yet, so Degular shows where Halyard goes.
+- **Code:** FontKit.tsx "Keep font" takes a list.
+- **Why:** Israel's round of notes on homepage 15.
+- **Files:** Framer page /homepage-15, Framer component copy V8, framer/code-components/FontKit.tsx
+- **Made by:** agent
