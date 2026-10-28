@@ -101,3 +101,10 @@ What changed and when. The agent appends one entry after each meaningful change.
 - **Why:** Israel asked for Degular as the main font, Figtree as the secondary, smaller headers and lowercase eyebrows, and pointed out the name and role were still in the old font.
 - **Files:** Framer page /homepage-13, Framer text styles V6, Framer component copy, framer/code-components/FontKit.tsx, framer/code-components/LabHoverRow.tsx, framer/code-components/README.md
 - **Made by:** agent
+
+### 2026-10-28
+- **Changed:** New page /homepage-14 in Framer, a copy of /homepage-13. Headers and titles are bold Degular (700): hero, line 2, Selected work, card titles (new style Text Styles/V7/H2 (Degular bold)), What I build, Lab titles, contact heading (another component copy, V7). Line 2 breaks after "meets". Name bigger and bold in Degular; role in Figtree semibold at the paragraph size. Buttons and nav text in Degular, nav links bigger (11 → 14px, 12px on phone).
+- **Code:** FontKit.tsx gained Text weights, Degular layers and Extra CSS controls (off by default, so homepage 13 looks the same).
+- **Why:** Israel: "it's looking better with this font. Just make the headers bold", plus the line break, name/role, buttons and nav.
+- **Files:** Framer page /homepage-14, Framer text style V7/H2, Framer component copy, framer/code-components/FontKit.tsx, documents/where-we-left-off-oct-28-2026.md, AGENTS.md
+- **Made by:** agent

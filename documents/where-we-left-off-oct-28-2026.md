@@ -7,7 +7,8 @@ Read this first when restarting work on the Framer site. The site basics (live p
 - **Live homepage:** `/` (built as homepage 11). Unchanged since Oct 19.
 - **Two new versions under review** (not published, Israel decides):
   - `/homepage-12` (Oct 27): Clash Display.
-  - `/homepage-13` (Oct 28): Degular + Figtree. The latest direction.
+  - `/homepage-13` (Oct 28): Degular + Figtree.
+  - `/homepage-14` (Oct 28): homepage 13 with bold headers. The latest direction ("looking better with this font").
 - Other live pages: `/about`, `/logo-gallery-3`. Everything else is under `/archive/`.
 
 ## 2. What each new version changes
@@ -31,14 +32,22 @@ Both start from the homepage and keep its animation, clay and layout.
 
 Eyebrows are the small labels: the case-card categories ("ai product · custom training · 2026"), "the problem / what I did / the outcome", and the Lab tags ("away · ios · 2026"). The light block is see-through white (10%) on the dark cards and #F3F3F1 in the Lab cards.
 
-## 3. How Degular works (homepage 13)
+### Homepage 14 on top of 13
+- Headers bold (Degular 700): "I design/", line 2, Selected work, What I build, the contact heading, the card titles (new style `Text Styles/V7/H2 (Degular bold)`), the Lab titles.
+- Line 2 breaks in two: "for the moment AI meets / a real person." (phone size 27px so it stays on two lines).
+- Name bigger and bold in Degular (28/24/22px); role in Figtree semibold at the paragraph size (22/20/18px).
+- Buttons and nav text in Degular; nav links 11px → 14px (12px on phone).
+- Contact block: another copy, "Closing · contact room (V7, Degular bold)".
+
+## 3. How Degular works (homepage 13 and 14)
 
 Degular isn't in Framer's font library or Google Fonts. It comes from Israel's Adobe Fonts kit `gwt5tgs` (family `degular-variable`). Framer can't host Adobe fonts, so:
 
 - `FontKit.tsx` (a code component) sits invisibly at the top of homepage 13, in the layer "Font kit (Degular + Figtree)". It loads the Adobe kit and Figtree and switches the fonts by CSS:
   - Degular: every h1, h2 and h3, anything inside a frame with the `withDegular` override (the name and role), and code components set to `degular-variable`.
   - Figtree: everything else.
-- Its controls: Degular weight (200 now), optical size, secondary font. One change there updates the whole page.
+- Its controls: Degular weight (200 on homepage 13), optical size, secondary font. One change there updates the whole page.
+- Homepage 14 turns on three more: "Text weights" (each text keeps its own weight, so headers can be bold), "Degular layers" (`Name (Degular), Button ·, NavigationLinks`: layers by name; the published page labels each layer with `data-framer-name`) and "Extra CSS" (the nav size).
 - After publishing, check Degular shows on the live address. If it doesn't, add the site's address to the Adobe Fonts web project.
 
 ## 4. Code changes (all opt-in: pages that don't turn them on look the same)
