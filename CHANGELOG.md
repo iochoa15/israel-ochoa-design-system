@@ -143,3 +143,10 @@ What changed and when. The agent appends one entry after each meaningful change.
 - **Why:** Israel: "everything that you made bold … semi-bold, make it medium. Just decrease one weight down. And the eyebrow, bylines, and the buttons make it Nohemi Medium."
 - **Files:** Framer page /homepage-15, Framer component copy V8, Framer workspace fonts, framer/code-components/LabHoverRow.tsx
 - **Made by:** agent
+
+### 2026-10-28
+- **Changed (homepage 15, round 6):** Color hierarchy: page background #CDD2EB (darkest, the blue Israel picked), Selected work room and contact box #E5E8F4 (lighter), case cards white (lightest). Case-card shadows halved to rgba(0,0,0,0.125) (they were still at 0.25: the round-2 cut hadn't reached them). Lab titles now match the case-card titles (Halyard Medium 26/24/20px, tracking -0.005em, line height 1.12, closed cards the same size). Contact box no longer looks cut: it uses a dock that always finishes at the end of the page (withDockLast) and has 64px under it on desktop and tablet so the floating nav doesn't cover its bottom edge.
+- **Code:** Dock.tsx gained withDockLast. LabHoverRow.tsx gained Closed title, Title tracking and Title line height controls (defaults keep the old look).
+- **Why:** Israel's notes: the contact box looked cut, Lab titles should match the case cards, shadows 50% subtler, and a clear background → room → card hierarchy.
+- **Files:** Framer page /homepage-15, Framer component copy V8, framer/code-components/Dock.tsx, framer/code-components/LabHoverRow.tsx
+- **Made by:** agent

@@ -124,3 +124,9 @@ export function withDockCard(Component: ComponentType<any>): ComponentType {
 export function withDockInRoom(Component: ComponentType<any>): ComponentType {
     return makeDock("scale", "start 0.3", 120)(Component)
 }
+
+/** Last room on the page (homepage 15 contact): finishes docking when its bottom reaches the bottom of the
+ *  screen, so it always lands fully even though the page can't scroll its top up to 15%. */
+export function withDockLast(Component: ComponentType<any>): ComponentType {
+    return makeDock("spread", "end end", 240)(Component)
+}
