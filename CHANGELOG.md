@@ -135,3 +135,11 @@ What changed and when. The agent appends one entry after each meaningful change.
 - **Why:** Israel: "make the headers one or two points smaller and less bold."
 - **Files:** Framer page /homepage-15, Framer component copy V8, framer/code-components/LabHoverRow.tsx
 - **Made by:** agent
+
+### 2026-10-28
+- **Changed (homepage 15, round 5):** Every weight one step lighter: headers SemiBold → Medium (line 2, Selected work, What I build, "I design/", case-card titles, contact heading, Lab titles); name Bold → SemiBold; nav links Medium. Nohemi Medium for the details: the role under the name, every eyebrow (case-card tags, the hero "Open to…" line, Lab tags) and every button (case study, contact, nav "Get in touch").
+- **How:** Nohemi Medium (Desktop font file) uploaded to the Framer workspace (Workspace settings → Fonts); Framer names it "Nohemi Medium". The agent tool can't list custom fonts, but `fontName="Nohemi"` with weight 500 resolves to it. Eyebrows got the font set on each layer (a text style's font can't get past the page's Halyard rule); buttons get it from the Font kit CSS by layer name ("Button ·"). New style Text Styles/V8/Label (Nohemi Medium) exists but ended up unused.
+- **Code:** LabHoverRow.tsx gained "Tag font" and "Tag weight" controls (empty by default, so other pages look the same).
+- **Why:** Israel: "everything that you made bold … semi-bold, make it medium. Just decrease one weight down. And the eyebrow, bylines, and the buttons make it Nohemi Medium."
+- **Files:** Framer page /homepage-15, Framer component copy V8, Framer workspace fonts, framer/code-components/LabHoverRow.tsx
+- **Made by:** agent
