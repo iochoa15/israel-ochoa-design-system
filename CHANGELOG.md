@@ -156,3 +156,11 @@ What changed and when. The agent appends one entry after each meaningful change.
 - **Why:** Israel: "even less noticeable, like 50% less noticeable, and a little bit more spread out."
 - **Files:** Framer page /homepage-15
 - **Made by:** agent
+
+### 2026-10-28
+- **Changed (round 8, the design system goes site-wide):** Homepage 15: Lab cards 20% shorter (560 → 448px); contact box as wide as the case cards (64px side margins desktop, 40 tablet, 24 phone); eyebrows and Lab tags in Nohemi Light with more padding (7px 14px), all red text in the button red #E54633 (Israel's orange swatch measured as exactly that color). Homepage 15 set as the Home page (/); the previous home moved to /archive/homepage-11 and /homepage-12, -13, -14 to /archive/. /about and /logo-gallery-3 restyled to the same system: Font kit layer (Halyard everywhere, Nohemi details), #CDD2EB background, #E5E8F4 rooms, the light V8 contact box at card width, headers Medium, section eyebrows in Nohemi Light lowercase.
+- **How:** Nohemi Light uploaded to the Framer workspace fonts. Home page switched in the Framer editor (Pages → right-click → Set home page). The design system is written down in documents/design-system-oct-28-2026.md.
+- **Code:** LabHoverRow.tsx gained a "Tag padding" control (default 4px 8px).
+- **Why:** Israel: "From now on, that's going to be the design system we're going to follow … Let's make homepage 15 the main homepage across all of the links and all of the site."
+- **Files:** Framer pages /, /about, /logo-gallery-3, /archive/*; framer/code-components/LabHoverRow.tsx; AGENTS.md; documents/design-system-oct-28-2026.md
+- **Made by:** agent
