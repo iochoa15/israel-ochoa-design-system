@@ -150,3 +150,9 @@ What changed and when. The agent appends one entry after each meaningful change.
 - **Why:** Israel's notes: the contact box looked cut, Lab titles should match the case cards, shadows 50% subtler, and a clear background → room → card hierarchy.
 - **Files:** Framer page /homepage-15, Framer component copy V8, framer/code-components/Dock.tsx, framer/code-components/LabHoverRow.tsx
 - **Made by:** agent
+
+### 2026-10-28
+- **Changed (homepage 15, round 7):** Case-card shadows half as strong again and softer: 0px -8px 40px rgba(0,0,0,0.0625) (was 24px blur at 0.125), on desktop, tablet and phone.
+- **Why:** Israel: "even less noticeable, like 50% less noticeable, and a little bit more spread out."
+- **Files:** Framer page /homepage-15
+- **Made by:** agent
