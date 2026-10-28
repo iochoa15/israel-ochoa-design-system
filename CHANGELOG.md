@@ -122,3 +122,9 @@ What changed and when. The agent appends one entry after each meaningful change.
 - **Why:** Israel's round of notes on homepage 15.
 - **Files:** Framer page /homepage-15, Framer component copy V8, framer/code-components/FontKit.tsx
 - **Made by:** agent
+
+### 2026-10-28
+- **Changed (homepage 15, round 3):** Every piece of text on /homepage-15 is now Halyard Display: headings, paragraphs, name, role, eyebrows, buttons, nav, Lab cards and the footer credits (wording unchanged). Halyard Display (Light, Regular, Book, Medium, SemiBold, Bold) was added to the Adobe Fonts web project "IOD" (kit gwt5tgs), which now serves it. The Font kit layer on homepage 15 applies it to all text on that page with one rule.
+- **Why:** Israel: "change all of the fonts, all of the fonts, everywhere. Everything that is a live text, change it to Halyard Display." Nohemi for details comes later, one step at a time.
+- **Files:** Framer page /homepage-15 (Font kit settings only), Adobe Fonts web project IOD
+- **Made by:** agent
