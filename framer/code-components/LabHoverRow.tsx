@@ -23,6 +23,7 @@ interface LabHoverRowProps {
     titleFont: string
     titleWeight: number
     tagBelow: boolean
+    tagLower: boolean
     style?: CSSProperties
 }
 
@@ -213,11 +214,13 @@ const SPRING = { type: "spring", stiffness: 170, damping: 26, mass: 0.9 } as con
  * @framerSupportedLayoutHeight any
  */
 export default function LabHoverRow(props: LabHoverRowProps) {
-    const { items = DEFAULT_ITEMS, openRatio = 2.6, height = 560, gap = 12, radius = 20, titleFont = "Wix Madefor Display", titleWeight = 600, tagBelow = false } = props
+    const { items = DEFAULT_ITEMS, openRatio = 2.6, height = 560, gap = 12, radius = 20, titleFont = "Wix Madefor Display", titleWeight = 600, tagBelow = false, tagLower = false } = props
     // Homepage 12 (Oct 27): the tag moves under the title, on a light block.
+    // Homepage 13 (Oct 28): the tag reads in lowercase.
+    const tagCase: CSSProperties = tagLower ? { textTransform: "lowercase", letterSpacing: "0.01em", fontSize: 12 } : {}
     const tagStyle: CSSProperties = tagBelow
-        ? { ...label, order: 1, alignSelf: "flex-start", maxWidth: "100%", boxSizing: "border-box", padding: "4px 8px", borderRadius: 4, background: C.canvas }
-        : label
+        ? { ...label, ...tagCase, order: 1, alignSelf: "flex-start", maxWidth: "100%", boxSizing: "border-box", padding: "4px 8px", borderRadius: 4, background: C.canvas }
+        : { ...label, ...tagCase }
     const isStatic = useIsStaticRenderer()
     const [active, setActive] = useState<number | null>(null)
     const rootRef = useRef<HTMLDivElement>(null)
@@ -341,4 +344,5 @@ addPropertyControls(LabHoverRow, {
     titleFont: { type: ControlType.String, title: "Title font", description: "A font already used on the page, e.g. Clash Display", defaultValue: "Wix Madefor Display" },
     titleWeight: { type: ControlType.Number, title: "Title weight", defaultValue: 600, min: 100, max: 900, step: 100 },
     tagBelow: { type: ControlType.Boolean, title: "Tag under title", defaultValue: false },
+    tagLower: { type: ControlType.Boolean, title: "Lowercase tag", defaultValue: false },
 })

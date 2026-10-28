@@ -94,3 +94,10 @@ What changed and when. The agent appends one entry after each meaningful change.
 - **Why:** Israel asked for a new version with this background, Clash Display, no italic accents, eyebrow chips under the text and bigger card text.
 - **Files:** Framer page /homepage-12, Framer text styles V5, Framer component copy, framer/code-components/HeroHeadline.tsx, framer/code-components/LabHoverRow.tsx
 - **Made by:** agent
+
+### 2026-10-28
+- **Changed:** New page /homepage-13 in Framer, a copy of /homepage-12. Headers and titles in Degular (weight 200, optical size 6, from Israel's Adobe Fonts kit gwt5tgs), the name and role too; all other text in Figtree. Headers are smaller (76px → 56px desktop, 60 → 44 tablet, 40 → 32 phone; card titles 34 → 28). Eyebrows are lowercase (new style Text Styles/V6/Label (lowercase)). New text styles Text Styles/V6/*. The contact block is another component copy, "Closing · contact room (V6, Degular)".
+- **How:** Framer can't host Adobe fonts, so the new code component FontKit.tsx (on homepage 13 only) loads the kit and Figtree and swaps the fonts by CSS. LabHoverRow.tsx gained a "Lowercase tag" control (off by default, so other pages look the same).
+- **Why:** Israel asked for Degular as the main font, Figtree as the secondary, smaller headers and lowercase eyebrows, and pointed out the name and role were still in the old font.
+- **Files:** Framer page /homepage-13, Framer text styles V6, Framer component copy, framer/code-components/FontKit.tsx, framer/code-components/LabHoverRow.tsx, framer/code-components/README.md
+- **Made by:** agent
